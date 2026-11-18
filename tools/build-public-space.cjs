@@ -15,7 +15,7 @@ const pages = [
   ['訾舒然', 'observatory', '光走了很久，才抵达这里。', '阅读来自哈勃的宇宙影像，在星云和星系之间漫游，或翻开四封原创星际来信。'],
 ];
 async function expandCss(file) {
-  const source = await fs.readFile(file, 'utf8');
+  const source = (await fs.readFile(file, 'utf8')).replace(/^\uFEFF/, '');
   const includes = [...source.matchAll(/^@import url\(['"]([^'"]+)['"]\);/gm)];
   if (!includes.length) return source;
   const expanded = await Promise.all(includes.map(async ([, target]) => {
