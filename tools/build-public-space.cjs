@@ -5,7 +5,7 @@ const {rolldown} = require(process.env.PBL_ROLLDOWN || 'rolldown');
 const root = path.resolve(__dirname, '..');
 const cssFiles = ['style.css', 'reading.css', 'layouts.css', 'discovery.css', 'enhancements.css',
   'library.css', 'polish.css', 'experience.css', 'cinema-grade.css', 'odyssey.css', 'odyssey-visuals.css',
-  'odyssey-gate.css', 'bridge.css', 'shipboard.css', 'cosmos.css', 'expedition.css', 'interface.css', 'arrival.css', 'fast-preview.css', 'instruments.css'];
+  'odyssey-gate.css', 'bridge.css', 'shipboard.css', 'cosmos.css', 'expedition.css', 'interface.css', 'arrival.css', 'fast-preview.css', 'instruments.css', 'lesson-reader.css'];
 const pages = [
   ['', 'universe', '离开地面，重新看见我们的世界。', '从地球轨道出发，走过八站深空旅程，阅读真实观测影像背后的科学。'],
   ['陈冠伟', 'explore/earth', '行星漫游', '比较八大行星的体积、公转周期和表面引力。地球的平均半径约 6,371 公里。'],

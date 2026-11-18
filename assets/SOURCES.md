@@ -84,3 +84,11 @@ NASA 影像使用说明：<https://www.nasa.gov/nasa-brand-center/images-and-med
 新增专题代码在 `js/research-data.js`、`js/fieldwork.js` 和 `fieldwork.css`。韦布与哈勃影像使用 ESA/Hubble 与 NASA 各自页面的完整署名；ESA/Hubble 的使用条件见 <https://esahubble.org/copyright/>，NASA 使用说明见 <https://www.nasa.gov/nasa-brand-center/images-and-media/>。国家航天局页面公开展示不自动等于无限制授权，课程展示应保留来源、日期与原始链接。
 
 项目把原失效的 IAU 链接替换为可访问的 [IAU 星座存档](https://iauarchive.eso.org/public/themes/constellations/)。存档页面说明正式定义的是星座边界，并不规定唯一的连线画法；星座图表的授权条件以页面标注为准。
+
+## 深度专题及交互参考
+
+五个栏目新增 55 篇中文专题。每篇的原始科学资料集中登记在 [`js/lesson-sources.js`](../js/lesson-sources.js)，页面提供直达链接。复用图片的观测类型和原始署名随图展示。正文、练习和解析为项目自行编写。
+
+- [NASA Eyes](https://science.nasa.gov/eyes/) 将太阳系场景与天体和任务资料组织在一起。本站将轨道和探测任务的专题连回相应场景。
+- [Stellarium](https://stellarium.org/) 在夜空视图中提供星群和星座边界。本站的观星手册配合已有星图，说明现场如何识别参照星、核对方位和记录条件。
+- [ESA ESASky 使用指南](https://www.cosmos.esa.int/web/esdc/esasky-how-to) 展示如何按波长看同一片天空。本站影像专题沿用按波段辨读的思路，并为本站采用的影像注明仪器、图像类型及来源。

@@ -17,6 +17,8 @@ import {bindFinder} from '../朱雷/star-finder.js';
 import {renderEvidence,bindEvidence} from '../滕紫涵/evidence.js';
 import {renderWebbCompare,bindWebbCompare} from '../訾舒然/webb-compare.js';
 import {setupInterface} from './interface.js';
+import {renderLessonCollection,setupLessonReader} from './lesson-reader.js';
+import {lessonCollections} from './lesson-data.js';
 const stylesheet = document.querySelector('[data-site-style]');
 if (stylesheet?.media === 'print' && !stylesheet.dataset.failed) {
   await new Promise(resolve => {
@@ -38,6 +40,7 @@ if (!location.hash && entryRoute && entryRoute !== 'universe') {
 setupSpaceAudio();
 const app=document.querySelector('#app');
 const controller=createController();
+const lessonReader=setupLessonReader(app);
 const experience=setupSpaceExperience();
 const cinema=setupCinematicPresentation();
 const odyssey=setupOdysseyExperience();
@@ -56,6 +59,7 @@ app.addEventListener('click', event => {
   const trigger = event.target.closest('[data-instrument-jump]');
   const section = trigger && document.getElementById(trigger.dataset.instrumentJump);
   if (!section) return;
+  if (trigger.matches('a')) event.preventDefault();
   const heading = section.querySelector('h2');
   heading.tabIndex = -1;
   heading.focus({preventScroll:true});
@@ -70,6 +74,11 @@ function renderObservingInstrument(state) {
     default: return '';
   }
 }
+function renderLessonEntry(route) {
+  const collection = lessonCollections[route];
+  if (!collection) return '';
+  return `<aside class="lesson-entry" style="--lesson-accent:${collection.accent}"><a href="#science-lessons" data-instrument-jump="science-lessons"><strong>${collection.title}</strong><span>${collection.entries.length} 篇专题与练习 ↓</span></a></aside>`;
+}
 function render() {
   const state = controller.state;
   const expanded = captureReadingDetails();
@@ -77,13 +86,14 @@ function render() {
   enable3d.searchParams.delete('view');
   const previewBar = fastPreview ? `<aside class="fast-preview-bar" aria-label="三维展示">快速预览 <a data-enable-3d>开启 3D ↗</a></aside>` : '';
   app.innerHTML = renderHeader(state) + renderSidebar(state) +
-    `<main id="page-content" tabindex="-1">${renderContent(state)}${renderDock(state)}${renderObservingInstrument(state)}${renderReadingEntry(state)}${renderFieldGuide(state.route)}${renderLearning(state)}${renderNextChapter(state.route)}</main>` +
+    `<main id="page-content" tabindex="-1">${renderContent(state)}${renderLessonEntry(state.route)}${renderDock(state)}${renderObservingInstrument(state)}${renderReadingEntry(state)}${renderLessonCollection(state.route)}${renderFieldGuide(state.route)}${renderLearning(state)}${renderNextChapter(state.route)}</main>` +
     renderControls(state) + renderFooter(state) + previewBar +
     `<div class="dialog-host ${state.dialog ? '' : 'hidden'}">${renderDialog(state)}</div>`;
   const enableLink = app.querySelector('[data-enable-3d]');
   if (enableLink) enableLink.href = enable3d.href;
   restoreReadingDetails(expanded);
   controller.afterRender();
+  lessonReader.afterRender(state.route);
   experience.afterRender(state);
   cinema.afterRender(state);
   odyssey.afterRender(state);
