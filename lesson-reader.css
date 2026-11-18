@@ -1,6 +1,7 @@
 ﻿.lesson-room,.lesson-entry,.lesson-gateway {
   --lesson-accent:#c7ddf5;
   color:#eef3fa;
+  pointer-events:auto;
 }
 .lesson-entry,.lesson-room {width:min(calc(100% - 64px),1090px);margin-inline:auto}
 .lesson-entry {margin-block:22px 30px}
