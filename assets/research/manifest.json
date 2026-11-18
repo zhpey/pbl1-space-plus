@@ -1,0 +1,125 @@
+{
+  "checked_on": "2026-10-17",
+  "assets": [
+    {
+      "file": "pillars-optical.jpg",
+      "source_page": "https://esahubble.org/images/heic1501a/",
+      "download_url": "https://cdn.esahubble.org/archives/images/screen/heic1501a.jpg",
+      "credit": "NASA, ESA/Hubble and the Hubble Heritage Team",
+      "usage_url": "https://esahubble.org/copyright/",
+      "original_pixels": [
+        1280,
+        1335
+      ],
+      "local_pixels": [
+        1280,
+        1335
+      ],
+      "sha256": "d13e34abde25142cedcbf45673fb06ec196f032618ae1b38c79bb488437ecf96",
+      "processing": "Resized proportionally to at most 1600 pixels; converted to JPEG. No cropping, recolouring or alignment."
+    },
+    {
+      "file": "pillars-infrared.jpg",
+      "source_page": "https://esahubble.org/images/heic1501b/",
+      "download_url": "https://cdn.esahubble.org/archives/images/screen/heic1501b.jpg",
+      "credit": "NASA, ESA/Hubble and the Hubble Heritage Team",
+      "usage_url": "https://esahubble.org/copyright/",
+      "original_pixels": [
+        1280,
+        1200
+      ],
+      "local_pixels": [
+        1280,
+        1200
+      ],
+      "sha256": "720a1b946d2cbb7de23a3f71bff485a63036850164c5d19ce93b69d984992770",
+      "processing": "Resized proportionally to at most 1600 pixels; converted to JPEG. No cropping, recolouring or alignment."
+    },
+    {
+      "file": "pillars-webb.jpg",
+      "source_page": "https://science.nasa.gov/asset/webb/pillars-of-creation-nircam-and-miri-composite-image/",
+      "download_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/outreach/migrated/2022/STScI-01GK2KMYS6HADS6ND8NRHG53RP.png?w=2000&h=1872&fit=clip",
+      "credit": "NASA, ESA, CSA, STScI; Image Processing: Joseph DePasquale (STScI), Alyssa Pagan (STScI), Anton Koekemoer (STScI)",
+      "usage_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "original_pixels": [
+        2000,
+        1872
+      ],
+      "local_pixels": [
+        1600,
+        1498
+      ],
+      "sha256": "5d240708775606c7f4ad068cd33374353a09594c88dbb73d6525b987ac561e0c",
+      "processing": "Resized proportionally to at most 1600 pixels; converted to JPEG. No cropping, recolouring or alignment."
+    },
+    {
+      "file": "sgra.jpg",
+      "source_page": "https://www.eso.org/public/news/eso2208-eht-mw/",
+      "download_url": "https://cdn.eso.org/images/screen/eso2208-eht-mwa.jpg",
+      "credit": "EHT Collaboration",
+      "usage_url": "https://www.eso.org/public/outreach/copyright/",
+      "original_pixels": [
+        1280,
+        1280
+      ],
+      "local_pixels": [
+        1280,
+        1280
+      ],
+      "sha256": "25c3e64cb779a95fec7f5ec2b393f2d35eb9341afd74a94700a1ff7d2339e5b2",
+      "processing": "Converted to local JPEG. No cropping or recolouring."
+    },
+    {
+      "file": "change6.jpg",
+      "source_page": "https://www.cnsa.gov.cn/n6758823/n6758842/c10543340/content.html",
+      "download_url": "https://www.cnsa.gov.cn/n6758823/n6758842/c10543340/part/10543423.jpg",
+      "credit": "国家航天局",
+      "usage_url": "https://www.cnsa.gov.cn/n6758823/n6758842/c10543340/content.html",
+      "released_on": "2024-06-04",
+      "original_pixels": [
+        800,
+        421
+      ],
+      "local_pixels": [
+        800,
+        421
+      ],
+      "sha256": "31921247c38d7bc1c21e517487f957f0495cff22164038154be4c34f84bbffc9",
+      "processing": "Converted to JPEG and proportionally resized if needed. No cropping, recolouring or alignment."
+    },
+    {
+      "file": "tianwen1.jpg",
+      "source_page": "https://www.cnsa.gov.cn/n6758824/n6759009/n6760412/n6760413/c6840435/content.html",
+      "download_url": "source page image part",
+      "credit": "国家航天局",
+      "usage_url": "https://www.cnsa.gov.cn/n6758824/n6759009/n6760412/n6760413/c6840435/content.html",
+      "original_pixels": [
+        6098,
+        2460
+      ],
+      "local_pixels": [
+        1600,
+        645
+      ],
+      "sha256": "4722047dd233e08181ecc6805b413f46360de06fae963c0f133ce087f616f97a",
+      "processing": "Converted to JPEG and proportionally resized if needed. No cropping, recolouring or alignment."
+    },
+    {
+      "file": "tianwen2.jpg",
+      "source_page": "https://www.cnsa.gov.cn/n6758823/n6758842/c10684432/content.html",
+      "download_url": "https://www.cnsa.gov.cn/n6758823/n6758842/c10684432/part/10684503.png",
+      "credit": "国家航天局",
+      "usage_url": "https://www.cnsa.gov.cn/n6758823/n6758842/c10684432/content.html",
+      "original_pixels": [
+        693,
+        519
+      ],
+      "local_pixels": [
+        693,
+        519
+      ],
+      "sha256": "8d810f9abc226596ce6ad0bc104f05f3b9bae2be9e29782c3274cf759d242842",
+      "processing": "Converted to JPEG and proportionally resized if needed. No cropping, recolouring or alignment."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">地球与火星之间的深空通信</title><desc id="desc">原创概念示意：地球与火星之间传递的电磁信号和等待，天体尺寸、距离及信号形状非真实比例。</desc>
+  <defs><radialGradient id="sky"><stop stop-color="#16334d"/><stop offset="1" stop-color="#071322"/></radialGradient><radialGradient id="earth" cx=".3" cy=".3"><stop stop-color="#7eacb1"/><stop offset=".5" stop-color="#30647f"/><stop offset="1" stop-color="#0c2138"/></radialGradient><radialGradient id="mars" cx=".3" cy=".3"><stop stop-color="#e3ad83"/><stop offset=".6" stop-color="#a55e47"/><stop offset="1" stop-color="#452e31"/></radialGradient></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#b5cfdf" opacity=".5"><circle cx="73" cy="84" r="1.3"/><circle cx="205" cy="68" r="1"/><circle cx="487" cy="55" r="1.2"/><circle cx="691" cy="92" r="1.3"/><circle cx="742" cy="344" r="1"/><circle cx="445" cy="395" r="1.2"/><circle cx="303" cy="408" r="1"/></g>
+  <path d="M201 249H623" fill="none" stroke="#7c9eb9" stroke-width="1.5" stroke-dasharray="3 10"/>
+  <path d="M274 232L292 249L274 266M491 232L509 249L491 266" stroke="#d5ae7f" fill="none" stroke-width="2"/>
+  <g fill="none" stroke="#8dbacf" stroke-width="1.5"><path d="M244 173A109 109 0 0 1 244 325" opacity=".75"/><path d="M272 147A145 145 0 0 1 272 351" opacity=".45"/><path d="M304 119A185 185 0 0 1 304 379" opacity=".2"/></g>
+  <g fill="none" stroke="#d4ad85" stroke-width="1.5"><path d="M573 194A80 80 0 0 0 573 304" opacity=".7"/><path d="M547 172A112 112 0 0 0 547 326" opacity=".4"/></g>
+  <circle cx="158" cy="249" r="80" fill="url(#earth)" stroke="#94c5d5" stroke-width="1.5"/>
+  <path d="M107 209L132 194L155 213L167 236L150 254L165 282L147 300L124 278L130 248L110 239Z" fill="#a5b4a0" opacity=".65"/>
+  <path d="M163 182Q222 213 207 256M103 271Q143 305 194 287" stroke="#e0edf0" stroke-width="8" opacity=".28" fill="none"/>
+  <circle cx="661" cy="249" r="56" fill="url(#mars)" stroke="#d5ab83"/>
+  <path d="M642 209L656 225L649 245L677 262L685 283L659 280L643 260L630 238Z" fill="#684239" opacity=".5"/>
+  <g transform="translate(411 248)"><circle r="29" fill="#0d2236" stroke="#9cb8cd"/><path d="M0-18V0L11 7" stroke="#d2b285" stroke-width="2" fill="none" stroke-linecap="round"/><circle r="2.5" fill="#d2b285"/></g>
+  <path d="M127 358H189M636 340H686" stroke="#7897ac"/><g font-family="monospace" font-size="10" letter-spacing="3" fill="#91aabd"><text x="129" y="381">EARTH</text><text x="639" y="363">MARS</text></g>
+  <text x="40" y="466" fill="#97b2c6" font-size="12" letter-spacing="4" font-family="monospace">A SIGNAL TAKES TIME</text>
+</svg>

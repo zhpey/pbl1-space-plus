@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">月球基地的能源与居住系统</title><desc id="desc">原创月球基地概念示意：月面居住舱、连接通道、太阳能板和通信天线，非已建成基地或工程图纸。</desc>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#071322"/><stop offset="1" stop-color="#132c42"/></linearGradient><linearGradient id="ground" x2="0" y2="1"><stop stop-color="#435363"/><stop offset="1" stop-color="#172534"/></linearGradient><linearGradient id="metal" x2="0" y2="1"><stop stop-color="#c5d4da"/><stop offset="1" stop-color="#668398"/></linearGradient><radialGradient id="earth"><stop stop-color="#83b1bd"/><stop offset=".7" stop-color="#356b85"/><stop offset="1" stop-color="#17354c"/></radialGradient><pattern id="cells" width="21" height="18" patternUnits="userSpaceOnUse"><rect width="21" height="18" fill="#1e4058"/><path d="M0 0H21V18" fill="none" stroke="#8eb4ca" stroke-opacity=".5"/></pattern></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#b7cddd" opacity=".65"><circle cx="63" cy="67" r="1.2"/><circle cx="279" cy="76" r="1"/><circle cx="515" cy="43" r="1.3"/><circle cx="715" cy="177" r="1.2"/><circle cx="675" cy="73" r="1"/><circle cx="372" cy="126" r="1"/></g>
+  <circle cx="156" cy="139" r="39" fill="url(#earth)" stroke="#9fc8d7"/><path d="M132 118L149 108L162 130L151 151L160 169L141 162L132 140Z" fill="#b0bba7" opacity=".7"/>
+  <path d="M0 349L89 303L159 338L257 305L341 321L425 290L522 326L615 299L704 324L800 299V500H0Z" fill="url(#ground)"/>
+  <path d="M0 371Q176 338 364 369T800 353" fill="none" stroke="#758798" opacity=".3"/>
+  <ellipse cx="417" cy="386" rx="223" ry="29" fill="#071322" opacity=".4"/>
+  <g fill="url(#metal)" stroke="#c0d3de" stroke-width="1.5"><path d="M252 342V310A48 48 0 0 1 348 310V342Z"/><path d="M407 342V291A55 55 0 0 1 517 291V342Z"/><rect x="340" y="316" width="78" height="26" rx="5"/></g>
+  <g fill="#203d51" stroke="#90aebf"><rect x="278" y="310" width="20" height="20" rx="4"/><rect x="315" y="310" width="15" height="20" rx="4"/><rect x="435" y="291" width="22" height="22" rx="5"/><rect x="476" y="291" width="22" height="22" rx="5"/><path d="M459 342V318Q469 310 479 318V342Z"/></g>
+  <path d="M278 344V360M325 344V360M429 344V361M493 344V361" stroke="#97afbf" stroke-width="5"/>
+  <g transform="translate(588 315)"><path d="M0 25V-38M-22-56Q0-13 27-51" stroke="#b9cbd8" stroke-width="3" fill="none"/><path d="M1-32L11-69" stroke="#c7a67e" stroke-width="2"/><circle cx="11" cy="-69" r="3" fill="#c7a67e"/></g>
+  <path d="M544 374L585 325L695 336L654 386Z" fill="url(#cells)" stroke="#87aac0" stroke-width="2"/><path d="M572 380L569 397M657 386L658 402" stroke="#95aebf" stroke-width="3"/>
+  <ellipse cx="116" cy="403" rx="51" ry="10" fill="#122131" stroke="#7c8c99" stroke-opacity=".35"/>
+  <text x="40" y="466" fill="#a4b9c9" font-size="12" letter-spacing="4" font-family="monospace">DESIGNING A LUNAR HOME</text>
+</svg>

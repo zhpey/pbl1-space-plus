@@ -1,0 +1,3 @@
+export const heading=(kicker,title,desc='')=>`<div class="reading-heading"><span class="eyebrow">${kicker}</span><h2>${title}</h2>${desc?`<p>${desc}</p>`:''}</div>`;
+export const cards=items=>`<div class="knowledge-grid">${items.map(([title,body],i)=>`<article class="knowledge-card"><span class="reading-number">0${i+1}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>`;
+export function timeline(items){return `<ol class="discovery-timeline">${items.map(([date,title,body])=>`<li><span class="timeline-date">${date}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join('')}</ol>`;}

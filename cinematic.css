@@ -1,0 +1,107 @@
+/* The portal has its own visual language; repeated body selectors intentionally
+   outweigh the shared reading and earlier portal layout rules. */
+body[data-route="universe"][data-route] .topbar { height: 86px; padding: 0 4.2%; background:linear-gradient(#03061499,transparent); border-color:#dae6ff16; }
+body[data-route="universe"][data-route] .brand-symbol { color:#b7c8ff; font-size:37px; }
+body[data-route="universe"][data-route] .brand-title { font-weight:500; letter-spacing:4px; }
+body[data-route="universe"][data-route] .brand-title sup { color:#94b8f1; }
+body[data-route="universe"][data-route] .header-nav a.active::after { background:#9cbef0; }
+body[data-route="universe"][data-route] .stage-shade { background:linear-gradient(90deg,#02061082,transparent 53%),linear-gradient(0deg,#030716d9,transparent 24%,transparent 80%,#03061455); }
+body[data-route="universe"][data-route] .universe-map { min-height:740px; height:100svh; }
+body[data-route="universe"][data-route] .map-heading { top:23%; left:7.3%; width:45%; }
+body[data-route="universe"][data-route] .map-heading .eyebrow { display:flex; align-items:center; gap:14px; color:#bfceeb; letter-spacing:4px; font-size:11px; }
+.map-heading .eyebrow::before { display:none; }
+.map-heading .eyebrow i { width:22px; height:1px; background:#a4c3f1; }
+body[data-route="universe"][data-route] .map-heading h1 { font-size:clamp(44px,5.2vw,82px); line-height:1.3; letter-spacing:4px; margin:25px 0 22px; font-weight:500; }
+body[data-route="universe"][data-route] .map-heading h1 > span { color:#f0f4ff; }
+body[data-route="universe"][data-route] .map-heading .title-outline { background:linear-gradient(110deg,#b0d1ff,#c3bcfb); color:transparent; background-clip:text; -webkit-background-clip:text; }
+body[data-route="universe"][data-route] .map-heading p { color:#abb9d0; font-size:13px; line-height:2.2; letter-spacing:1.5px; }
+.portal-hero-actions { display:flex; align-items:center; gap:25px; margin-top:28px; pointer-events:auto; }
+.portal-launch { display:inline-flex; align-items:center; gap:30px; border:1px solid #bad5ff65; background:linear-gradient(110deg,#9abff51c,#809eec0a); padding:15px 20px; color:#e8f0ff; font-size:12px; letter-spacing:2px; transition:background .25s,box-shadow .25s; }
+.portal-launch span { font-size:19px; }
+.portal-launch:hover { background:#a7c7ff22; box-shadow:0 0 35px #89a8ff15; }
+.portal-text-link { display:flex; gap:16px; align-items:center; font-size:11px; letter-spacing:1px; color:#aebdd5; }
+.portal-text-link:hover { color:#eef4ff; }
+body[data-route="universe"][data-route] .portal-kicker { margin-top:26px; font-size:8px; color:#7b8eaf; letter-spacing:3px; }
+.portal-frame { position:absolute; inset:108px 4.2% auto; display:flex; justify-content:space-between; color:#7e8da9; letter-spacing:2px; font:8px var(--mono); }
+body[data-route="universe"][data-route] .portal-location { top:151px; right:4.2%; gap:12px; font:9px var(--sans); color:#a6bbd5; letter-spacing:2px; }
+body[data-route="universe"][data-route] .portal-location i { background:#a9c6f8; width:4px; height:4px; box-shadow:0 0 12px #7aaaff; }
+body[data-route="universe"][data-route] .portal-reset { margin-left:5px; padding:7px 10px; border-color:#c3d9ff22; color:#a9bbd5; background:#07102155; }
+body[data-route="universe"][data-route] .world-label { gap:5px; }
+body[data-route="universe"][data-route] .world-label small { color:#899dba; font-size:8px; letter-spacing:2px; }
+body[data-route="universe"][data-route] .world-label strong { font-size:17px; letter-spacing:4px; font-weight:400; }
+body[data-route="universe"][data-route] .world-label strong span { margin-left:4px; font-size:11px; }
+body[data-route="universe"][data-route] .world-label > span { font-size:10px; color:#91a3bf; }
+body[data-route="universe"][data-route] .world-planet { transition:opacity .4s; }
+body[data-route="universe"][data-route] .portal-instructions { left:7.3%; top:70%; bottom:auto; right:auto; display:flex; gap:12px; align-items:center; color:#a0b0cb; font-size:10px; letter-spacing:2px; }
+.portal-instructions small { font-size:9px; color:#7587a6; letter-spacing:1px; }
+.portal-mouse { display:block; width:17px; height:27px; border:1px solid #9ab0d655; border-radius:10px; position:relative; }
+.portal-mouse::after { content:''; position:absolute; width:2px; height:5px; left:6.5px; top:5px; background:#a3bbdf; border-radius:2px; animation:portal-scroll 2.6s ease-in-out infinite; }
+@keyframes portal-scroll { 0%,100% { transform:translateY(0); opacity:.3; } 50% { transform:translateY(7px); opacity:1; } }
+.portal-bottom { position:absolute; bottom:0; left:4.2%; right:4.2%; height:112px; border-top:1px solid #dae6ff20; display:grid; grid-template-columns:140px 1fr 130px; align-items:center; gap:28px; pointer-events:auto; }
+body[data-route="universe"][data-route] .map-scroll { position:static; display:flex; align-items:center; gap:12px; transform:none; font-size:10px; color:#b0c0db; letter-spacing:2px; }
+.scroll-line { display:block; height:31px; width:1px; background:linear-gradient(#c3d8f0,transparent); }
+.portal-world-rail { display:flex; gap:0; justify-content:space-between; }
+.portal-world-rail a { display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:9px; row-gap:7px; font-size:12px; color:#e0e7f5; letter-spacing:2px; padding:13px 8px; transition:color .2s; }
+.portal-world-rail a > span { grid-row:1 / 3; font:8px var(--mono); color:#788ba8; margin-right:4px; }
+.portal-world-rail a i { display:none; }
+.portal-world-rail a small { grid-column:2; font-size:9px; letter-spacing:1px; color:#7e90ac; }
+.portal-world-rail a:hover { color:var(--world-color); }
+.portal-sector { text-align:right; font:8px/2 var(--mono); letter-spacing:2px; color:#7788a6; }
+.portal-sector b { color:#adbfdd; font-weight:400; }
+body[data-route="universe"][data-route] .controls { top:auto; right:4.2%; bottom:139px; display:flex; flex-direction:row; gap:0; border:1px solid #a6c2f32b; background:#060e2077; backdrop-filter:blur(10px); border-radius:0; overflow:hidden; }
+body[data-route="universe"][data-route] .controls button { background:transparent; border-radius:0; width:38px; height:36px; color:#bbd0f0; border:none; border-right:1px solid #a6c2f31f; }
+body[data-route="universe"][data-route] .controls button:last-child { border-right:0; }
+body[data-route="universe"][data-route] .controls button:hover { background:#b6cefb18; }
+.space-audio { display:flex; align-items:center; gap:10px; color:#a6b8d2; font:10px var(--sans); letter-spacing:1px; padding:10px 5px; background:transparent; }
+.space-audio > i { height:15px; display:flex; gap:3px; align-items:center; }
+.space-audio b { width:1px; height:4px; background:#9cb9e2; transform-origin:center; }
+.space-audio b:nth-child(2) { height:12px; }.space-audio b:nth-child(3) { height:8px; }.space-audio b:nth-child(4) { height:5px; }
+.space-audio[aria-pressed="true"] b { animation:space-equalizer 1.25s ease-in-out infinite alternate; }
+.space-audio[aria-pressed="true"] b:nth-child(2) { animation-delay:-.7s; }.space-audio[aria-pressed="true"] b:nth-child(3) { animation-delay:-.3s; }
+@keyframes space-equalizer { to { transform:scaleY(.3); } }
+body[data-route="universe"][data-portal-flight="true"] .portal-bottom,body[data-route="universe"][data-portal-flight="true"] .portal-frame { opacity:0; transition:opacity .4s; }
+body[data-route="universe"][data-route] .beyond-space { background:radial-gradient(ellipse at 80% 5%,#17233d66,transparent 50%),#070d19; padding-top:90px; border-top:1px solid #b6c9ee17; }
+body[data-route="universe"][data-route] .beyond-space h2 { color:#e4eafb; font-weight:400; letter-spacing:2px; }
+@media(max-width:1200px) and (min-width:761px) {
+ body[data-route="universe"][data-route] .header-nav { gap:20px; }
+ body[data-route="universe"][data-route] .map-heading { top:24%; left:6%; }
+ body[data-route="universe"][data-route] .map-heading h1 { font-size:clamp(41px,5.2vw,64px); }
+ .portal-hero-actions { gap:15px; }.portal-launch { gap:12px; padding:12px 15px; }
+ .portal-bottom { grid-template-columns:100px 1fr; gap:15px; }.portal-sector { display:none; }
+ .portal-world-rail a { font-size:11px; letter-spacing:1px; }.portal-world-rail a > span { margin:0; }
+ body[data-route="universe"][data-route] .portal-instructions { left:6%; }
+}
+@media(max-width:760px) {
+ body[data-route="universe"][data-route] .topbar { height:72px; padding:0 6%; }
+ body[data-route="universe"][data-route] .brand-symbol { font-size:30px; }
+ body[data-route="universe"][data-route] .header-right { gap:11px; }
+ .space-audio { gap:0; padding:9px; }.space-audio > span { display:none; }
+ body[data-route="universe"][data-route] .universe-map { height:100svh; min-height:740px; }
+ .portal-frame { left:7%; right:7%; top:91px; font-size:6px; letter-spacing:1.3px; }.portal-frame span:last-child { display:none; }
+ body[data-route="universe"][data-route] .map-heading { top:13%; left:7%; width:86%; }
+ body[data-route="universe"][data-route] .map-heading .eyebrow { font-size:8px; letter-spacing:3px; gap:9px; }
+ body[data-route="universe"][data-route] .map-heading h1 { font-size:32px; line-height:1.28; letter-spacing:3px; margin:13px 0 11px; }
+ body[data-route="universe"][data-route] .map-heading h1 br { display:block; }
+ body[data-route="universe"][data-route] .map-heading p { font-size:10px; letter-spacing:.8px; line-height:1.9; }
+ .portal-hero-actions { display:none; }.portal-kicker { display:none!important; }
+ body[data-route="universe"][data-route] .portal-location { top:85px; right:7%; gap:0; }
+ body[data-route="universe"][data-route] .portal-location i,body[data-route="universe"][data-route] .portal-location span { display:none; }
+ body[data-route="universe"][data-route] .portal-reset { font-size:8px; padding:5px 7px; letter-spacing:1px; }
+ body[data-route="universe"][data-route] .world-label { gap:3px; top:calc(100% + 7px); min-width:85px; }
+ body[data-route="universe"][data-route] .world-label small { font-size:6px; letter-spacing:1px; }
+ body[data-route="universe"][data-route] .world-label strong { font-size:15px; letter-spacing:2px; }
+ body[data-route="universe"][data-route] .world-label strong span { font-size:9px; margin-left:1px; }
+ body[data-route="universe"][data-route] .world-label > span { font-size:8px; letter-spacing:.5px; }
+ body[data-route="universe"][data-route] .portal-instructions { display:none; }
+ .portal-bottom { height:81px; left:6%; right:6%; grid-template-columns:1fr; gap:0; }
+ body[data-route="universe"][data-route] .map-scroll { display:none; }
+ .portal-world-rail { width:100%; justify-content:space-between; gap:5px; }
+ .portal-world-rail a { padding:8px 1px; display:flex; flex-direction:column; gap:7px; font-size:10px; letter-spacing:.6px; }
+ .portal-world-rail a > span { font-size:7px; margin:0; }.portal-world-rail a small,.portal-sector { display:none; }
+ body[data-route="universe"][data-route] .controls { bottom:99px; left:6%; right:auto; }
+ body[data-route="universe"][data-route] .controls button { width:32px; height:30px; font-size:16px; }
+ body[data-route="universe"][data-route] .beyond-space { padding-top:60px; }
+ body[data-route="universe"][data-route] .beyond-space h2 { font-size:25px; }
+}
+@media(max-width:360px) { body[data-route="universe"][data-route] .map-heading h1 { font-size:29px; letter-spacing:2px; } }
+@media(prefers-reduced-motion:reduce) { .portal-mouse::after,.space-audio b { animation:none!important; } }

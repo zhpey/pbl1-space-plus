@@ -1,0 +1,256 @@
+/* Home observation mode. Keep the canvas visible behind the controls. */
+body[data-flight-mode=scene] .od-chapter-kicker {
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+body[data-flight-mode=scene] .od-chapter-kicker b {
+  display: block;
+  font: inherit;
+  color: #c7d9eb;
+  padding-left: 10px;
+  border-left: 1px solid #a9c9e44a;
+}
+body[data-flight-mode=scene] .od-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+}
+body[data-flight-mode=scene] .od-hero-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 13px;
+  border-radius: 3px;
+  font: 13px var(--sans);
+  white-space: nowrap;
+}
+.od-hero-actions .od-explore-launch {
+  color: #071725;
+  background: #d7ebf9;
+  border-color: #d7ebf9;
+}
+.od-hero-actions .od-explore-launch:hover { background: #f4faff; }
+.od-hero-actions .od-secondary {
+  background: #0a1423bf;
+  border: 1px solid #9bb8d65e;
+  color: #e0edf7;
+}
+.od-hero-actions .od-secondary:not(:disabled):hover {
+  background: #1a2b42;
+  border-color: #d7ebf9;
+}
+.od-hero-actions .od-secondary:disabled { opacity: .5; cursor: not-allowed; }
+body[data-flight-mode=scene] .od-hero-actions small {
+  font: 9px var(--mono);
+  color: #b7cde1;
+}
+body[data-flight-mode=scene] .od-key-hint {
+  gap: 15px;
+  margin-top: 10px;
+  max-width: none;
+}
+body[data-flight-mode=scene] .od-key-hint button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  font-size: 11px;
+  color: #b5c9dc;
+}
+body[data-flight-mode=scene] .od-key-hint button:hover { color: #f0f8ff; }
+body[data-flight-mode=scene] .od-view-controls { margin-top: 5px; }
+body[data-odyssey-clean=true][data-flight-mode=scene] .ship-mode-switch { visibility: hidden; }
+
+@media (max-width: 759px) {
+  body[data-route=universe][data-flight-mode=scene] .universe-map.od-hero {
+    height: max(820px, 100svh);
+    min-height: 820px;
+  }
+  body[data-flight-mode=scene] .od-hero-copy { top: 139px; }
+  body[data-flight-mode=scene] #od-hero-title {
+    font-size: clamp(39px, 11vw, 54px);
+    margin-block: 14px;
+  }
+  body[data-flight-mode=scene] .od-hero-intro { margin-bottom: 16px; }
+  body[data-flight-mode=scene] .od-hero-actions button { padding-inline: 10px; font-size: 12px; }
+  body[data-flight-mode=scene] .od-key-hint { gap: 13px; margin-top: 4px; }
+  body[data-flight-mode=scene] .od-key-hint button { min-height: 36px; }
+  body[data-flight-mode=scene] .od-bottom-hud { bottom: 92px; }
+  body[data-flight-mode=scene] .od-navigation-controls { gap: 9px; }
+  body[data-flight-mode=scene] .od-navigation-controls button { width: 40px; height: 40px; }
+  body[data-flight-mode=scene] .od-quality-label select { min-height: 36px; }
+  body[data-flight-mode=scene] .od-station-rail {
+    bottom: 13px;
+    left: 6%;
+    right: 6%;
+    height: 65px;
+    grid-template-columns: none;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
+    grid-auto-columns: max(79px, 23%);
+    gap: 6px;
+    overflow: auto hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #66809a transparent;
+    padding: 3px 1px;
+  }
+  body[data-flight-mode=scene] .od-station-rail button {
+    grid-row: 1;
+    height: 55px;
+    padding: 0 3px;
+    grid-template-columns: 21px 1fr;
+    grid-template-rows: 13px 18px;
+    gap: 1px 4px;
+  }
+  body[data-flight-mode=scene] .od-station-rail button>.od-sphere { width: 21px; height: 21px; grid-area: 1 / 1 / 3 / 2; }
+  body[data-flight-mode=scene] .od-station-rail button>.od-station-no { display: block; font-size: 8px; }
+  body[data-flight-mode=scene] .od-station-rail button>span:not(.od-sphere):not(.od-station-no) { font-size: 10px; }
+  body[data-flight-mode=scene] .od-station-rail button>small { display: none; }
+}
+@media (max-width: 359px) {
+  body[data-flight-mode=scene] .od-hero-actions button { padding-inline: 8px; }
+  body[data-flight-mode=scene] .od-hero-actions small { display: none; }
+  body[data-flight-mode=scene] .od-navigation-controls { gap: 6px; }
+  body[data-flight-mode=scene] .od-navigation-controls button { width: 35px; }
+}
+@media (min-width: 760px) and (max-height: 550px) {
+  body[data-flight-mode=scene] .od-hero-actions button { min-height: 36px; font-size: 11px; }
+  body[data-flight-mode=scene] .od-key-hint { margin-top: 4px; }
+  body[data-flight-mode=scene] .od-key-hint button { min-height: 28px; }
+}
+/* Planet observation uses the same scene as the station, with a compact lesson panel. */
+body[data-flight-mode=scene] .od-key-hint .od-observation-launch {
+  color: #cde7ff;
+  border-bottom: 1px solid #7ca6c874;
+}
+body[data-odyssey-station=saturn] .od-key-hint .od-observation-launch { color: #f8dfb2; border-color: #deb5778a; }
+body[data-od-observation] .od-hero-copy { width: min(390px, 42vw); }
+body[data-od-observation] .od-facts { visibility: hidden; }
+.observation-pane { color: #e8eff8; }
+.observation-back, .observation-source { color: #c3d8ec; font-size: 12px; }
+.observation-back {
+  background: transparent;
+  border: 1px solid #9db8d255;
+  padding: 8px 13px;
+  border-radius: 3px;
+  min-height: 36px;
+}
+body[data-od-observation] .observation-pane #od-hero-title {
+  margin: 18px 0 11px;
+  color: #f0f5fe;
+  font: 400 clamp(27px,3.3vw,48px)/1.2 var(--sans);
+  letter-spacing: .02em;
+}
+.observation-task, .observation-reading { max-width: 35ch; color: #d2dfec; font: 14px/1.85 var(--sans); }
+.observation-task { margin: 0 0 18px; }
+.observation-reading { margin: 14px 0; min-height: 4em; }
+.observation-modes { display: flex; gap: 6px; flex-wrap: wrap; }
+.observation-modes button {
+  padding: 8px 11px;
+  min-height: 38px;
+  color: #d4e4f4;
+  background: #0b1726e0;
+  border: 1px solid #8faec05e;
+  border-radius: 3px;
+  font: 12px var(--sans);
+}
+.observation-modes button[aria-pressed=true] { color: #0a1421; background: #cce4f9; border-color: #cce4f9; }
+body[data-od-observation=saturn] .observation-modes button[aria-pressed=true] { background: #efdbb7; border-color: #efdbb7; }
+.observation-source { text-decoration: underline; text-underline-offset: .28em; }
+.observation-note { color: #a2b6cc; font: 11px/1.4 var(--sans); margin-top: 11px; }
+.observation-fallback, .observation-fallback-note { display: none; }
+body[data-portal-renderer=fallback][data-od-observation] [data-observation-model-note] { display: none; }
+body[data-portal-renderer=fallback][data-od-observation] .observation-fallback-note { display: block; }
+body[data-portal-renderer=fallback][data-od-observation] .observation-fallback {
+  display: grid;
+  width: min(240px, 100%);
+  height: 174px;
+  place-items: center;
+  isolation: isolate;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.observation-fallback i, .observation-fallback b { grid-area: 1 / 1; border-radius: 50%; }
+.observation-fallback b { width: 92px; height: 92px; background: radial-gradient(circle at 28% 29%, #77baf2, #164878 65%, #02050b); }
+body[data-od-observation=earth] .observation-fallback[data-mode='1'] b { background: linear-gradient(105deg, transparent 22%, #120e15 74%), radial-gradient(circle at 25% 28%,#88c8ff,#16375c); box-shadow: -2px 0 6px #8badf9; }
+body[data-od-observation=earth] .observation-fallback[data-mode='2'] b { background: radial-gradient(circle at 67% 34%,#fbd492 1px,transparent 2px), radial-gradient(circle at 36% 53%,#fbd492 1px,transparent 2px), radial-gradient(circle at 47% 51%,#fbd492 1px,transparent 2px), radial-gradient(circle at 20% 25%,#172c49,#040a12 61%); }
+body[data-od-observation=saturn] .observation-fallback b { height: 82px; background: linear-gradient(160deg,#c7a774,#f4ddb1 36%,#a48559 48%,#d1b88c 63%,#392a23); }
+body[data-od-observation=saturn] .observation-fallback i {
+  width: 170px;
+  height: 170px;
+  transform: rotate(-14deg) scaleY(var(--ring-view));
+  background: radial-gradient(circle, transparent 43%,#ad926b55 44% 49%,#d7bc92 50% 62%,transparent 63% 66%,#e1c694 67% 70%,transparent 71%);
+}
+.od-transition { background: radial-gradient(ellipse at 51% 47%,#101c2d70 0%,#030713f5 55%,#02060cf9 100%); }
+.od-transition .od-transit-vortex { z-index: 0; opacity: .53; }
+.od-transition>span, .od-transition>i { position: relative; }
+@media(max-width:759px) {
+  body[data-od-observation][data-flight-mode=scene] .od-hero-copy { top: 138px; width: min(87vw, 390px); }
+  body[data-od-observation] .observation-pane #od-hero-title { margin-block: 11px 8px; }
+  .observation-task, .observation-reading { font-size: 13px; line-height: 1.65; }
+  .observation-task { margin-bottom: 10px; }
+  .observation-reading { margin: 9px 0 7px; min-height: 3.4em; }
+  .observation-back, .observation-modes button { min-height: 36px; }
+  .observation-note { margin-top: 7px; }
+}
+@media(max-width:359px) {
+  body[data-flight-mode=scene] .od-key-hint { column-gap: 8px; }
+  body[data-od-observation][data-flight-mode=scene] .od-hero-copy { top: 115px; }
+  .observation-fallback { margin-top: 4px; }
+}
+.observation-source + .observation-source { margin-left: 12px; }
+body[data-portal-renderer=fallback][data-od-observation] .od-hero { background-image: none; }
+body[data-portal-renderer=fallback] .observation-fallback { place-content: center; }
+body[data-portal-renderer=fallback] .observation-fallback-note { margin-top: 4px; }
+@media(max-width:759px) and (max-height:750px) {
+  body[data-route=universe][data-flight-mode=scene][data-od-observation] .universe-map.od-hero { min-height: 760px; }
+}
+@media(min-width:760px) and (max-height:560px) {
+  body[data-route=universe][data-flight-mode=scene][data-od-observation] .universe-map.od-hero { min-height: 520px; }
+  body[data-od-observation][data-flight-mode=scene] .od-hero-copy { top: 84px; width: 40vw; }
+  body[data-od-observation] .observation-pane #od-hero-title { margin-block: 10px 7px; }
+  .observation-task, .observation-reading { font-size: 13px; line-height: 1.65; }
+  .observation-task { margin-bottom: 11px; }
+  .observation-reading { margin-block: 10px 7px; min-height: 0; }
+}
+
+/* Keep the lesson readable without tinting the model or the telescope crop. */
+body[data-od-observation] .od-orbital-tag { visibility: hidden; }
+.observation-reference { display: none; }
+body[data-portal-renderer=fallback]:is([data-od-observation=moon],[data-od-observation=mars],[data-od-observation=jupiter],[data-od-observation=nebula],[data-od-observation=blackhole],[data-od-observation=deepfield]) .observation-fallback {
+  display: block;
+  width: min(100%, 290px);
+  height: 118px;
+  overflow: hidden;
+  border: 1px solid #9ebcdc65;
+  background: #03050b;
+}
+body[data-portal-renderer=fallback] .observation-fallback:has(.observation-reference) .observation-reference { height: 100%; overflow: hidden; }
+body[data-portal-renderer=fallback]:not([data-od-observation=earth]):not([data-od-observation=saturn]) .observation-fallback :is(i,b) { display: none; }
+body[data-portal-renderer=fallback]:not([data-od-observation=earth]):not([data-od-observation=saturn]) .observation-reference { display: block; }
+.observation-reference img { display: block; width: 100%; height: 100%; object-fit: cover; }
+body[data-od-observation=deepfield] .observation-reference img { object-fit: contain; }
+body[data-od-observation=deepfield] .observation-fallback[data-mode='1'] img { transform: scale(2.6); transform-origin: 55% 25%; }
+body[data-od-observation=deepfield] .observation-fallback[data-mode='2'] img { transform: scale(2.35); transform-origin: 46% 38%; }
+body[data-od-observation=nebula] .observation-fallback[data-mode='1'] img { transform: scale(1.65); transform-origin: 58% 53%; }
+.observation-modes button:focus-visible, .observation-back:focus-visible, .observation-source:focus-visible { outline: 2px solid #fbdfaa; outline-offset: 3px; }
+body[data-od-observation] .observation-modes button { border-radius: 4px; }
+body[data-flight-mode=scene] .od-transition { opacity: calc(var(--od-flight, 0) * .92); }
+@media (max-width: 759px) {
+  body[data-od-observation][data-flight-mode=scene] .od-hero-copy { top: 125px; }
+  .observation-modes button { min-height: 40px; }
+}
+@media (min-width: 760px) and (max-height: 550px) {
+  body[data-od-observation][data-flight-mode=scene] .od-hero-copy { top: 83px; }
+  body[data-portal-renderer=fallback][data-route=universe][data-flight-mode=scene][data-od-observation] .universe-map.od-hero { min-height: 630px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-od-observation] .od-hero-copy { animation: none; }
+  body[data-flight-mode=scene] .od-transition { display: none; }
+}

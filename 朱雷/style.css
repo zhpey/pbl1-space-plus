@@ -1,0 +1,205 @@
+/* Sky atlas layout and responsive rules. */
+.sky-workbench {
+  padding-top: 36px;
+  padding-bottom: 48px;
+  background: #090e1288;
+}
+.sky-workbench .atlas-layout {
+  grid-template-columns: 150px minmax(250px, 1fr) minmax(230px, 0.65fr);
+  gap: 0;
+  max-width: none;
+  border: 1px solid #81b6d333;
+  margin-top: 25px;
+}
+.atlas-catalogue {
+  display: flex;
+  flex-direction: column;
+  background: #10202bd9;
+  pointer-events: auto;
+  padding: 15px 0;
+}
+.catalogue-label {
+  font: 9px var(--mono);
+  color: #7e9daa;
+  letter-spacing: 1px;
+  margin: 5px 15px 19px;
+}
+.atlas-catalogue .tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: none;
+  padding: 15px 12px;
+  margin: 0;
+  min-height: 48px;
+}
+.atlas-catalogue .tab small {
+  font: 8px var(--mono);
+  color: #557986;
+}
+.atlas-catalogue .tab > span {
+  margin-left: auto;
+}
+.atlas-catalogue .tab.active {
+  border-left-color: #94cddd;
+  color: #b6e1ed;
+  background: #82c2dd11;
+}
+.sky-workbench .star-map {
+  min-height: 450px;
+  border: 0;
+  border-inline: 1px solid #81b6d333;
+  background:
+    linear-gradient(#8db7ce09 1px, transparent 1px),
+    linear-gradient(90deg, #8db7ce09 1px, transparent 1px),
+    radial-gradient(ellipse, #274f6733, transparent 70%);
+  background-size:
+    35px 35px,
+    35px 35px,
+    100% 100%;
+  display: grid;
+  align-items: center;
+}
+.sky-workbench .star-map svg {
+  height: 420px;
+}
+.sky-workbench .atlas-copy {
+  padding: 28px;
+  max-width: none;
+  align-self: stretch;
+  background: #0d1822d9;
+}
+.atlas-copy .eyebrow {
+  color: #9bc7d7;
+}
+.atlas-copy .eyebrow::before {
+  background: #9bc7d7;
+}
+body[data-route='atlas'] .learning-region .knowledge-grid {
+  display: block;
+  counter-reset: observe;
+}
+.learning-region[data-learning='atlas'] .knowledge-card {
+  display: grid;
+  grid-template-columns: 40px 220px 1fr;
+  align-items: start;
+  border: 0;
+  border-bottom: 1px dashed #739bad44;
+  background: none;
+  padding: 23px 0;
+  gap: 15px;
+}
+.learning-region[data-learning='atlas'] .knowledge-card h3 {
+  margin: 0;
+}
+.learning-region[data-learning='atlas'] .reading-callout {
+  border: 1px dashed #739bad66;
+  background: #6babc00a;
+}
+body[data-route='atlas'] .constellation-directory {
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.learning-region[data-learning='atlas'] .constellation-entry {
+  display: grid;
+  grid-template-columns: 35px 1fr 1fr;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+}
+.constellation-entry .entry-en {
+  overflow-wrap: anywhere;
+}
+.learning-region[data-learning='atlas'] .constellation-entry h3 {
+  margin: 0;
+}
+.learning-region[data-learning='atlas'] .constellation-entry p {
+  grid-column: 2/-1;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .sky-workbench .atlas-layout {
+    grid-template-columns: 125px 1fr;
+  }
+  .sky-workbench .atlas-copy {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 25px;
+  }
+  .sky-workbench .atlas-copy p,
+  .sky-workbench .atlas-copy .buttons {
+    grid-column: 2;
+  }
+  .sky-workbench .atlas-copy h2 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .sky-workbench .atlas-copy .atlas-season {
+    grid-column: 1;
+    align-self: start;
+  }
+  .learning-region[data-learning='atlas'] .knowledge-card {
+    grid-template-columns: 30px 160px 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .sky-workbench {
+    padding-top: 85px;
+  }
+  .sky-workbench .atlas-layout {
+    grid-template-columns: 1fr;
+  }
+  .atlas-catalogue {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+  }
+  .catalogue-label {
+    grid-column: 1/-1;
+    margin: 5px 5px 10px;
+  }
+  .atlas-catalogue .tab {
+    padding: 10px;
+    min-height: 40px;
+  }
+  .sky-workbench .star-map {
+    min-height: 330px;
+    border: 0;
+    border-top: 1px solid #81b6d333;
+    border-bottom: 1px solid #81b6d333;
+  }
+  .sky-workbench .star-map svg {
+    height: 330px;
+  }
+  .sky-workbench .atlas-copy {
+    padding: 25px;
+  }
+  .learning-region[data-learning='atlas'] .knowledge-card {
+    grid-template-columns: 25px 1fr;
+    gap: 10px;
+  }
+  .learning-region[data-learning='atlas'] .knowledge-card p {
+    grid-column: 2;
+  }
+  .learning-region[data-learning='atlas'] .constellation-directory {
+    grid-template-columns: 1fr;
+  }
+  .learning-region[data-learning='atlas'] .constellation-entry {
+    padding: 20px 10px;
+  }
+}
+
+.workbench-heading {
+  border-bottom: 1px solid #81b6d333;
+  padding-bottom: 22px;
+}
+.workbench-heading .page-title {
+  font-size: 32px;
+}
+.workbench-heading .intro {
+  max-width: none;
+}

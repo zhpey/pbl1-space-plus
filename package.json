@@ -1,0 +1,10 @@
+{
+  "name": "pbl1-space-plus",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-public-space.cjs"
+  },
+  "devDependencies": {
+    "rolldown": "1.2.15"
+  }
+}

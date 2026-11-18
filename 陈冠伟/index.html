@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c0f">
+  <meta name="description" content="比较八大行星的体积、公转周期和表面引力。地球的平均半径约 6,371 公里。">
+  <title>太空+ SPACE PLUS · 行星漫游</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>html { color-scheme:dark; background:#090c0f; }
+body { margin:0; }
+#space-site[hidden] { display:none !important; }
+.launch-preview { min-height:100svh; box-sizing:border-box; display:grid; align-content:center; gap:clamp(20px,5vw,48px); padding:clamp(24px,8vw,108px); color:#eef4fa; font:16px/1.6 system-ui,'Microsoft YaHei',sans-serif; background:radial-gradient(ellipse at 79% 35%,#23547c55,transparent 60%),#090c0f; isolation:isolate; position:relative; }
+.launch-preview::before { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,#090c0ffd 0%,#090c0fdd 35%,#090c0f22 100%),var(--launch-earth) 80% center / min(78vw,900px) auto no-repeat; }
+.launch-brand { text-decoration:none; color:inherit; font-weight:700; width:max-content; }
+.launch-brand span { margin-left:.7em; font-size:11px; letter-spacing:.2em; color:#abc5da; }
+.launch-intro { max-width:760px; }
+.launch-intro h1 { font-size:clamp(38px,6vw,92px); line-height:1.14; letter-spacing:-.04em; margin:0 0 18px; text-wrap:balance; }
+.launch-intro p { max-width:42ch; margin:0; color:#cadcea; }
+.launch-preview nav { max-width:730px; display:flex; gap:8px; flex-wrap:wrap; }
+.launch-preview nav a { min-height:44px; display:inline-flex; align-items:center; gap:10px; padding:0 12px; border:1px solid #789db676; border-radius:5px; background:#0d1b28e0; color:inherit; text-decoration:none; font-size:14px; }
+.launch-preview nav a:hover,.launch-preview nav a:focus-visible { background:#274d69; }
+@media (max-width:600px) { .launch-preview::before { background-position:center,90% 18%; background-size:cover,95% auto; } }
+
+</style>
+  <link rel="modulepreload" href="../js/public-film-shots-BTQMoS94.js">
+  <script>if(new URLSearchParams(location.search).get('view')==='fast')document.documentElement.dataset.fastView='true';</script>
+  <script type="module" src="../js/public-site-BSimoOVc.js"></script>
+  <link rel="stylesheet" href="../public-site-a5ae3da009.css" data-site-style media="print" onload="this.media='all'" onerror="this.dataset.failed='true'">
+</head>
+<body data-entry-route="explore/earth" style="--launch-earth:url('../assets/odyssey/earth-preview.webp')">
+  <main id="launch-preview" class="launch-preview">
+    <a class="launch-brand" href="../">太空<sup>+</sup> <span>SPACE PLUS</span></a>
+    <section class="launch-intro"><h1>行星漫游</h1><p>比较八大行星的体积、公转周期和表面引力。地球的平均半径约 6,371 公里。</p></section>
+    <nav aria-label="五人作品"><a href="../陈冠伟/">行星漫游 <span aria-hidden="true">↗</span></a><a href="../邹海鹏/">太阳系 <span aria-hidden="true">↗</span></a><a href="../朱雷/">星座图谱 <span aria-hidden="true">↗</span></a><a href="../滕紫涵/">宇宙理论 <span aria-hidden="true">↗</span></a><a href="../訾舒然/">影像与故事 <span aria-hidden="true">↗</span></a></nav>
+  </main>
+  <div id="space-site" hidden>
+    <a class="skip-link" href="#page-content">跳到探索内容</a>
+    <div id="stage"><canvas id="universe" aria-label="可拖动旋转的三维宇宙" tabindex="0"></canvas><div class="stage-shade"></div></div>
+    <div id="app"></div>
+  </div>
+</body>
+</html>

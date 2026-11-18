@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">分级火箭与进入轨道</title><desc id="desc">原创概念示意：分离的火箭级段、继续飞行的上面级和弯向轨道的飞行线，非真实轨迹或工程比例。</desc>
+  <defs><radialGradient id="sky" cx=".7" cy=".35"><stop stop-color="#183953"/><stop offset="1" stop-color="#071322"/></radialGradient><linearGradient id="metal"><stop stop-color="#e2eaeb"/><stop offset=".55" stop-color="#a8bcc8"/><stop offset="1" stop-color="#456074"/></linearGradient><linearGradient id="flame" x2="0" y2="1"><stop stop-color="#fff2c5"/><stop offset=".3" stop-color="#eeb77a"/><stop offset="1" stop-color="#db8f5b" stop-opacity="0"/></linearGradient></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#c8daeb" opacity=".55"><circle cx="63" cy="91" r="1.2"/><circle cx="164" cy="67" r="1"/><circle cx="710" cy="109" r="1.3"/><circle cx="587" cy="54" r="1"/><circle cx="657" cy="257" r="1"/><circle cx="257" cy="164" r="1"/><circle cx="740" cy="349" r="1"/></g>
+  <path d="M0 474C219 398 479 406 800 471" fill="#142e44" stroke="#88b9c7" stroke-width="2"/>
+  <path d="M193 425C252 285 394 127 661 106" stroke="#8db1c9" stroke-width="2" fill="none" stroke-dasharray="4 10"/>
+  <path d="M628 92L662 106L634 127" stroke="#d4ae7f" stroke-width="2" fill="none"/>
+  <g transform="translate(485 193) rotate(53)">
+    <path d="M-21 45L-17-42Q-14-65 0-83Q14-65 17-42L21 45Z" fill="url(#metal)" stroke="#c0d3de" stroke-width="2"/>
+    <path d="M-18-35H18M-20 21H20" stroke="#415d72" stroke-width="6"/>
+    <circle cy="-22" r="7" fill="#142c42" stroke="#9dc4d2"/>
+    <path d="M-16 46L-29 91L0 76L29 91L16 46" fill="#7897ac"/>
+    <path d="M-13 49Q-11 82 0 112Q11 82 13 49Z" fill="url(#flame)"/>
+  </g>
+  <g transform="translate(343 309) rotate(37)">
+    <path d="M-22-48H22L26 44H-26Z" fill="url(#metal)" opacity=".8" stroke="#adc4d2" stroke-width="2"/>
+    <path d="M-23 21H23M-23-32H23" stroke="#3c5871" stroke-width="7"/>
+    <path d="M-26 41L-35 62L-15 53H15L35 62L26 41" fill="#4e6b82"/>
+  </g>
+  <g fill="none" stroke="#a9c7d9" opacity=".35"><path d="M300 291L257 271M314 329L266 339M329 354L307 399"/><path d="M425 241L448 222" stroke-dasharray="3 6"/></g>
+  <path d="M82 385V414H111M683 63H712V92" stroke="#829fb5" fill="none" opacity=".6"/>
+  <text x="40" y="466" fill="#97b2c6" font-size="12" letter-spacing="4" font-family="monospace">STAGE / SEPARATE / ORBIT</text>
+</svg>

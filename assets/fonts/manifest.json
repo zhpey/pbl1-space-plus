@@ -1,0 +1,32 @@
+[
+  {
+    "file": "space-reading-sc.woff2",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+    "sourceSha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "sha256": "9f422c3cb3088495c1270eff9fc1ce329b9175ec4a04a02d086e149c2391b6d2",
+    "bytes": 410384,
+    "subset": true,
+    "glyphs": 1590,
+    "license": "noto-sans-sc-OFL.txt"
+  },
+  {
+    "file": "space-grotesk.woff2",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf",
+    "sourceSha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+    "sha256": "074b55c5fb158e70e416f386a8932a35e7c478a61a2930fe690e65c80377aa5d",
+    "bytes": 49352,
+    "subset": false,
+    "glyphs": 735,
+    "license": "space-grotesk-OFL.txt"
+  },
+  {
+    "file": "space-data-mono.woff2",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Regular.ttf",
+    "sourceSha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46",
+    "sha256": "95ed03e71507916132d53ac3d0763e9de5cc2b6d2dfb3f057d667ab0892f0ebf",
+    "bytes": 39240,
+    "subset": false,
+    "glyphs": 930,
+    "license": "ibm-plex-mono-OFL.txt"
+  }
+]

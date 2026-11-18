@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">城市灯光与暗夜星空的对照</title><desc id="desc">原创概念示意：城市上方散射的灯光与减少无用照明后的暗夜星空，非同地实测影像或精确亮度比较。</desc>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#071322"/><stop offset="1" stop-color="#152d3e"/></linearGradient><radialGradient id="light" cx=".5" cy="1"><stop stop-color="#e2b778" stop-opacity=".65"/><stop offset=".5" stop-color="#a77d56" stop-opacity=".2"/><stop offset="1" stop-color="#a77d56" stop-opacity="0"/></radialGradient><linearGradient id="milky"><stop stop-color="#7c9eb8" stop-opacity="0"/><stop offset=".5" stop-color="#93afc8" stop-opacity=".16"/><stop offset="1" stop-color="#7c9eb8" stop-opacity="0"/></linearGradient></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <path d="M424 327Q550 159 790 89L800 176Q601 229 501 365Z" fill="url(#milky)"/>
+  <g fill="#c7dceb"><circle cx="81" cy="82" r="1.3"/><circle cx="228" cy="114" r="1.2"/><circle cx="321" cy="66" r="1"/><circle cx="459" cy="80" r="1.2"/><circle cx="530" cy="58" r="1"/><circle cx="612" cy="91" r="1.7"/><circle cx="710" cy="52" r="1.2"/><circle cx="743" cy="127" r="1.2"/><circle cx="668" cy="158" r="1.5"/><circle cx="495" cy="161" r="1.3"/><circle cx="553" cy="204" r="1.7"/><circle cx="704" cy="238" r="1"/><circle cx="757" cy="287" r="1.2"/><circle cx="468" cy="276" r="1.2"/><circle cx="630" cy="284" r="1.3"/><circle cx="582" cy="144" r="1.2"/><circle cx="582" cy="306" r="1.2"/><circle cx="676" cy="199" r="1"/><circle cx="768" cy="79" r="1"/><circle cx="523" cy="115" r="1"/><circle cx="448" cy="214" r="1"/><circle cx="618" cy="224" r="1.2"/></g>
+  <ellipse cx="217" cy="339" rx="211" ry="278" fill="url(#light)"/>
+  <path d="M0 366H52V322H87V348H112V287H150V366H166V308H199V276H231V366H255V316H286V339H316V296H352V366H383V344H415V387H0Z" fill="#122436" stroke="#536774" stroke-width="1"/>
+  <g fill="#d3ac78" opacity=".75"><path d="M121 302H128V311H121ZM137 302H144V311H137ZM121 322H128V331H121ZM137 322H144V331H137ZM206 292H213V301H206ZM221 292H228V301H221ZM206 312H213V321H206ZM324 314H331V323H324ZM339 314H346V323H339Z"/></g>
+  <path d="M389 386Q460 358 502 374Q557 322 600 363Q667 316 715 354Q760 330 800 349V500H0V391Z" fill="#081827"/>
+  <path d="M396 57V412" stroke="#94b3c8" stroke-opacity=".22" stroke-dasharray="3 9"/>
+  <g stroke="#9ab5c5" fill="none" stroke-width="2"><path d="M620 382V343Q620 333 630 333H643"/><path d="M603 382V347Q603 338 592 338H580"/></g>
+  <path d="M632 337L617 368H652Z" fill="#d2b27e" opacity=".14"/><path d="M579 342L563 373H595Z" fill="#d2b27e" opacity=".14"/>
+  <path d="M632 334H650M574 339H592" stroke="#d9bb8e" stroke-width="4"/>
+  <text x="40" y="466" fill="#97b2c6" font-size="12" letter-spacing="4" font-family="monospace">BRING BACK THE NIGHT</text>
+</svg>

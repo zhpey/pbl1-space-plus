@@ -1,0 +1,37 @@
+{
+  "href": "https://images-assets.nasa.gov/image/PIA04215/collection.json",
+  "data": [
+    {
+      "center": "JPL",
+      "date_created": "1999-12-01T00:00:07Z",
+      "description": "Rising from a sea of dust and gas like a giant seahorse, the Horsehead nebula is one of the most photographed objects in the sky. NASA Hubble Space Telescope took a close-up look at this heavenly icon, revealing the cloud intricate structure.",
+      "description_508": "Rising from a sea of dust and gas like a giant seahorse, the Horsehead nebula is one of the most photographed objects in the sky. NASA Hubble Space Telescope took a close-up look at this heavenly icon, revealing the cloud intricate structure.",
+      "keywords": [
+        "Horsehead Nebula",
+        "Hubble Space Telescope"
+      ],
+      "media_type": "image",
+      "nasa_id": "PIA04215",
+      "secondary_creator": "JPL/NASA, NOAO, ESA and The Hubble Heritage Team, STScI/AURA",
+      "title": "Horsehead Nebula"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://images-assets.nasa.gov/image/PIA04215/PIA04215~thumb.jpg",
+      "rel": "preview",
+      "render": "image",
+      "width": 853,
+      "size": 49000,
+      "height": 620
+    },
+    {
+      "href": "https://images-assets.nasa.gov/image/PIA04215/PIA04215~orig.jpg",
+      "rel": "canonical",
+      "render": "image",
+      "height": 620,
+      "width": 853,
+      "size": 53000
+    }
+  ]
+}

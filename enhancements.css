@@ -1,0 +1,26 @@
+/* Reading and scene feedback, shared by the native and Vue editions. */
+.reading-entry{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 5vw 0 158px;padding:22px 0;border-block:1px solid var(--line);color:#c6d3db;background:linear-gradient(90deg,#dd936c0b,transparent)}
+.reading-entry small{display:block;font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:8px}
+.reading-entry strong{font-size:14px;font-weight:400;line-height:1.9}
+.reading-entry-arrow{flex-shrink:0;color:var(--accent);font-size:13px}
+.reading-entry:hover{border-color:#dd936c88}
+.learning-region{scroll-margin-top:24px}
+.learning-region:focus{outline:none}
+.learning-region:focus-visible{outline:1px solid var(--accent);outline-offset:8px}
+.hero-copy>p,.intro,.atlas-copy p,.photo-caption p,.dialog p{font-size:14px;line-height:2;color:#b5c2cc;text-wrap:pretty}
+.knowledge-card p,.reading-callout p,.zone-detail p,.discovery-timeline p,.telescope-card p,.reading-heading>p{font-size:14px;line-height:2.1;color:#b5c2cc}
+.reading-footnote,.science-note{font-size:12px!important;color:#9bafbc!important}
+.hero-stats label,.dialog-grid small,.console-telemetry small,.gallery-source{font-size:11px;color:#97aab7}
+.side-nav a{color:#97a5af}
+.scene-note{font-size:11px;color:#9bafbc}
+.scene-status{position:fixed;right:24px;bottom:76px;z-index:12;max-width:min(420px,calc(100vw - 48px));padding:13px 17px;border:1px solid #6f879955;background:#101b24f5;color:#c6d3db;font-size:13px;line-height:1.8;box-shadow:0 8px 28px #0005}
+.scene-status[hidden]{display:none}
+.scene-status button{padding:4px 10px;margin-left:12px;border:1px solid #dd936c88;color:var(--accent);background:#dd936c12}
+@media(max-width:1100px){.reading-entry{margin-left:125px}}
+@media(max-width:760px){
+ .reading-entry{margin:0 24px;padding:20px 0;gap:12px;align-items:flex-start}
+ .reading-entry strong{font-size:13px}.reading-entry-arrow{font-size:12px;padding-top:25px}
+ .hero-copy>p,.intro,.atlas-copy p,.photo-caption p,.dialog p{font-size:14px}
+ .learning-region .knowledge-card p,.learning-region .reading-callout p,.learning-region .zone-detail p,.learning-region .discovery-timeline p,.learning-region .telescope-card p,.learning-region .reading-heading>p{font-size:14px}
+ .scene-status{right:16px;bottom:20px;max-width:calc(100vw - 32px);font-size:12px}
+}

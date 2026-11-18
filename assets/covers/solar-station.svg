@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">空间站与地球：轨道上的家园</title><desc id="desc">原创概念示意：空间站舱段、太阳能板与地球弧面，非真实比例或具体工程结构。</desc>
+  <defs><radialGradient id="sky"><stop stop-color="#183852"/><stop offset="1" stop-color="#071322"/></radialGradient><linearGradient id="earth" x2="0" y2="1"><stop stop-color="#7abacb"/><stop offset=".06" stop-color="#1d4b65"/><stop offset="1" stop-color="#0a1b30"/></linearGradient><linearGradient id="metal"><stop stop-color="#e1e9e9"/><stop offset=".45" stop-color="#91aebb"/><stop offset="1" stop-color="#334f63"/></linearGradient><pattern id="cells" width="17" height="17" patternUnits="userSpaceOnUse"><rect width="17" height="17" fill="#193950"/><path d="M0 0H17V17" fill="none" stroke="#7fb0bf" stroke-opacity=".35"/></pattern></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#d2e3f0" opacity=".5"><circle cx="84" cy="73" r="1.4"/><circle cx="186" cy="105" r="1"/><circle cx="641" cy="57" r="1.4"/><circle cx="724" cy="162" r="1"/><circle cx="533" cy="113" r="1"/><circle cx="58" cy="256" r="1"/><circle cx="674" cy="283" r="1.3"/></g>
+  <ellipse cx="439" cy="290" rx="318" ry="106" fill="none" stroke="#8baebd" stroke-opacity=".2" stroke-dasharray="4 10" transform="rotate(-16 439 290)"/>
+  <circle cx="405" cy="846" r="472" fill="url(#earth)" stroke="#a1d9e5" stroke-width="3"/>
+  <path d="M74 414Q201 386 307 405T534 390T749 410" fill="none" stroke="#d0e8e9" stroke-width="13" opacity=".14"/>
+  <g transform="translate(410 227) rotate(-18)">
+    <path d="M-215 0H217" stroke="#9cb7c6" stroke-width="10"/>
+    <g fill="url(#cells)" stroke="#99b6c6" stroke-width="2"><rect x="-232" y="-91" width="84" height="181"/><rect x="-119" y="-91" width="84" height="181"/><rect x="46" y="-91" width="84" height="181"/><rect x="158" y="-91" width="84" height="181"/></g>
+    <path d="M-191-90V90M-77-90V90M88-90V90M200-90V90" stroke="#c1d5df" stroke-width="4"/>
+    <rect x="-19" y="-57" width="39" height="115" rx="13" fill="url(#metal)" stroke="#c9dce5"/>
+    <rect x="-61" y="-16" width="119" height="34" rx="12" fill="url(#metal)" stroke="#c9dce5"/>
+    <path d="M-19-19H20M-19 22H20M-41-16V18M41-16V18" stroke="#38546a" stroke-width="3"/>
+    <path d="M1 58V80L17 91" stroke="#d1a674" fill="none" stroke-width="4"/>
+    <circle cx="1" cy="-39" r="7" fill="#182b3c" stroke="#cce1e9"/>
+  </g>
+  <path d="M57 354V373H76M724 112H743V131" fill="none" stroke="#9fb8cc" opacity=".55"/>
+  <text x="40" y="466" fill="#97b2c6" font-size="12" letter-spacing="4" font-family="monospace">ORBITAL HABITAT</text>
+</svg>

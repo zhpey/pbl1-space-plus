@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">从星空确定方向与位置</title><desc id="desc">原创概念示意：北极星、地平线和测角线，连接到卫星定位意象，非某地实时星空或精确导航图。</desc>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#071322"/><stop offset="1" stop-color="#15364a"/></linearGradient><radialGradient id="glow"><stop stop-color="#d6bf91" stop-opacity=".3"/><stop offset="1" stop-color="#d6bf91" stop-opacity="0"/></radialGradient></defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <g fill="#b5cde0" opacity=".75"><circle cx="83" cy="92" r="1.4"/><circle cx="176" cy="146" r="1"/><circle cx="209" cy="62" r="1.2"/><circle cx="361" cy="75" r="1"/><circle cx="601" cy="57" r="1.2"/><circle cx="728" cy="185" r="1.5"/><circle cx="473" cy="177" r="1.2"/><circle cx="657" cy="228" r="1"/></g>
+  <path d="M111 238L163 229L187 199L233 193L273 157L313 152" stroke="#9cb9cc" stroke-opacity=".6" fill="none"/><g fill="#c7dae6"><circle cx="111" cy="238" r="3"/><circle cx="163" cy="229" r="3"/><circle cx="187" cy="199" r="3"/><circle cx="233" cy="193" r="3"/><circle cx="273" cy="157" r="3"/><circle cx="313" cy="152" r="3"/></g>
+  <circle cx="400" cy="112" r="46" fill="url(#glow)"/><path d="M400 94V130M382 112H418" stroke="#e2c291" stroke-width="1.5"/><circle cx="400" cy="112" r="4" fill="#f0dfbb"/>
+  <path d="M0 368Q198 331 400 361T800 356V500H0Z" fill="#0b1c2e"/>
+  <path d="M94 361H706" stroke="#7da5bc" stroke-opacity=".5"/><path d="M400 348V134" stroke="#d6b98b" stroke-dasharray="3 8" opacity=".55"/>
+  <g fill="none" stroke="#b0c9d8"><path d="M277 361L400 113" stroke-width="1.5"/><path d="M277 361L598 179" stroke-dasharray="3 8" stroke-opacity=".5"/><path d="M338 361A61 61 0 0 0 304 308" stroke="#d4b184" stroke-width="2"/><circle cx="277" cy="361" r="6" fill="#102538"/></g>
+  <g transform="translate(600 174) rotate(24)" stroke="#9fc4d9" stroke-width="1.5"><rect x="-49" y="-17" width="29" height="34" fill="#1d4059"/><rect x="20" y="-17" width="29" height="34" fill="#1d4059"/><path d="M-34-17V17M34-17V17M-49 0H49"/><rect x="-14" y="-13" width="28" height="26" rx="2" fill="#b4c8d2"/><path d="M0-13V-30"/><circle cy="-32" r="3" fill="#d4b184"/></g>
+  <g transform="translate(611 368)"><circle r="40" fill="#0e2235" stroke="#688aa2"/><path d="M0-30L11 0L0 28L-11 0Z" fill="#8bb2c7"/><path d="M0-30L11 0H0Z" fill="#e2c192"/><circle r="4" fill="#11293d"/></g>
+  <text x="40" y="466" fill="#97b2c6" font-size="12" letter-spacing="4" font-family="monospace">DIRECTION / ANGLE / POSITION</text>
+</svg>

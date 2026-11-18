@@ -1,0 +1,12 @@
+[
+  {
+    "file": "iss-web.glb",
+    "source": "https://science.nasa.gov/resource/international-space-station-3d-model/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/i/ISS_stationary.glb",
+    "credit": "NASA / International Space Station 3D Model",
+    "processing": "Embedded textures resized to max 512px WebP with Pillow; glTF Transform 4.2.1 optimize --compress meshopt --texture-compress false --simplify-ratio 0.65 --simplify-error 0.002",
+    "bytes": 3364480,
+    "sha256": "2abc21d85913f211ba6de3de40039b8918eeaa7e3ca306a21542dc633a31b15b",
+    "date": "2026-11-15"
+  }
+]

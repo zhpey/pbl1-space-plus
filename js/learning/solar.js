@@ -1,0 +1,7 @@
+import {solarZones,missions} from '../learning-data.js';
+import {heading,cards,timeline} from './shared.js';
+import {renderMissionArchives} from '../fieldwork.js';
+export function solarReading(s){
+ const selected=solarZones.find(x=>x.id===s.solarZone)||solarZones[0];
+ return `<section>${heading('A MAP OF OUR NEIGHBOURHOOD','太阳系，不只八大行星。','沿着太阳向外出发，认识不同的天体家族。')}<div class="zone-selector" aria-label="选择太阳系分区">${solarZones.map((z,i)=>`<button class="zone-button ${selected.id===z.id?'active':''}" data-action="solar-zone" data-value="${z.id}" aria-pressed="${selected.id===z.id}"><small>0${i+1}</small><span>${z.name}</span><em>${z.range}</em></button>`).join('')}</div><article class="zone-detail"><span class="eyebrow">${selected.range}</span><h3>${selected.title}</h3><p>${selected.body}</p><p class="reading-footnote">${selected.extra}</p></article>${cards([['恒星与行星','恒星通过内部核聚变释放能量；行星不依靠氢核聚变发光，主要反射恒星的光。'],['卫星与矮行星','卫星绕行星等天体运行；矮行星绕太阳运行、形状近似球体，但没有清空轨道附近的其他天体。'],['彗星与小行星','小行星常以岩石、金属为主；彗星富含挥发性冰，接近太阳时可产生彗发和彗尾。实际分类也存在过渡天体。']])}</section><section>${heading('HUMANITY LOOKS UP','从第一颗卫星，到更远的世界。','八个航天里程碑，连接我们理解宇宙的不同方式。')}${timeline(missions)}<div class="reading-callout"><h3>为什么探测器要“借力”行星？</h3><p>引力助推可以改变飞船相对于太阳的速度与方向。它并不是无中生有地获得能量，而是与运动中的行星交换极少量的动量和能量。</p></div><p class="reading-footnote">资料：<a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">NASA Solar System</a> · <a href="https://www.cnsa.gov.cn/" target="_blank" rel="noopener noreferrer">国家航天局</a></p></section>${renderMissionArchives(s)}`;
+}

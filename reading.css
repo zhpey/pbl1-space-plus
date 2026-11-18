@@ -1,0 +1,423 @@
+@import url('./fieldwork.css');
+.controls.scrolled-out {
+  display: none !important;
+}
+.learning-region {
+  position: relative;
+  pointer-events: auto;
+  margin-left: max(11vw, 140px);
+  margin-right: 5vw;
+  padding: 65px 0 70px;
+  background: #090e12f5;
+  border-top: 1px solid var(--line);
+  isolation: isolate;
+}
+.learning-region::before {
+  content: '';
+  position: absolute;
+  inset: 0 -5vw 0 0;
+  background: #090e12f5;
+  z-index: -1;
+}
+.learning-region > section + section {
+  margin-top: 75px;
+}
+.reading-top-link {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  font-size: 10px;
+  color: #7e929e;
+}
+.reading-top-link:hover {
+  color: var(--accent);
+}
+.reading-heading {
+  margin-bottom: 28px;
+  max-width: 760px;
+}
+.reading-heading h2 {
+  font-size: clamp(25px, 2.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.55;
+  margin: 17px 0 13px;
+  letter-spacing: 0;
+}
+.reading-heading > p {
+  color: #879ba7;
+  font-size: 12px;
+  line-height: 2;
+  margin: 0;
+}
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 16px;
+}
+.knowledge-card {
+  border: 1px solid #ffffff16;
+  background: linear-gradient(145deg, #13202966, #0d151b77);
+  padding: 25px 23px;
+  min-width: 0;
+}
+.reading-number {
+  font: 10px var(--mono);
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+.knowledge-card h3,
+.reading-callout h3,
+.zone-detail h3 {
+  font-weight: 400;
+  font-size: 17px;
+  margin: 16px 0 12px;
+}
+.knowledge-card p,
+.reading-callout p,
+.zone-detail p {
+  font-size: 12px;
+  line-height: 2.2;
+  color: #a1b1bb;
+  margin: 0;
+}
+.reading-callout {
+  border-left: 2px solid #dd936c88;
+  background: #dd936c08;
+  padding: 23px 28px;
+  margin-top: 24px;
+}
+.reading-callout .eyebrow {
+  font-size: 9px;
+}
+.reading-callout .reading-footnote {
+  margin-top: 15px;
+}
+.reading-footnote {
+  font-size: 10px !important;
+  line-height: 2 !important;
+  color: #768b98 !important;
+  margin-top: 18px !important;
+}
+.reading-footnote a,
+.telescope-card > a {
+  color: var(--accent);
+  text-underline-offset: 4px;
+}
+.reading-footnote a:hover,
+.telescope-card > a:hover {
+  text-decoration: underline;
+}
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid #ffffff17;
+  max-width: 100%;
+}
+.zone-selector {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.zone-button {
+  background: #101b2388;
+  border: 1px solid #ffffff17;
+  text-align: left;
+  padding: 15px 13px;
+  color: #8299a7;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+.zone-button small {
+  font: 8px var(--mono);
+  color: #5b7384;
+}
+.zone-button span {
+  font-size: 12px;
+}
+.zone-button em {
+  font-size: 9px;
+  font-style: normal;
+  line-height: 1.7;
+}
+.zone-button.active,
+.zone-button:hover {
+  border-color: #dd936c88;
+  color: var(--accent);
+}
+.zone-detail {
+  border: 1px solid #ffffff17;
+  margin: 17px 0;
+  padding: 25px 28px;
+  min-height: 190px;
+  background: #13232d44;
+}
+.zone-detail .eyebrow {
+  font-size: 9px;
+}
+.discovery-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.discovery-timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 35px;
+  padding: 0 0 28px 22px;
+}
+.discovery-timeline li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #dd936c22;
+}
+.discovery-timeline li::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 17px;
+  bottom: 1px;
+  width: 1px;
+  background: #dd936c26;
+}
+.discovery-timeline li:last-child::after {
+  display: none;
+}
+.timeline-date {
+  font: 12px/1.8 var(--mono);
+  color: var(--accent);
+}
+.discovery-timeline h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+.discovery-timeline p {
+  font-size: 12px;
+  line-height: 2;
+  color: #91a7b4;
+  max-width: 800px;
+  margin: 0;
+}
+.constellation-directory,
+.theory-directory,
+.story-directory {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.constellation-entry,
+.theory-entry,
+.story-entry {
+  display: block;
+  border: 1px solid #ffffff17;
+  padding: 23px 20px;
+  background: #14212c44;
+  transition: border-color 0.2s;
+  position: relative;
+  min-width: 0;
+}
+.constellation-entry:hover,
+.theory-entry:hover,
+.story-entry:hover,
+.constellation-entry.active,
+.story-entry.active {
+  border-color: #dd936c77;
+}
+.constellation-entry h3,
+.theory-entry h3,
+.story-entry h3 {
+  font-size: 17px;
+  font-weight: 400;
+  margin: 14px 0 10px;
+}
+.entry-en {
+  font: 8px var(--mono);
+  letter-spacing: 1px;
+  color: #79929f;
+}
+.constellation-entry p,
+.theory-entry p,
+.story-entry p {
+  font-size: 10px;
+  line-height: 1.9;
+  color: #8ea5b2;
+  margin: 13px 0 0;
+}
+.constellation-entry > span:last-child {
+  position: absolute;
+  right: 19px;
+  top: 22px;
+  color: var(--accent);
+}
+.theory-entry .status-chip {
+  font-size: 8px;
+  line-height: 1.7;
+  margin: 4px 0 0;
+}
+.theory-entry h3 {
+  font-size: 16px;
+}
+.telescope-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.telescope-card {
+  padding: 30px;
+  border: 1px solid #ffffff19;
+  background: radial-gradient(ellipse at top right, #21405244, transparent 75%);
+}
+.telescope-card h3 {
+  font-size: 23px;
+  font-weight: 400;
+  margin: 20px 0;
+}
+.telescope-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 23px 0;
+}
+.telescope-card dt {
+  font-size: 10px;
+  color: #6f8b9c;
+  font-weight: 400;
+}
+.telescope-card dd {
+  font-size: 12px;
+  color: #c0cdd6;
+  margin: 8px 0 0;
+}
+.telescope-card p {
+  font-size: 12px;
+  color: #92a8b6;
+  line-height: 2.2;
+  margin: 20px 0;
+}
+.telescope-card > a {
+  font-size: 10px;
+}
+@media (max-width: 1100px) {
+  .learning-region {
+    margin-left: 125px;
+  }
+  .zone-selector {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .constellation-directory,
+  .theory-directory,
+  .story-directory {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .discovery-timeline li {
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+  }
+}
+@media (max-width: 760px) {
+  .learning-region {
+    margin: 0 24px;
+    padding: 60px 0 48px;
+  }
+  .learning-region > section + section {
+    margin-top: 50px;
+  }
+  .reading-heading h2 {
+    font-size: 26px;
+  }
+  .reading-heading > p {
+    font-size: 11px;
+  }
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .knowledge-card {
+    padding: 22px;
+  }
+  .knowledge-card p,
+  .reading-callout p,
+  .zone-detail p {
+    font-size: 11px;
+  }
+  .reading-callout {
+    padding: 20px;
+  }
+  .zone-selector {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .zone-detail {
+    padding: 22px;
+    min-height: 0;
+  }
+  .discovery-timeline li {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-bottom: 24px;
+  }
+  .discovery-timeline p {
+    font-size: 11px;
+  }
+  .constellation-directory,
+  .theory-directory,
+  .story-directory {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .constellation-entry,
+  .theory-entry,
+  .story-entry {
+    padding: 19px 14px;
+  }
+  .constellation-entry h3,
+  .theory-entry h3,
+  .story-entry h3 {
+    font-size: 15px;
+  }
+  .entry-en {
+    font-size: 7px;
+    overflow-wrap: anywhere;
+  }
+  .telescope-grid,
+  .quiz-grid {
+    grid-template-columns: 1fr;
+  }
+  .telescope-card {
+    padding: 24px;
+  }
+  .telescope-card h3 {
+    font-size: 20px;
+  }
+  .telescope-card p {
+    font-size: 11px;
+  }
+  .quiz-summary {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .quiz-summary > button {
+    font-size: 10px;
+  }
+  .quiz-card {
+    padding: 22px;
+  }
+  .reading-top-link {
+    font-size: 9px;
+  }
+  .learning-region::before {
+    right: -24px;
+  }
+}
+
+.discovery-timeline .timeline-date {
+  display: block;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "file": "earth.jpg",
+    "derived_from": "textures/earth_daymap.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 55861,
+    "sha256": "4e3af05cd0b0cd87acc7646a28f93e46f0f6cd80d8d903694216b37b436ce7b6",
+    "date": "2026-11-15"
+  },
+  {
+    "file": "jupiter.jpg",
+    "derived_from": "textures/jupiter.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 68075,
+    "sha256": "3e2cc2897b38bd12d283cb7b8c562f62bc8b567b830584c945183667eeed7a8b",
+    "date": "2026-11-15"
+  },
+  {
+    "file": "mars.jpg",
+    "derived_from": "textures/mars.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 69531,
+    "sha256": "9280d4ae2cc2afdaca29c22539c0742344f2cc0b8eb154c27cbc92976ce5bbaf",
+    "date": "2026-11-15"
+  },
+  {
+    "file": "moon.jpg",
+    "derived_from": "textures/moon.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 125902,
+    "sha256": "8c428d80b252a8c1ba557005085eb8b824a3e75e7bae36307fbcbdd1daaeb74f",
+    "date": "2026-11-15"
+  },
+  {
+    "file": "neptune.jpg",
+    "derived_from": "textures/neptune.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 14130,
+    "sha256": "074959fc7df4e5c1fc1480c085cb4b91733edf2df60344b8403b14c7a22e87aa",
+    "date": "2026-11-15"
+  },
+  {
+    "file": "saturn.jpg",
+    "derived_from": "textures/saturn.jpg",
+    "source": "https://planetpixelemporium.com/planets.html",
+    "distribution": "https://github.com/jeromeetienne/threex.planets/tree/master/images",
+    "credit": "Planet Pixel Emporium / original project texture collection",
+    "processing": "Resized to 768 x 384, JPEG quality 88; decorative CSS sphere projection",
+    "bytes": 20502,
+    "sha256": "e0048141b779d2aa5acd49abc5482590eef0f9e62d80b24bf9d1327ef169a356",
+    "date": "2026-11-15"
+  }
+]

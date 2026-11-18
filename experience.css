@@ -1,0 +1,149 @@
+/* The document moves naturally; the sky and the shared 3D scene stay behind it. */
+.experience-section,.voyage-story{width:100%;padding:90px 7.3%;position:relative;border-top:1px solid #adc7f229;background:transparent;color:#e1e8f4;pointer-events:auto}
+.experience-section h2,.voyage-story h2{font-size:clamp(24px,1.9vw,27px);font-weight:400;letter-spacing:.025em;line-height:1.55;margin:16px 0}
+.experience-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;max-width:1300px;margin:0 auto 48px}
+.experience-heading>.eyebrow,.experience-heading .eyebrow{font-size:10px;color:#9cbbde;letter-spacing:2px}
+.experience-heading>p{font-size:15px;line-height:2;color:#9daec7;margin:0 0 8px}
+.experience-section button,.voyage-story button{font:inherit;cursor:pointer}
+.experience-section button:focus-visible,.voyage-story button:focus-visible,.experience-section a:focus-visible,.voyage-story a:focus-visible,.experience-section summary:focus-visible,.voyage-story summary:focus-visible{outline:2px solid #c5ddff;outline-offset:6px}
+.experience-footnote{max-width:1300px;margin:28px auto 0;font-size:11px;line-height:1.9;color:#8196b3}
+.voyage-story{padding-top:80px;padding-bottom:0;--voyage-progress:0}
+.voyage-layout{display:grid;grid-template-columns:1fr 1fr;gap:5%;max-width:1300px;margin:auto;position:relative}
+.voyage-visual{grid-column:2;grid-row:1;align-self:start;position:sticky;top:8vh;height:84vh;display:flex;flex-direction:column;justify-content:center;pointer-events:none}
+.voyage-viewport{position:relative;width:100%;height:min(66vh,45vw);min-height:300px}
+.voyage-crosshair{width:16px;height:16px;position:absolute;border-color:#8cabd366;z-index:1}
+.crosshair-a{top:3%;left:0;border-left:1px solid;border-top:1px solid}
+.crosshair-b{bottom:3%;right:0;border-right:1px solid;border-bottom:1px solid}
+.voyage-orbit{position:absolute;inset:8%;border:1px solid #a0bddb1a;border-radius:50%;transform:rotate(-24deg) scaleY(.8)}
+.voyage-orbit::after{content:'';position:absolute;inset:15%;border:1px dashed #a0bddb1c;border-radius:50%}
+.voyage-coordinates{position:absolute;left:0;top:8%;color:#91a7c4;font-size:9px;letter-spacing:2px;line-height:1.9}
+.voyage-planet-captions{position:absolute;left:0;bottom:7%;height:35px;right:0}
+.voyage-planet-captions>span{display:none;font-size:12px;color:#c7d9f0;letter-spacing:3px}
+.voyage-planet-captions small{display:block;font-size:9px;letter-spacing:1.5px;color:#7d95b7;margin-top:8px}
+body[data-voyage-chapter='0'] [data-planet-caption='0'],body[data-voyage-chapter='1'] [data-planet-caption='1'],body[data-voyage-chapter='2'] [data-planet-caption='2'],body[data-voyage-chapter='3'] [data-planet-caption='3'],body[data-voyage-chapter='4'] [data-planet-caption='4']{display:block}
+.voyage-art-note{position:absolute;right:0;bottom:7%;font-size:9px;color:#8299b7;letter-spacing:1px}
+.voyage-track{height:1px;background:#91b3e52b;position:relative;margin-top:14px}
+.voyage-track i{display:block;height:1px;width:100%;background:#b7cfee;transform:scaleX(var(--voyage-progress));transform-origin:left;transition:transform .15s linear}
+.voyage-steps{grid-column:1;grid-row:1;min-width:0}
+.chapter-step{min-height:85svh;display:flex;align-items:center;scroll-margin-top:95px;padding:70px 0}
+.chapter-copy{max-width:500px}
+.chapter-index{display:flex;align-items:center;gap:18px;color:var(--chapter-color);font-size:22px;font-weight:300;letter-spacing:2px}
+.chapter-index i{width:32px;height:1px;background:var(--chapter-color);opacity:.5}
+.chapter-index>span{font-size:9px;letter-spacing:1.5px}
+.chapter-step h3{font-size:clamp(23px,1.8vw,26px);font-weight:400;line-height:1.55;letter-spacing:.025em;margin:20px 0}
+.chapter-step p{font-size:15px;line-height:1.85;color:#a7b8cf;margin:16px 0}
+.chapter-step p.chapter-lead{color:#d4dfef;font-size:16px;line-height:1.9}
+.chapter-step dl{display:flex;gap:36px;margin:28px 0;padding:20px 0;border-top:1px solid #b2c8e32a;border-bottom:1px solid #b2c8e32a}
+.chapter-step dt{color:var(--chapter-color);font-size:20px;font-weight:300}
+.chapter-step dd{font-size:10px;color:#92a6c2;margin:8px 0 0;letter-spacing:.5px}
+.chapter-step details{border-bottom:1px solid #b2c8e32a;padding:0 0 16px}
+.chapter-step summary{cursor:pointer;list-style:none;font-size:12px;line-height:1.8;color:#c6d6eb;display:flex;justify-content:space-between;gap:16px}
+.chapter-step summary::-webkit-details-marker{display:none}
+.chapter-step summary span{font-size:16px;color:var(--chapter-color);transition:transform .25s}
+.chapter-step details[open] summary span{transform:rotate(45deg)}
+.chapter-step details p{font-size:14px;margin-bottom:0}
+.chapter-step p.chapter-prompt{font-size:13px;color:#839ab8;border-left:1px solid #aec9ed66;padding-left:12px;margin-top:22px}
+.chapter-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin:24px 0 18px}
+.chapter-actions>button:first-child{background:transparent;border:0;padding:0;color:#d3e4fd;font-size:12px;text-align:left}
+.voyage-discovery-button{border:1px solid #a7c5ed4d;background:#a0c7fc08;color:#aec5e4;font-size:10px!important;padding:8px 12px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:34px;border-radius:0}
+.voyage-discovery-button:hover,.voyage-discovery-button.is-stamped{border-color:#a9d2e6a3;background:#9ccee617;color:#d1effa}
+.chapter-world-link{color:#8da9ce;font-size:10px;letter-spacing:1px}
+.chapter-world-link span{margin-left:15px}
+.chapter-copy{transition:filter .45s}
+.chapter-step:not(.is-current) .chapter-index{opacity:.55}
+.scale-layout{max-width:1300px;margin:auto;display:grid;grid-template-columns:1.15fr 1fr;gap:7%;align-items:center}
+.scale-instrument{--scale-step:.4;position:relative;min-height:440px;display:flex;align-items:center;justify-content:center;padding-bottom:100px}
+.scale-rings{position:absolute;width:310px;height:310px;top:0;left:50%;transform:translateX(-50%)}
+.scale-rings i{position:absolute;border:1px solid #8eaed431;border-radius:50%;inset:0}
+.scale-rings i:nth-child(2){inset:15%;border-style:dashed;opacity:.65}
+.scale-rings i:nth-child(3){inset:30%}
+.scale-rings i:nth-child(4){inset:-10%;border-color:#8eaed40c}
+.scale-sun{width:8px;height:8px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#d0e5fc;border-radius:50%;box-shadow:0 0 18px #b3d4ff}
+.scale-orbit-dot{width:5px;height:5px;position:absolute;top:50%;left:100%;background:#d8bc87;border-radius:50%;transform-origin:-153px 0;transform:rotate(calc(var(--scale-step) * -270deg));transition:transform .65s}
+.scale-exponent{position:relative;margin-top:70px;font-size:58px;line-height:1;letter-spacing:2px;font-weight:200;color:#b8cce8;text-shadow:0 2px 35px #081326}
+.scale-exponent sup{font-size:25px;vertical-align:top;display:inline-block;padding-top:5px;margin-left:4px}
+.scale-exponent small{display:block;text-align:center;font-size:10px;letter-spacing:2px;margin-top:20px;color:#90a5c2}
+.scale-controls{position:absolute;bottom:0;left:0;right:0}
+.scale-controls>label{display:block;font-size:10px;letter-spacing:1px;color:#a1b7d3;margin-bottom:12px}
+.scale-controls input{width:100%;accent-color:#b8d0f0;cursor:pointer;margin:0;height:20px}
+.scale-stop-labels{display:flex;justify-content:space-between;gap:6px;margin-top:10px}
+.scale-stop-labels button{border:0;background:none;padding:4px 0;color:#8098ba;font-size:10px}
+.scale-stop-labels button[aria-pressed='true']{color:#e2efff}
+.scale-kind{font-size:11px;color:#91acd0;letter-spacing:1px}
+.scale-result h3{font-weight:400;font-size:23px;margin:18px 0 8px}
+.scale-distance{font-weight:300;font-size:23px;color:#b5d0ed}
+.scale-comparisons{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:28px 0;padding:25px 0;border-top:1px solid #a1c1e32a;border-bottom:1px solid #a1c1e32a}
+.scale-comparisons small{display:block;font-size:10px;color:#90a7c8;margin-bottom:12px}
+.scale-comparisons b{font-size:17px;font-weight:400;overflow-wrap:anywhere}
+.scale-result>p{font-size:15px;line-height:1.85;color:#a1b5d0;min-height:78px}
+.experience-tabs{display:flex;gap:0;border-bottom:1px solid #b2c5df40;max-width:1300px;margin:0 auto 32px}
+.experience-tabs button{color:#8ea6c6;position:relative;border:0;background:none;padding:17px 24px;text-align:left;font-size:13px;line-height:1.6}
+.experience-tabs button::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#bed4f2;transform:scaleX(0);transition:transform .3s}
+.experience-tabs button[aria-pressed='true']{background:linear-gradient(transparent,#a3c6ff0b);color:#e0edff}
+.experience-tabs button[aria-pressed='true']::after{transform:scaleX(1)}
+.experience-tabs button>span{font-size:9px;margin-right:14px;color:#7e9cbe}
+.experience-tabs button>small{font-size:9px;color:#8aa1bf;display:block;margin-top:7px;letter-spacing:1px}
+.archive-view,.band-view{display:grid;grid-template-columns:1.2fr 1fr;gap:5%;max-width:1300px;margin:0 auto;align-items:start}
+.archive-view figure,.band-view figure{margin:0;min-width:0;position:relative}
+.archive-view img{width:100%;height:440px;object-fit:cover;border:1px solid #9bbadd24;filter:saturate(.8)}
+.archive-view figcaption{font-size:11px;color:#91a8c7;line-height:1.9;margin-top:13px}
+.archive-view figcaption small{font-size:9px;color:#718bab}
+.archive-copy{padding:8px 0}
+.archive-copy .eyebrow{font-size:9px;color:#93aac9;line-height:1.8}
+.archive-copy h3,.band-copy h3{font-size:22px;line-height:1.55;font-weight:400;margin:15px 0}
+.archive-copy p,.band-copy p{font-size:15px;line-height:1.85;color:#acbfd9}
+.archive-copy p.archive-date{font-size:10px;color:#91a7c4}
+.archive-copy ol{list-style:none;padding:0;margin:24px 0;display:grid;gap:16px}
+.archive-copy li{display:flex;gap:18px;font-size:14px;line-height:1.9;color:#9aafcb}
+.archive-copy li b{font-size:11px;color:#cadcf3;font-weight:400;flex:0 0 auto}
+.archive-copy details{border-top:1px solid #a4c0df2e;padding-top:17px;margin-top:24px}
+.archive-copy summary{font-size:12px;line-height:1.8;cursor:pointer;color:#c6d9f4}
+.archive-copy details p{font-size:12px}
+.experience-source{display:inline-block;margin-top:20px;color:#91b1db;font-size:10px;letter-spacing:.5px}
+.band-view{grid-template-columns:1.4fr 1fr;align-items:center}
+.band-view img{width:100%;height:560px;object-fit:cover;object-position:center;border:1px solid #b2cce629}
+.band-view figcaption{position:absolute;bottom:1px;left:1px;right:1px;padding:42px 24px 22px;background:linear-gradient(transparent,#030a17d6);font-size:11px;letter-spacing:1px;color:#e0edfc}
+.band-view figcaption span{display:block;font-size:9px;margin-top:9px;color:#b4cbe7}
+.band-copy .eyebrow{font-size:9px;color:#91accd}
+.band-explanation{border-left:1px solid #9ebad88a;padding:4px 0 4px 20px;margin:30px 0}
+.band-explanation>span{font-size:11px;color:#c8dbf3;letter-spacing:1px}
+.band-explanation p{font-size:12px;margin-bottom:0}
+.band-copy>small{font-size:10px;line-height:1.7;color:#91a9ca}
+.band-copy p.band-credit{font-size:9px;line-height:1.8;color:#7892b2}
+.voyage-passport{display:grid;grid-template-columns:.8fr 1.2fr;gap:9%;align-items:start}
+.passport-summary{border:1px solid #abc6ea38;padding:34px;background:linear-gradient(135deg,#a7c8f00a,transparent)}
+.passport-summary .eyebrow{font-size:9px}
+.passport-summary h3{font-size:21px;font-weight:400;line-height:1.6;margin:20px 0 12px}
+.passport-summary p{font-size:15px;line-height:2;color:#8fa7c9}
+.passport-count{display:flex;align-items:center;gap:24px;margin:28px 0}
+.passport-count strong{font-size:48px;font-weight:200;color:#d0e1f5}
+.passport-count strong small{font-size:18px;color:#7d99bd}
+.passport-count>span{font-size:11px;color:#a6bfdf}
+.passport-summary ol{list-style:none;margin:0;padding:0;border-top:1px solid #a5c3e22b}
+.passport-summary li{border-bottom:1px solid #a5c3e22b}
+.passport-summary li button{display:flex;gap:22px;padding:15px 0;width:100%;border:0;background:none;text-align:left;color:#8fa5c4;font-size:12px}
+.passport-summary li button span{font-size:10px;color:#7891b3;min-width:18px}
+.passport-summary li.is-stamped button,.passport-summary li.is-stamped button span{color:#bce7ed}
+.passport-summary p.passport-status{font-size:10px;color:#8ba4c5;margin-bottom:0}
+.reading-trails>.eyebrow{font-size:9px}
+.reading-trails>h2{font-size:24px;margin-top:20px}
+.reading-trails>p{font-size:15px;line-height:2;color:#94a9c7}
+.reading-trails article{display:flex;gap:25px;padding:28px 0;border-bottom:1px solid #a4c0e32b}
+.trail-no{font-size:23px;font-weight:200;color:#7896bd}
+.reading-trails article small{color:#8ca5c7;font-size:9px;letter-spacing:1px}
+.reading-trails h3{font-size:17px;font-weight:400;line-height:1.6;margin:12px 0}
+.reading-trails article p{font-size:15px;line-height:1.9;color:#91a8c7}
+.reading-trails ol{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:0}
+.reading-trails li button{padding:0;background:none;border:0;color:#c0d6f3;font-size:11px;line-height:1.8;text-align:left}
+/* No WebGL still has a legible visual destination for every chapter. */
+body[data-portal-renderer='fallback'] .voyage-orbit{background:radial-gradient(circle at 35% 25%,#aecdeab5,#233e6680 35%,#030b1780 66%);box-shadow:0 0 50px #a2c7f520;inset:17%;transform:none}
+@media(min-width:1700px){.voyage-passport{padding-left:max(7.3%,calc((100vw - 1300px)/2));padding-right:max(7.3%,calc((100vw - 1300px)/2))}}
+@media(max-width:1000px){.experience-section,.voyage-story{padding-left:6%;padding-right:6%}.voyage-layout{gap:4%}.chapter-step{min-height:90svh}.chapter-step h3{font-size:23px}.chapter-step dl{gap:24px}.chapter-step dt{font-size:17px}.archive-copy h3,.band-copy h3{font-size:22px}.archive-view img{height:420px}.band-view img{height:520px}.voyage-passport{gap:6%}.passport-summary{padding:25px}.experience-tabs button{padding:16px 20px}.scale-rings{width:260px;height:260px;top:28px}.scale-orbit-dot{transform-origin:-128px 0}}
+@media(max-width:760px){
+ .experience-section,.voyage-story{padding:55px 7%}.experience-heading{display:block;margin-bottom:30px}.experience-heading h2{font-size:22px;line-height:1.55;margin-top:14px}.experience-heading>p{font-size:15px;margin-top:16px;line-height:1.9}.experience-heading .eyebrow{font-size:8px;letter-spacing:1.3px}
+ .voyage-story{padding-bottom:0}.voyage-layout{display:block}.voyage-visual{height:36svh;top:65px;z-index:0;margin-bottom:-36svh;justify-content:flex-start}.voyage-viewport{height:34svh;min-height:0;width:100%;max-width:500px;margin:auto}.voyage-crosshair{width:10px;height:10px}.voyage-coordinates{top:6%;font-size:7px}.voyage-orbit{inset:8% 20%}.voyage-planet-captions{bottom:7%;height:28px}.voyage-planet-captions>span{font-size:9px;letter-spacing:1.5px}.voyage-planet-captions small{font-size:7px;letter-spacing:.5px;margin-top:5px}.voyage-art-note{font-size:7px;bottom:7%}.voyage-track{margin-top:4px}.voyage-steps{position:relative;z-index:1}.chapter-step{min-height:calc(100svh + 250px);display:block;padding-top:calc(36svh + 105px);padding-bottom:40px;scroll-margin-top:0}.chapter-copy{max-width:500px;margin:auto;background:linear-gradient(#06102100,#06102196 13%,#06102196 85%,#06102100)}.chapter-index{font-size:18px;gap:12px}.chapter-index>span{font-size:8px;letter-spacing:1px}.chapter-index i{width:24px}.chapter-step h3{font-size:22px;margin:17px 0}.chapter-step p{font-size:15px;line-height:1.85}.chapter-step p.chapter-lead{font-size:15px;line-height:1.9}.chapter-step dl{gap:28px;margin:22px 0;padding:17px 0}.chapter-step dt{font-size:18px}.chapter-step dd{font-size:9px}.chapter-step summary{font-size:11px}.chapter-actions{gap:16px}.chapter-actions>button:first-child{font-size:11px}.chapter-world-link{font-size:10px}
+ .scale-layout,.archive-view,.band-view,.voyage-passport{grid-template-columns:1fr;gap:32px}.scale-instrument{min-height:370px;padding-bottom:90px}.scale-rings{width:250px;height:250px;top:0}.scale-orbit-dot{transform-origin:-123px 0}.scale-exponent{margin-top:24px;font-size:50px}.scale-stop-labels button{font-size:9px}.scale-controls>label{font-size:9px}.scale-result{padding-top:15px;border-top:1px solid #a4c3e02e}.scale-result h3{font-size:22px;margin-top:12px}.scale-distance{font-size:21px}.scale-comparisons{margin:22px 0;padding:21px 0}.scale-comparisons b{font-size:16px}.scale-result>p{font-size:15px;min-height:0}.experience-footnote{font-size:9px;margin-top:23px}
+ .experience-tabs{margin-bottom:25px}.experience-tabs button{font-size:12px;padding:14px 13px;flex:1}.experience-tabs button>span{display:block;font-size:8px;margin-bottom:5px}.experience-tabs button>small{font-size:8px;letter-spacing:0}.archive-view img{height:290px}.archive-view figcaption{font-size:10px}.archive-copy{padding:0}.archive-copy h3,.band-copy h3{font-size:22px}.archive-copy p,.band-copy p{font-size:15px}.archive-copy li{font-size:11px;gap:15px}.band-view img{height:420px}.band-explanation{margin:24px 0}.band-copy p.band-credit{font-size:9px}.passport-summary{padding:26px}.passport-summary h3{font-size:21px}.reading-trails{padding-top:18px}.reading-trails>h2{font-size:22px}.reading-trails article{gap:20px}.reading-trails h3{font-size:17px}.reading-trails ol{display:grid;gap:9px}.reading-trails article p{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){.voyage-track i,.chapter-copy,.chapter-step summary span,.scale-orbit-dot,.experience-tabs button::after{transition:none}}
+@media(max-width:760px){.chapter-copy{clip-path:inset(var(--chapter-clip,0px) 0 0)}.voyage-story :is(button,a,summary){scroll-margin-top:calc(36svh + 100px)}}

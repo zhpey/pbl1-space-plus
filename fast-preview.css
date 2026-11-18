@@ -1,0 +1,46 @@
+body[data-route='universe'][data-portal-renderer='loading'] .od-hero,
+html[data-fast-view] body[data-route='universe'][data-odyssey-station='earth'] .od-hero {
+  background-image: linear-gradient(90deg,#03070df0,#03070d55 65%),url('./assets/odyssey/earth-preview.webp');
+  background-size: cover, auto 88%;
+  background-repeat: no-repeat;
+  background-position: center, right center;
+}
+.fast-preview-bar {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 22;
+  padding: 6px 10px;
+  border: 1px solid #69849c;
+  border-radius: 6px;
+  background: #0d1824;
+  color: #c1d6e8;
+  font: 13px/1.5 system-ui,sans-serif;
+}
+.fast-preview-bar a { display: inline-flex; align-items: center; min-height: 30px; margin-left: 6px; color: #fff; text-decoration: underline; }
+body[data-portal-renderer='fallback'] :is(.controls,.solar-view-controls,.scene-note) { display: none; }
+@media (max-width:760px) {
+  body[data-route='universe'][data-portal-renderer='loading'] .od-hero,
+  html[data-fast-view] body[data-route='universe'][data-odyssey-station='earth'] .od-hero {
+    background-position: center,center 57%;
+    background-size: cover,auto 58%;
+  }
+}
+.planet-quick-pick { display:flex; flex-wrap:wrap; gap:6px; margin-top:20px; }
+.planet-quick-pick .tab { padding:8px; min-height:36px; }
+.planet-quick-pick .tab.active { border-color:var(--accent); }
+.solar-static-chart { display:none; }
+body:not([data-portal-renderer='webgl']) .solar-static-chart {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;
+  position:absolute; inset:62px 16px 18px; align-content:center;
+}
+.solar-static-chart strong,.solar-static-chart a { padding:8px 4px; text-align:center; border:1px solid #edc18440; border-radius:8px; color:#e9edf2; font-size:13px; }
+.solar-static-chart strong { color:#edc184; }
+.solar-static-chart a::before { content:''; display:inline-block; width:.55em; height:.55em; margin-right:5px; border-radius:50%; background:var(--world-color); }
+body[data-route='solar']:not([data-portal-renderer='webgl']) :is(.viewport-instruction,.solar-speed,.solar-view-controls) { display:none; }
+.gallery-story-link { display:inline-block; margin-top:10px; color:#badcf1; text-underline-offset:4px; }
+
+body:not([data-portal-renderer='webgl']) :is(#stage, #universe) { pointer-events:none; }
+
+.planet-quick-pick, .solar-static-chart, .gallery-story-link { pointer-events:auto; }
+body:not([data-portal-renderer='webgl']) #app { pointer-events:auto; }

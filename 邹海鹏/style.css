@@ -1,0 +1,154 @@
+/* Solar module: warm observatory tones, open orbits and an asymmetric layout. */
+body[data-route='solar'] { --accent: #edc184; --line: #d7b9892e; }
+body[data-route='solar'] .stage-shade {
+  background: linear-gradient(90deg, #070d18b3, #080d1830 60%, #080d1866);
+}
+body[data-route='solar'] .mission-console { min-height: 0; padding-top: 32px; padding-bottom: 24px; }
+body[data-route='solar'] .console-heading {
+  display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 26px;
+}
+body[data-route='solar'] .console-heading .eyebrow { color: var(--accent); }
+body[data-route='solar'] .console-heading h1 {
+  font-size: clamp(26px, 2.5vw, 38px); font-weight: 450; letter-spacing: .04em; margin: 12px 0 0; line-height: 1.4;
+}
+body[data-route='solar'] .console-intro {
+  margin: 0; color: #b4bdcc; font-size: 13px; line-height: 1.9; border-left: 1px solid var(--line); padding-left: 22px;
+}
+body[data-route='solar'] .solar-workspace {
+  display: grid; grid-template-columns: minmax(0, 1fr) 248px; gap: 28px;
+}
+body[data-route='solar'] .solar-observation { min-width: 0; }
+body[data-route='solar'] .orbital-viewport {
+  position: relative; height: clamp(310px, calc(100svh - 430px), 460px);
+  border: 1px solid var(--line); border-radius: 72px 12px 72px 12px;
+  background: radial-gradient(ellipse at center, #e7bc7610, transparent 65%);
+}
+body[data-route='solar'] .viewport-coordinate {
+  position: absolute; top: 24px; left: 40px; font: 10px/1.9 var(--mono); color: #b0bacb; letter-spacing: 1px;
+}
+body[data-route='solar'] .orbital-viewport .solar-legend {
+  position: absolute; top: 28px; right: 24px; margin: 0; gap: 14px; font-size: 10px;
+}
+body[data-route='solar'] .solar-legend span:first-child::before { color: #edc184; }
+body[data-route='solar'] .viewport-instruction {
+  position: absolute; bottom: 22px; left: 32px; font-size: 11px; color: #aeb9c9;
+}
+body[data-route='solar'] .orbit-tools {
+  display: flex; flex-wrap: wrap; gap: 12px 20px; padding: 16px 8px 0; align-items: center;
+}
+body[data-route='solar'] .solar-speed { display: flex; align-items: center; gap: 12px; }
+body[data-route='solar'] .orbit-tools label { font-size: 11px; }
+body[data-route='solar'] .orbit-tools output { color: var(--accent); }
+body[data-route='solar'] .orbit-tools input { width: clamp(85px, 10vw, 150px); accent-color: #edc184; }
+body[data-route='solar'] .solar-view-controls { display: flex; gap: 6px; }
+body[data-route='solar'] .solar-view-controls button {
+  width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%;
+  background: #0b1422b3; color: #dac8ad; font: 18px var(--mono); cursor: pointer;
+}
+body[data-route='solar'] .solar-view-controls button:hover { border-color: var(--accent); background: #edc18418; }
+body[data-route='solar'] .orbit-tools .discovery-link { font-size: 11px; color: var(--accent); }
+body[data-route='solar'] #app > .controls { display: none; }
+body[data-route='solar'] .console-telemetry {
+  display: flex; flex-direction: column; justify-content: center; padding: 12px 0 12px 26px;
+  border-left: 1px solid var(--line); min-width: 0;
+}
+body[data-route='solar'] .solar-star-note .eyebrow { font-size: 10px; letter-spacing: 1.5px; }
+body[data-route='solar'] .solar-emblem {
+  display: block; width: 56px; height: 56px; border-radius: 50%; margin: 20px 0 18px 9px;
+  background: radial-gradient(circle at 35% 35%, #fff1bd, #e9ac56 62%, #ae5b27);
+  box-shadow: 0 0 0 9px #edc18408, 0 0 0 10px #edc18424, 0 0 46px #e9ac5622;
+}
+body[data-route='solar'] .solar-star-note h2 { font-size: 21px; font-weight: 400; line-height: 1.5; margin: 0 0 16px; }
+body[data-route='solar'] .console-telemetry .primary {
+  min-height: 42px; padding: 9px 16px; border-radius: 24px; border-color: #edc18466;
+  color: #efd4a8; background: #edc1840c; font-size: 12px; pointer-events: auto;
+}
+body[data-route='solar'] .solar-mass { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+body[data-route='solar'] .solar-mass small { font-size: 12px; color: #aab7c9; }
+body[data-route='solar'] .solar-mass strong { display: block; font: 32px/1.5 var(--mono); color: #efd4a8; margin-top: 6px; }
+body[data-route='solar'] .solar-mass strong span { font-size: 16px; margin-left: 3px; }
+body[data-route='solar'] .console-disclaimer { font-size: 11px; line-height: 1.9; color: #9caabd; margin: 14px 0 0; }
+
+/* Circular destinations connect the model to the eight planet archives. */
+body[data-route='solar'] .planet-dock { display: block; padding: 18px 0 0; min-height: 0; border-top: 0; }
+body[data-route='solar'] .dock-label { display: flex; align-items: center; gap: 14px; letter-spacing: 1.5px; }
+body[data-route='solar'] .dock-label b { color: #e1cfb2; font-size: 12px; }
+body[data-route='solar'] .dock-label::after { content: ''; height: 1px; background: var(--line); flex: 1; }
+body[data-route='solar'] .planet-list { margin-top: 15px; gap: 12px; }
+body[data-route='solar'] .planet-button { border: 0; border-radius: 60px 60px 12px 12px; gap: 9px; padding: 15px 4px; font-size: 13px; }
+body[data-route='solar'] .planet-button:hover { background: linear-gradient(#edc18412, transparent); }
+body[data-route='solar'] .planet-thumbnail { width: 38px; height: 38px; outline: 1px solid #dac29b2b; outline-offset: 7px; margin-bottom: 7px; }
+body[data-route='solar'] .planet-button small { font-size: 9px; letter-spacing: 0; }
+
+body[data-route='solar'] .learning-region { padding-top: 46px; background: linear-gradient(#080f1b80, #080f1bbf); }
+body[data-route='solar'] .solar-neighbourhood { display: grid; grid-template-columns: 218px minmax(0, 1fr); gap: 24px 30px; }
+body[data-route='solar'] .world-intro { background: none; border: 0; border-left: 2px solid #edc18466; border-radius: 0; padding: 12px 26px; }
+body[data-route='solar'] .reading-heading { grid-column: 1/-1; margin-bottom: 8px; }
+body[data-route='solar'] .zone-selector { grid-column: 1; grid-row: 2/4; grid-template-columns: 1fr; gap: 6px; align-self: start; border: 0; }
+body[data-route='solar'] .zone-button { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; padding: 10px; border: 1px solid transparent; border-radius: 30px 8px 8px 30px; background: none; }
+body[data-route='solar'] .zone-button small { grid-row: 1/3; width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; align-self: center; }
+body[data-route='solar'] .zone-button span { font-size: 13px; color: #b5c0cc; }
+body[data-route='solar'] .zone-button em { grid-column: 2; margin-top: 4px; font-size: 10px; }
+body[data-route='solar'] .zone-button.active { background: #edc1840d; border-color: #edc1843b; }
+body[data-route='solar'] .zone-button.active small { color: #142030; background: #e6bd83; border-color: #e6bd83; }
+body[data-route='solar'] .zone-detail { margin: 0; min-height: 260px; padding: 36px; border: 1px solid var(--line); border-radius: 8px 52px 8px 8px; background: linear-gradient(135deg, #d0a36113, #0b1725b3 70%); align-self: start; }
+body[data-route='solar'] .zone-detail h3 { font-size: 24px; margin: 20px 0; }
+body[data-route='solar'] .knowledge-grid { grid-column: 2; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; margin-top: 0; }
+body[data-route='solar'] .knowledge-card { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 20px 0 0; }
+body[data-route='solar'] .knowledge-card h3 { color: #e2c9a3; }
+body[data-route='solar'] .discovery-timeline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 40px; }
+body[data-route='solar'] .discovery-timeline li { padding: 22px 0 22px 25px; border-top: 1px solid var(--line); }
+body[data-route='solar'] .discovery-timeline li::before { top: 30px; background: #e6bd83; }
+body[data-route='solar'] .discovery-timeline li::after { display: none; }
+body[data-route='solar'] .fallback { right: 40vw; top: 32vh; width: 20vw; }
+
+@media (max-width: 1100px) {
+  body[data-route='solar'] .solar-workspace { grid-template-columns: minmax(0, 1fr) 200px; gap: 20px; }
+  body[data-route='solar'] .console-telemetry { padding-left: 20px; }
+  body[data-route='solar'] .solar-star-note h2 { font-size: 20px; }
+  body[data-route='solar'] .orbital-viewport .solar-legend { top: auto; bottom: 46px; left: 28px; right: auto; }
+  body[data-route='solar'] .orbit-tools .discovery-link { flex-basis: 100%; margin: 0; }
+  body[data-route='solar'] .zone-selector { grid-row: 2; }
+  body[data-route='solar'] .knowledge-grid { grid-column: 1/-1; gap: 18px; }
+}
+@media (max-width: 760px) {
+  body[data-route='solar'] .mission-console { padding-top: 85px; padding-bottom: 16px; }
+  body[data-route='solar'] .console-heading { align-items: start; margin-bottom: 22px; }
+  body[data-route='solar'] .console-heading h1 { font-size: 25px; }
+  body[data-route='solar'] .console-heading .eyebrow { font-size: 9px; }
+  body[data-route='solar'] .console-intro { display: none; }
+  body[data-route='solar'] .solar-workspace { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  body[data-route='solar'] .orbital-viewport { height: 320px; border-radius: 44px 8px 44px 8px; }
+  body[data-route='solar'] .viewport-coordinate { left: 24px; top: 18px; font-size: 9px; }
+  body[data-route='solar'] .viewport-instruction { left: 20px; bottom: 18px; font-size: 10px; }
+  body[data-route='solar'] .orbital-viewport .solar-legend { left: 20px; bottom: 42px; font-size: 9px; }
+  body[data-route='solar'] .orbit-tools { padding: 12px 0 0; gap: 12px; justify-content: space-between; }
+  body[data-route='solar'] .solar-speed { gap: 8px; }
+  body[data-route='solar'] .orbit-tools input { width: 80px; }
+  body[data-route='solar'] .solar-view-controls button { width: 36px; height: 36px; }
+  body[data-route='solar'] .orbit-tools .discovery-link { flex-basis: auto; margin: 0 0 0 auto; }
+  body[data-route='solar'] .console-telemetry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; padding: 20px 0; border-left: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); align-items: center; }
+  body[data-route='solar'] .solar-star-note .eyebrow { font-size: 9px; }
+  body[data-route='solar'] .solar-emblem { width: 34px; height: 34px; margin: 18px 0 14px 4px; box-shadow: 0 0 0 4px #edc1840c, 0 0 0 5px #edc18424; }
+  body[data-route='solar'] .solar-star-note h2 { font-size: 16px; margin-bottom: 14px; }
+  body[data-route='solar'] .console-telemetry .primary { padding: 7px 12px; min-height: 38px; font-size: 11px; }
+  body[data-route='solar'] .solar-mass { margin: 0; border: 0; padding: 0 0 0 15px; border-left: 1px solid var(--line); }
+  body[data-route='solar'] .solar-mass small { font-size: 10px; }
+  body[data-route='solar'] .solar-mass strong { font-size: 28px; }
+  body[data-route='solar'] .console-disclaimer { grid-column: 1/-1; margin: 0; font-size: 11px; }
+  body[data-route='solar'] .planet-dock { margin: 0 24px; padding-top: 12px; }
+  body[data-route='solar'] .planet-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  body[data-route='solar'] .planet-button { padding: 14px 0 10px; }
+  body[data-route='solar'] .planet-button small { font-size: 8px; }
+  body[data-route='solar'] .planet-thumbnail { width: 32px; height: 32px; outline-offset: 5px; }
+  body[data-route='solar'] .solar-neighbourhood { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  body[data-route='solar'] .zone-selector { grid-row: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  body[data-route='solar'] .zone-button { padding: 8px 6px; column-gap: 6px; }
+  body[data-route='solar'] .zone-button span { font-size: 12px; }
+  body[data-route='solar'] .zone-button em { font-size: 9px; }
+  body[data-route='solar'] .zone-detail { min-height: 0; padding: 25px; border-top-right-radius: 38px; }
+  body[data-route='solar'] .zone-detail h3 { font-size: 21px; margin: 16px 0; }
+  body[data-route='solar'] .knowledge-grid { grid-template-columns: 1fr; gap: 20px; }
+  body[data-route='solar'] .discovery-timeline { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  body[data-route='solar'] .fallback { right: 28vw; top: 330px; width: 44vw; }
+}

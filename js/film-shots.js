@@ -1,0 +1,19 @@
+// Camera positions are in a composed cinematic scene, not astronomical units.
+// Three keyframes per shot create actual parallax and changing silhouettes.
+export const filmShots=[
+ {id:'silence',station:0,name:'序幕',en:'BEFORE THE FIRST LIGHT',duration:6,title:'彼岸',line:'先让世界安静下来。',kind:'prologue',camera:[[0,.1,14],[.1,.15,12.5],[.2,.2,11]],target:[[0,0,-8],[0,0,-8],[0,0,-8]],fov:47,roll:0,light:[-7,3,-5],exposure:1.05,warmth:-.07,cut:'black'},
+ {id:'first-light',station:0,name:'第一束光',en:'THE WORLD WE CALL HOME',duration:14,title:'第一束光',line:'我们熟悉的世界，也值得被重新发现。',kind:'limb',camera:[[-4.4,1.3,4.7],[-3.1,1.5,5.7],[-1.4,1.7,7]],target:[[.7,.65,0],[.45,.3,0],[.2,.1,0]],fov:48,roll:-.1,light:[10,2,-7],exposure:1.08,warmth:.02},
+ {id:'departure',station:0,name:'离开家园',en:'A SMALL SHIP. A LONG WAY HOME.',duration:11,title:'离开，才懂得回望',line:'把整个家园，留在身后的那一刻。',kind:'probe',camera:[[-1.2,1.6,13],[.4,1.3,12],[2.3,1.8,11.6]],target:[[0,0,0],[0,0,0],[0,-.1,0]],fov:43,roll:.035,light:[-6,4,7],exposure:1.1,warmth:-.025},
+ {id:'earthrise',station:1,name:'月面地出',en:'THE EARTH RISES IN SILENCE',duration:12,title:'寂静，也有重量',line:'没有风的月面上，一颗蓝色星球正在升起。',kind:'moon',camera:[[-1.8,1.8,8.1],[0,1.2,7.6],[1.8,.8,7.1]],target:[[0,-.6,0],[0,-.6,0],[.2,-.55,0]],fov:49,roll:-.025,light:[-6,4,5],exposure:1.02,warmth:-.045},
+ {id:'red-world',station:2,name:'红色边境',en:'ANOTHER POSSIBLE PAST',duration:11,title:'红色地平线',line:'有些河流已经干涸，关于生命的问题却还在流淌。',kind:'mars',camera:[[-4,1.2,6.8],[-1.4,1.6,6.4],[1.8,1.5,6.4]],target:[[0,-.45,0],[0,-.3,0],[.2,-.25,0]],fov:48,roll:.065,light:[-7,3,4],exposure:1.06,warmth:.09},
+ {id:'giant',station:3,name:'巨行星掠影',en:'BENEATH THE GIANT',duration:12,title:'在巨大的面前',line:'一颗卫星掠过眼前，风暴在更远处无声旋转。',kind:'jupiter',camera:[[-2,.3,9],[-1,.5,8],[.2,.8,7.6]],target:[[1.6,.2,-1],[1.4,.1,-1],[1.2,.2,-1]],fov:50,roll:-.075,light:[-7,5,6],exposure:1.03,warmth:.025},
+ {id:'rings-wide',station:4,name:'土星全景',en:'AN ARCHITECTURE OF GRAVITY',duration:12,title:'引力，写下一道弧线',line:'无数微小的冰与岩石，组成一个宏大的轮廓。',kind:'saturn',camera:[[-2,3.6,14],[.3,2.8,12.8],[3.1,1.9,11.8]],target:[[0,0,0],[0,0,0],[0,0,0]],fov:45,roll:.075,light:[-8,5,5],exposure:1.05,warmth:.06},
+ {id:'rings-close',station:4,name:'冰环之间',en:'BETWEEN A MILLION SMALL WORLDS',duration:11,title:'擦肩而过',line:'那些看似连续的光环，原来是彼此独立的小世界。',kind:'ice',camera:[[-2,.15,2],[-.8,.4,.8],[.5,.7,-.6]],target:[[3.7,1,-4],[3.5,1.2,-4],[3.2,1.25,-4]],fov:54,roll:-.09,light:[-6,5,7],exposure:1.12,warmth:.025},
+ {id:'birthplace',station:5,name:'恒星诞生之地',en:'WHERE THE DARKNESS BECOMES LIGHT',duration:15,title:'有新的太阳，正在醒来',line:'尘埃不是旅程的终点。它也可以是恒星的开始。',kind:'nebula',camera:[[-2,-.2,12],[-.4,.4,9.3],[1.2,1,7.3]],target:[[1,.7,-13],[1.6,1,-13],[2,1.25,-13]],fov:51,roll:.055,light:[-7,4,4],exposure:.95,warmth:.035,cut:'warp'},
+ {id:'horizon',station:6,name:'光的边界',en:'THE EDGE OF WHAT CAN RETURN',duration:14,title:'再向前，光也无法回头',line:'黑暗本身不会发光。我们看见的，是它改写的光。',kind:'hole',camera:[[-1.5,.8,15],[-.6,.5,12.3],[.7,.25,10.2]],target:[[0,0,0],[0,0,0],[0,0,0]],fov:49,roll:-.07,light:[-7,4,3],exposure:.98,warmth:.045,cut:'black'},
+ {id:'deep-time',station:7,name:'时间深处',en:'EVERY LIGHT HAS A PAST',duration:12,title:'越看向远方，越接近从前',line:'这不是宇宙的尽头。这是我们此刻看得见的过去。',kind:'galaxy',camera:[[2,1.8,15],[.8,1.4,13.5],[-.7,1.1,12]],target:[[0,.3,-2],[0,.3,-2],[0,.3,-2]],fov:48,roll:.1,light:[-6,3,4],exposure:1.05,warmth:-.045,cut:'black'},
+ {id:'home',station:0,name:'归途',en:'OUR ONLY HOME, SO FAR',duration:14,title:'彼岸，其实也是此岸',line:'回到这颗星球。带着一点不同的目光。',kind:'home',camera:[[3.5,1.6,14],[1.8,1.1,13.3],[.2,.8,13]],target:[[0,-.3,0],[0,-.3,0],[0,-.3,0]],fov:43,roll:-.025,light:[-5,3,4],exposure:1.07,warmth:.035,cut:'black'},
+];
+let cursor=0;for(const shot of filmShots){shot.start=cursor;cursor+=shot.duration;shot.end=cursor;}
+export const filmDuration=cursor;
+export const filmTime=value=>`${String(Math.floor(Math.max(0,value)/60)).padStart(2,'0')}:${String(Math.floor(Math.max(0,value)%60)).padStart(2,'0')}`;

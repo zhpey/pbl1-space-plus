@@ -1,0 +1,66 @@
+{
+  "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/collection.json",
+  "data": [
+    {
+      "album": [
+        "Test"
+      ],
+      "center": "GSFC",
+      "date_created": "2017-12-08T00:00:00Z",
+      "description": "NASA image release April 22, 2010  NASA's Hubble Space Telescope captured this billowing cloud of cold interstellar gas and dust rising from a tempestuous stellar nursery located in the Carina Nebula, 7,500 light-years away in the southern constellation Carina. This pillar of dust and gas serves as an incubator for new stars and is teeming with new star-forming activity. Hot, young stars erode and sculpt the clouds into this fantasy landscape by sending out thick stellar winds and scorching ultraviolet radiation. The low-density regions of the nebula are shredded while the denser parts resist erosion and remain as thick pillars. In the dark, cold interiors of these columns new stars continue to form. In the process of star formation, a disk around the proto-star slowly accretes onto the star's surface. Part of the material is ejected along jets perpendicular to the accretion disk. The jets have speeds of several hundreds of miles per second. As these jets plow into the surround nebula, they create small, glowing patches of nebulosity, called Herbig-Haro (HH) objects.  Long streamers of gas can be seen shooting in opposite directions off the pedestal on the upper right-hand side of the image. Another pair of jets is visible in a peak near the top-center of the image. These jets (known as HH 901 and HH 902, respectively) are common signatures of the births of new stars. This image celebrates the 20th anniversary of Hubble's launch and deployment into an orbit around Earth. Hubble's Wide Field Camera 3 observed the pillar on Feb. 1-2, 2010. The colors in this composite image correspond to the glow of oxygen (blue), hydrogen and nitrogen (green), and sulfur (red). Object Names: HH 901, HH 902 Image Type: Astronomical  Credit: NASA, ESA, and M. Livio and the Hubble 20th Anniversary Team (STScI)  To read learn more about this image go to:  <a href=\"http://www.nasa.gov/mission_pages/hubble/science/hubble20th-img.html\" rel=\"nofollow\">www.nasa.gov/mission_pages/hubble/science/hubble20th-img....</a>  <b><a href=\"http://www.nasa.gov/centers/goddard/home/index.html\" rel=\"nofollow\">NASA Goddard Space Flight Center</a></b>  is home to the nation's largest organization of combined scientists, engineers and technologists that build spacecraft, instruments and new technology to study the Earth, the sun, our solar system, and the universe.",
+      "keywords": [
+        "Hubble Captures Spectacular \"Landscape\" in the Carina Nebula",
+        "space",
+        "nasa",
+        "hubble",
+        "hubblespacetelescope",
+        "goddardspaceflightcenter",
+        "hubble20thanniversary",
+        "hubble20years"
+      ],
+      "location": "Greenbelt, MD",
+      "media_type": "image",
+      "nasa_id": "GSFC_20171208_Archive_e002076",
+      "title": "Hubble Captures Spectacular \"Landscape\" in the Carina Nebula"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/GSFC_20171208_Archive_e002076~medium.jpg",
+      "rel": "alternate",
+      "render": "image",
+      "width": 1280,
+      "size": 130000,
+      "height": 869
+    },
+    {
+      "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/GSFC_20171208_Archive_e002076~small.jpg",
+      "rel": "alternate",
+      "render": "image",
+      "width": 640,
+      "size": 41000,
+      "height": 434
+    },
+    {
+      "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/GSFC_20171208_Archive_e002076~thumb.jpg",
+      "rel": "preview",
+      "render": "image",
+      "width": 640,
+      "size": 41000,
+      "height": 434
+    },
+    {
+      "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/GSFC_20171208_Archive_e002076~large.jpg",
+      "rel": "alternate",
+      "render": "image",
+      "width": 1920,
+      "size": 271000,
+      "height": 1304
+    },
+    {
+      "href": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002076/GSFC_20171208_Archive_e002076~orig.jpg",
+      "rel": "canonical",
+      "render": "image"
+    }
+  ]
+}
