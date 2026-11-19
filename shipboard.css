@@ -137,5 +137,3 @@ body[data-portal-renderer=fallback] [data-ship-inspect],body[data-portal-rendere
 }
 .ship-arrival-file:hover { text-decoration: underline; }
 .ship-inspector .ship-arrival-file { clear: both; }
-.exp-flight-progress [data-flight-depart] { border-color: #dfc28b; color: #ffe7b7; }
-.exp-flight-progress [data-flight-depart][hidden] { display: none; }

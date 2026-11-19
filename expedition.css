@@ -49,9 +49,64 @@ body[data-route=universe][data-flight-mode=scene] .universe-map.od-hero{min-heig
 @media(max-width:1000px){.exp-field-guide{gap:18px;margin-left:135px}.exp-field-guide>svg{width:65px}.exp-field-guide>button{font-size:10px;max-width:150px;line-height:1.8;white-space:normal}}@media(max-width:759px){.exp-field-guide{margin:25px 6%;display:grid;grid-template-columns:45px 1fr;gap:15px;padding:26px 0}.exp-field-guide>svg{width:45px;height:65px;align-self:start}.exp-field-guide h2{font-size:21px;margin-top:12px}.exp-field-guide p{font-size:11px}.exp-field-guide>button{grid-column:2;margin:0;justify-self:start;max-width:none}.exp-field-guide .od-eyebrow{font-size:6px}.od-reader-image{height:180px}.od-reader-body>h2{font-size:27px}.od-reader-lead{font-size:13px}.article-figure img{max-height:220px}}
 
 /* 10–12 / Mission cockpit: fixed flight geometry and direct manual controls. */
-body[data-piloting=true] .ship-heading,body[data-piloting=true] .ship-orbit-label,body[data-piloting=true] .ship-system-menu,body[data-piloting=true] .ship-inspector,body[data-piloting=true] .ship-task-log,body[data-piloting=true] .ship-view-tools,body[data-piloting=true] .ship-command-bar,body[data-piloting=true] .ship-hotspots,body[data-piloting=true] .ship-feedback,body[data-piloting=true] .ship-mode-switch{display:none!important}body[data-piloting=true] .ship-scene-viewport{position:fixed!important;inset:0!important;z-index:20!important;pointer-events:none!important}body[data-piloting=true] .shipboard{position:relative!important;z-index:21!important;pointer-events:none!important}body[data-piloting=true] .ship-deck-ui{display:none!important}.exp-flight-ui[hidden]{display:none}.exp-flight-ui{position:fixed;inset:0;z-index:40;pointer-events:none;color:#deebf5;font-family:var(--sans)}.exp-flight-ui button{pointer-events:auto;border:1px solid #c7d7df44;border-radius:2px;background:#08101bd9;color:#d8e5ef;font:10px var(--sans);padding:10px 13px;backdrop-filter:blur(9px)}.exp-flight-readout{position:absolute;top:90px;left:35px;display:grid;grid-template-columns:auto auto;align-items:baseline;gap:5px 12px;padding:15px 17px;background:#07101bc9;border-left:1px solid #c5d9e755;min-width:185px}.exp-flight-readout>span{grid-column:1/-1;font:8px var(--mono);color:#a7bfd2;letter-spacing:.08em}.exp-flight-readout>b{font:300 31px var(--mono)}.exp-flight-readout>small{font:8px var(--sans);color:#96a8b7}.exp-flight-readout>i{grid-column:1/-1;min-height:15px;font:9px var(--sans);font-style:normal;color:#c5b79f}.exp-flight-progress{position:absolute;left:35px;top:225px;display:grid;gap:9px}.exp-flight-progress>b{font:10px var(--mono);color:#dbd0bd}.exp-flight-progress>span,.exp-flight-keys{font:8px var(--sans);color:#a7b3c0}.exp-flight-progress button{justify-self:start;margin-top:4px}.exp-flight-keys{position:absolute;left:35px;bottom:25px;max-width:450px;line-height:1.8}.exp-flight-pad{position:absolute;right:30px;bottom:24px;display:grid;gap:7px;justify-items:end;pointer-events:auto;touch-action:none}.exp-flight-pad>div{display:flex;gap:7px}.exp-flight-pad button{min-width:43px;min-height:41px;touch-action:none}.exp-flight-pad>div:last-child button{min-width:66px}.exp-flight-pad button:active{background:#bdd6e933;border-color:#cde5f5aa}
-@media(max-width:759px){.exp-flight-readout{top:85px;left:12px;min-width:150px;padding:12px}.exp-flight-readout>b{font-size:25px}.exp-flight-progress{top:205px;left:12px}.exp-flight-keys{left:12px;bottom:150px;max-width:215px;font-size:7px}.exp-flight-pad{right:10px;bottom:10px;gap:5px}.exp-flight-pad button{min-width:38px;min-height:39px;padding:7px}.exp-flight-pad>div{gap:5px}.exp-flight-pad>div:last-child button{min-width:58px;font-size:9px}}
-@media(min-width:760px) and (max-height:550px){.exp-flight-readout{top:62px}.exp-flight-progress{top:190px}.exp-flight-keys{bottom:8px;max-width:390px}.exp-flight-pad{bottom:8px}.exp-flight-pad button{min-height:35px}}
+body[data-piloting=true] .ship-heading,body[data-piloting=true] .ship-orbit-label,body[data-piloting=true] .ship-system-menu,body[data-piloting=true] .ship-inspector,body[data-piloting=true] .ship-task-log,body[data-piloting=true] .ship-view-tools,body[data-piloting=true] .ship-command-bar,body[data-piloting=true] .ship-hotspots,body[data-piloting=true] .ship-feedback,body[data-piloting=true] .ship-mode-switch{display:none!important}body[data-piloting=true] .ship-scene-viewport{position:fixed!important;inset:0!important;z-index:20!important;pointer-events:none!important}body[data-piloting=true] .shipboard{position:relative!important;z-index:21!important;pointer-events:none!important}body[data-piloting=true] .ship-deck-ui{display:none!important}
+.exp-flight-ui[hidden]{display:none}
+.exp-flight-ui{
+ position:fixed;inset:0;z-index:40;pointer-events:none;color:#eef5fb;
+ font:14px var(--sans);--flight-edge:clamp(12px,3vw,38px);
+}
+.exp-flight-ui:focus{outline:none}
+.exp-flight-ui button,.exp-flight-ui select{
+ pointer-events:auto;min-height:38px;border:1px solid #bacfe357;border-radius:5px;
+ background:#0a141ff0;color:#eef5fb;font:inherit;padding:7px 12px;
+}
+.exp-flight-ui button:focus-visible,.exp-flight-ui select:focus-visible{outline:2px solid var(--flight-accent,#b9e9ff);outline-offset:3px}
+.exp-flight-ui button:hover,.exp-flight-pad button:active,.exp-flight-pad button[data-held=true]{background:#293c50;border-color:var(--flight-accent,#b9e9ff)}
+.exp-flight-readout{
+ position:absolute;top:94px;left:var(--flight-edge);width:min(276px,calc(100% - 2 * var(--flight-edge)));
+ display:grid;grid-template-columns:auto 1fr;align-items:center;gap:7px 12px;padding:13px 15px;
+ background:#0a141fea;border:1px solid #bacfe339;border-top:2px solid var(--flight-accent,#b9e9ff);border-radius:6px;
+}
+.exp-flight-readout label{color:#b7cadd;font-size:12px}
+.exp-flight-readout select{width:100%;min-width:0}
+.exp-flight-metrics{grid-column:1/-1;display:flex;align-items:baseline;justify-content:space-between;gap:10px;color:#bacada;font-size:12px}
+.exp-flight-metrics [data-flight-speed]{font:24px var(--mono);color:#eef5fb;font-variant-numeric:tabular-nums}
+.exp-flight-readout p,.exp-flight-readout [data-flight-depart]{grid-column:1/-1;margin:0}
+.exp-flight-readout [data-flight-guidance]{color:var(--flight-accent,#b9e9ff);font-weight:700}
+.exp-flight-readout [data-flight-message]{color:#bdc9d6;font-size:12px;line-height:1.5}
+.exp-flight-readout [data-flight-depart]{border-color:var(--flight-accent,#b9e9ff);color:var(--flight-accent,#b9e9ff)}
+.exp-flight-actions{position:absolute;top:94px;right:var(--flight-edge);display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.exp-flight-keys{position:absolute;left:var(--flight-edge);bottom:24px;margin:0;background:#0a141fea;border-radius:5px;padding:8px 12px;color:#c9d9e7;font-size:13px}
+.exp-flight-pad{position:absolute;right:var(--flight-edge);bottom:max(18px,env(safe-area-inset-bottom));display:flex;align-items:end;gap:15px}
+.exp-flight-directions{display:grid;grid-template-columns:repeat(3,48px);gap:5px}
+.exp-flight-directions button:first-child{grid-column:2}
+.exp-flight-directions button:nth-child(n+2){grid-row:2}
+.exp-flight-directions button:nth-child(2){grid-column:1}
+.exp-flight-directions button:nth-child(3){grid-column:2}
+.exp-flight-directions button:nth-child(4){grid-column:3}
+.exp-flight-pad button{min-height:48px;touch-action:none;user-select:none}
+.exp-flight-directions button{font-size:20px;padding:0}
+.exp-flight-throttle{display:flex;gap:6px}
+.exp-flight-throttle button{min-width:64px}
+.exp-flight-throttle [data-flight-hold="thrust:1"]{background:#21434c;border-color:#8ee5dc;color:#e8fffc;font-weight:700}
+.exp-flight-throttle [data-flight-hold="thrust:1"][data-held=true]{background:#3b6d71}
+@media(max-width:759px){
+ .exp-flight-readout{top:68px;width:min(250px,calc(100% - 24px));padding:9px 11px;gap:5px 9px}
+ .exp-flight-metrics [data-flight-speed]{font-size:20px}
+ .exp-flight-actions{top:auto;right:var(--flight-edge);left:var(--flight-edge);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 120px);justify-content:center}
+ .exp-flight-actions button{min-height:40px;font-size:12px;padding:6px 10px}
+ .exp-flight-pad{left:var(--flight-edge);justify-content:space-between}
+ .exp-flight-directions{grid-template-columns:repeat(3,46px)}
+ .exp-flight-throttle{gap:5px}
+ .exp-flight-throttle button{min-width:56px;padding:5px 8px}
+ .exp-flight-keys{display:none}
+}
+@media(max-height:550px) and (min-width:600px){
+ .exp-flight-readout,.exp-flight-actions{top:62px}
+ .exp-flight-actions{right:var(--flight-edge);left:auto;bottom:auto}
+ .exp-flight-pad{left:auto}
+ .exp-flight-keys{display:none}
+}
 @media(prefers-reduced-motion:reduce){.exp-signal-path b{animation:none}}
 
-body[data-piloting=true] .controls,body[data-piloting=true] .od-bottom-hud,body[data-piloting=true] .od-station-rail,body[data-piloting=true] .od-facts{display:none!important}
+body[data-piloting=true] .od-key-hint,body[data-piloting=true] .controls,body[data-piloting=true] .od-bottom-hud,body[data-piloting=true] .od-station-rail,body[data-piloting=true] .od-facts{display:none!important}

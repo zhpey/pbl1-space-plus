@@ -26,8 +26,7 @@ export function setupFilmPlayer(){
    button.title=available?'播放 2 分 24 秒星际电影':`${reason}，可使用探索八站`;
   });
   document.querySelectorAll('[data-exp-pilot]').forEach(button=>{
-   button.disabled=!available;
-   button.title=available?'进入三维驾驶，沿发光星环穿越航道':`${reason}，三维驾驶暂不可用`;
+   button.title=available?'进入三维驾驶，沿发光星环穿越航道':`${reason}，仍可打开飞船操作台选择站点`;
   });
  }
  function reflect(event){

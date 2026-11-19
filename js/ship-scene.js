@@ -20,9 +20,9 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
  const root=new THREE.Group();root.name='ship-operations';scene.add(root);
  const vessel=new THREE.Group();vessel.name='wa01-vessel';root.add(vessel);
  const modules={},surfaces=new Map(),textures=[],backgrounds=new Map();
- const flight=createFlightState();
- const neutralInput={thrust:false,reverse:false,brake:false,boost:false,yaw:0,pitch:0,roll:0};
- let flightInput={...neutralInput},flightField=null,lastFlightStatus=0,flightMessage='等待起飞';
+ const flight=createFlightState(),normalCameraFar=camera.far;
+ const neutralInput={thrust:false,brake:false,boost:false,yaw:0,pitch:0,roll:0};
+ let flightInput={...neutralInput},flightField=null,lastFlightStatus=0,flightTarget=1,flightMessage='等待起飞';
  let selected=null,hovered=null,visible=false,paused=false,time=0,stationIndex=0,warp=null,drag=null,yaw=0,pitch=0,shownYaw=0,shownPitch=0,zoom=1,inspection=false,lamps=true,orbit=false,deck=false,angle='default',settling=true,anchors=[],lastMotion='';
  const active=Object.fromEntries(['bridge','engine','radar','power','lab','bay'].map(id=>[id,false]));
  const values={...Object.fromEntries(Object.keys(active).map(id=>[id,0]))};
@@ -203,17 +203,20 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   flightInput={...neutralInput};
   flightField.group.visible=false;
   camera.up.set(0,1,0);
+  camera.far=normalCameraFar;camera.updateProjectionMatrix();
  }
  function flightCommand(e){
-  const {action,cockpit}=e.detail||{};
+  const {action,cockpit,index}=e.detail||{};
   if(action==='stop')stopFlight();
   if(action==='start'||(action==='reset'&&flight.active)){
    Object.assign(flight,createFlightState(),{active:true,cockpit:action==='reset'&&flight.cockpit});
    flightInput={...neutralInput};
-   flightField??=createFlightField(root,makePlanet);
-   flightField.reset(flight);
+   if(destinations[index])flightTarget=index;
+   backdrop(flightTarget);
+   flightField??=createFlightField(root);
+   flightField.reset(flight,flightTarget);
    flightField.group.visible=true;
-   flightMessage='按住 W 或「推进」，穿过高亮星环。';
+   flightMessage='按住 W 或「推进」，朝发光航标飞行。';
    lastFlightStatus=-Infinity;
    warp=null;setOrbit(false);guidance.stop();
   }
@@ -253,8 +256,9 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   vessel.position.set(0,Math.sin(time*.22)*.035,0);
   canopy.rotation.x=values.bridge*.72;const projection=THREE.MathUtils.smoothstep(values.bridge,.28,1);holo.visible=projection>.02;holo.scale.setScalar(projection);holo.rotation.y=time*.13;
   runningLights.visible=cabinWindows.visible=lamps;cabinLight.intensity=lamps?.7:0;
-  for(const p of plumes){p.visible=values.engine>.015;p.scale.y=.2+values.engine*(.8+Math.sin(time*23)*.012);p.position.z=1.95+.82*p.scale.y;p.material.uniforms.time.value=time;p.material.uniforms.power.value=values.engine;}
-  halos.forEach(h=>h.material.opacity=values.engine*.24);engineCores.forEach(m=>m.color.setRGB(.04+values.engine*.32,.09+values.engine*.92,.13+values.engine*1.45));engineLights.forEach(light=>light.intensity=values.engine*2.1);
+  const enginePower=flight.active?values.engine*(flightInput.thrust&&!flightInput.brake&&!flightField.complete?(flightInput.boost?1:.72):.13):values.engine;
+  for(const p of plumes){p.visible=enginePower>.015;p.scale.y=.2+enginePower*(.8+Math.sin(time*23)*.012);p.position.z=1.95+.82*p.scale.y;p.material.uniforms.time.value=time;p.material.uniforms.power.value=enginePower;}
+  halos.forEach(h=>h.material.opacity=enginePower*.24);engineCores.forEach(m=>m.color.setRGB(.04+enginePower*.32,.09+enginePower*.92,.13+enginePower*1.45));engineLights.forEach(light=>light.intensity=enginePower*2.1);
   wings.forEach(({hinge,side})=>hinge.rotation.z=side*(1-values.power)*1.36);
   antenna.rotation.y=values.radar*time*.65;antenna.rotation.x=values.radar*.12;
   const sweep=(time*.4)%1;scan.visible=values.radar>.02;scan.position.set(0,.8+sweep*2.5,0);scan.scale.setScalar(.5+sweep*3.4);scan.material.opacity=values.radar*(1-sweep)*.3;
@@ -265,22 +269,56 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   if(selected){const value=values[selected],moving=Math.abs(value-(active[selected]?1:0))>.015,key=[selected,Math.round(value*40),active[selected],moving].join(':');if(key!==lastMotion){lastMotion=key;document.dispatchEvent(new CustomEvent('space-ship-mechanism',{detail:{id:selected,value,active:active[selected],moving}}));}}else lastMotion='';
   for(const [id,collection]of surfaces)for(const m of collection.values()){const intensity=id===hovered?.18:id===selected?.105:0;m.emissive.copy(m.userData.originalEmissive);m.emissiveIntensity=m.userData.originalIntensity;if(intensity){m.emissive.add(new THREE.Color(0x5a99b2).multiplyScalar(intensity));m.emissiveIntensity=Math.max(1,m.emissiveIntensity);}}
   if(flight.active){
-   if(moving&&!flightField.complete&&!flightField.missed){
+   if(moving&&!flightField.complete){
     stepFlight(flight,flightInput,dt);
-    const report=flightField.update(flight,time);
-    if(report.type==='gate')flightMessage=flightField.complete?'三个航道环全部通过，可以跃迁。':`已通过第 ${flightField.gate} 道星环，朝下一道高亮星环推进。`;
-    if(report.type==='miss')flightMessage='错过当前星环，选择「重置航线」重试。';
-    if(report.type==='impact')flightMessage='擦碰障碍物，速度已下降。';
-    if(flightField.complete||flightField.missed){
+    const result=flightField.update(flight,time);
+    if(result==='gate')flightMessage=flightField.complete?'航道已通过，可以前往目的地。':'本段通过，请对准下一道航标。';
+    if(result==='miss')flightMessage='已回到上一检查点，保留已通过的航标。';
+    if(result==='impact')flightMessage='擦碰碎石，推进速度已降低。';
+    if(flightField.complete){
      Object.assign(flight.velocity,{x:0,y:0,z:0});flight.speed=0;
     }
-    if(report.type)lastFlightStatus=-Infinity;
    }
-   vessel.position.set(flight.position.x,flight.position.y,flight.position.z);vessel.rotation.set(flight.pitch,flight.yaw,flight.roll,'YXZ');vessel.quaternion.setFromEuler(vessel.rotation);root.position.set(0,0,0);
-   const orientation=vessel.quaternion,forward=new THREE.Vector3(0,0,-1).applyQuaternion(orientation),up=new THREE.Vector3(0,1,0).applyQuaternion(orientation);vessel.visible=!flight.cockpit;camera.up.copy(up);camera.fov=66;camera.updateProjectionMatrix();
-   if(flight.cockpit){camera.position.copy(vessel.position);camera.quaternion.copy(orientation);camera.lookAt(vessel.position.clone().addScaledVector(forward,8));}else{const offset=new THREE.Vector3(0,2.6,10).applyQuaternion(orientation);camera.position.copy(vessel.position).add(offset);camera.lookAt(vessel.position.clone().addScaledVector(forward,8));}camera.updateMatrixWorld(true);
-   for(const [i,o]of backgrounds)o.visible=false;atmosphere.update({time,quality,moving});flightDeck.update({active:flight.cockpit,lamps,quaternion:camera.quaternion,values,selected,hovered,index});root.updateMatrixWorld(true);
-   if(time-lastFlightStatus>.12||!moving){lastFlightStatus=time;document.dispatchEvent(new CustomEvent('space-flight-status',{detail:{speed:flight.speed,gate:flightField.gate,complete:flightField.complete,collisions:flightField.collisions,heading:Math.round((((-flight.yaw*180/Math.PI)%360)+360)%360),message:flightMessage}}));}
+   vessel.position.copy(flight.position);
+   vessel.rotation.set(flight.pitch,flight.yaw,flight.roll,'YXZ');
+   vessel.visible=!flight.cockpit;root.position.set(0,0,0);
+   camera.up.set(0,1,0);
+   camera.fov=mobile?73:60;camera.far=510;
+   const chaseOffset=flight.cockpit?0:.11;
+   camera.position.set(flight.position.x-flight.velocity.x*chaseOffset,
+    flight.position.y+(flight.cockpit?.25:3.3)-flight.velocity.y*chaseOffset,
+    flight.position.z+(flight.cockpit?0:10.5));
+   aim.set(flight.position.x,flight.position.y+(flight.cockpit?.25:2),flight.position.z-24);
+   camera.lookAt(aim);camera.updateProjectionMatrix();camera.updateMatrixWorld(true);
+   for(const [i,object] of backgrounds){
+    object.visible=i===flightTarget;
+    if(!object.visible)continue;
+    const composition=flightField.composition;
+    if(composition){
+     const [x,y,radius,tilt]=composition;
+     object.position.set(x*(mobile?.43:1),y,-194);
+     object.scale.setScalar(radius*(mobile?.86:1));object.rotation.set(0,0,tilt);
+     if(moving)object.userData.surface.rotation.y+=dt*.035;
+    }else{
+     object.position.set(0,0,-234);object.rotation.set(0,0,0);
+     const height=2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*260;
+     object.scale.setScalar(Math.max(height/13,height*camera.aspect/18)*1.08);
+     object.material.opacity=.81;
+    }
+   }
+   atmosphere.update({time,quality,moving});
+   flightDeck.update({active:flight.cockpit,lamps,quaternion:camera.quaternion,values,selected,hovered,index:flightTarget});
+   root.updateMatrixWorld(true);
+   if(time-lastFlightStatus>.09||!moving){
+    lastFlightStatus=time;
+    const next=flightField.next;
+    const offset=next?{x:next.x-flight.position.x,y:next.y-flight.position.y}:null;
+    document.dispatchEvent(new CustomEvent('space-flight-status',{detail:{
+     index:flightTarget,speed:flight.speed,gate:flightField.gate,total:flightField.total,
+     complete:flightField.complete,collisions:flightField.collisions,misses:flightField.misses,
+     distance:next?Math.max(0,Math.ceil(flight.position.z-next.z)):0,offset,message:flightMessage,
+    }}));
+   }
    settling=false;return moving;
   }
   const targetFocus=!deck&&selected?anchorPoints[selected].clone().applyEuler(vessel.rotation).multiplyScalar(inspection?scale:.3):new THREE.Vector3();targetFocus.x-=inspection||mobile||deck?0:.55;targetFocus.y+=inspection||deck?0:mobile?.3:.1;
