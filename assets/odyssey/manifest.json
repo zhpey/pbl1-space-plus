@@ -22,7 +22,7 @@
     "file": "jupiter.jpg",
     "url": "https://images-assets.nasa.gov/image/PIA21395/PIA21395~medium.jpg",
     "source": "https://images.nasa.gov/details/PIA21395",
-    "credit": "NASA / JPL-Caltech / SwRI / MSSS / Gerald Eichstädt / Seán Doran",
+    "credit": "NASA / JPL-Caltech / SwRI / MSSS / Kevin M. Gill (CC BY)",
     "kind": "观测影像",
     "description": "This enhanced-color image of Jupiter's Great Red Spot was created by citizen scientist Kevin Gill using data from the JunoCam imager on NASA's Juno spacecraft. The image was taken on July 10, 2017 at 07:07 p.m. PDT (10:07 p.m. EDT), as the Juno spacecraft performed its 7th close flyby of Jupiter. At the time the image was taken, the spacecraft was about 6,130 miles (9,866 kilometers) from the tops of the clouds of the planet.  https://photojournal.jpl.nasa.gov/catalog/PIA21395 .  -   Enhanced image by Kevin M. Gill (CC-BY) based on images provided courtesy of NASA/JPL-Caltech/SwRI/MSSS",
     "original_size": [
@@ -389,5 +389,62 @@
     "sha256": "3049c95b0d697ac4943eb444d2b781b97e994a48f3cf18b15a25bd2a8029ce84",
     "checked": "2026-11-18",
     "note": "ESA/Webb ??????????????????????"
+  },
+  {
+    "file": "m87-eht.jpg",
+    "url": "https://www.eso.org/public/archives/images/screen/eso1907a.jpg",
+    "source": "https://www.eso.org/public/images/eso1907a/",
+    "credit": "EHT Collaboration",
+    "kind": "射电观测重建",
+    "description": "2019 年公开的 M87* 黑洞阴影影像。按比例缩小并压缩为 JPEG。",
+    "original_size": [
+      1280,
+      746
+    ],
+    "saved_size": [
+      720,
+      420
+    ],
+    "bytes": 9589,
+    "sha256": "d0843b0cfcc95143d72e7067ef84aa55dd962e973d30f30341bb6e1c927889d0",
+    "checked": "2026-11-19"
+  },
+  {
+    "file": "hubble-orbit.webp",
+    "url": "https://science.nasa.gov/wp-content/uploads/2023/04/27946391011_d40ff10573_h-jpg.webp",
+    "source": "https://science.nasa.gov/mission/hubble/observatory/",
+    "credit": "NASA",
+    "kind": "轨道实拍",
+    "description": "轨道实拍 · 哈勃空间望远镜飞行在地球上方",
+    "original_size": [
+      1536,
+      1020
+    ],
+    "saved_size": [
+      1536,
+      1020
+    ],
+    "bytes": 157641,
+    "sha256": "012dcaf564f9a6b2bdb15f00978c16d22156768c81c7814a725cab75af253a20",
+    "checked": "2026-11-19"
+  },
+  {
+    "file": "wasp96-transit.webp",
+    "url": "https://stsci-opo.org/STScI-01G7NBMAX4TKZ19GD4W26SMYBY.png",
+    "source": "https://science.nasa.gov/asset/webb/exoplanet-wasp-96-b-niriss-transit-light-curve/",
+    "credit": "NASA / ESA / CSA / STScI",
+    "kind": "观测光变曲线与教学示意",
+    "description": "WASP-96 b 凌日示意与韦伯 NIRISS 实测光变曲线。按比例缩小并转为 WebP。",
+    "original_size": [
+      3840,
+      2583
+    ],
+    "saved_size": [
+      1280,
+      861
+    ],
+    "bytes": 41682,
+    "sha256": "6fc917bc633cde81a60f475a09d5e4d1bee005bb14552c57be6597490df1cb5e",
+    "checked": "2026-11-19"
   }
 ]

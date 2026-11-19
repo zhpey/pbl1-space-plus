@@ -106,6 +106,9 @@ canvas:focus-visible {
   touch-action: pan-y;
   cursor: grab;
 }
+body[data-space-foreground='hidden'] #stage {
+  pointer-events: none;
+}
 #universe:active {
   cursor: grabbing;
 }

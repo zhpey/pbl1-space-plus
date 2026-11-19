@@ -108,7 +108,9 @@ export function createController(options={}){
   const paper=state.route==='story'?document.querySelector('.letter-paper')?.getBoundingClientRect():null;
   const destination=state.route==='story'?document.querySelector('.letter-destination')?.getBoundingClientRect():null;
   const readingLetter=!!paper&&((paper.right>innerWidth-96&&paper.top<innerHeight*.65)||(destination&&destination.bottom<innerHeight*.25));
-  controls.classList.toggle('scrolled-out',readingLetter||!!learning&&learning.getBoundingClientRect().top<innerHeight*.5);
+  const instrument = document.querySelector('.pbl-instrument');
+  const readingInstrument = instrument && instrument.getBoundingClientRect().top < innerHeight * .65;
+  controls.classList.toggle('scrolled-out',readingLetter||readingInstrument||!!learning&&learning.getBoundingClientRect().top<innerHeight*.5);
  }
  addEventListener('scroll',updateSceneControls,{passive:true});
  addEventListener('resize',updateSceneControls);

@@ -1,12 +1,13 @@
 export const odysseyAsset = name => new URL('../assets/odyssey/'+name,import.meta.url).href;
 export const imageCredits={
+ 'wasp96-transit.webp':['NASA / ESA / CSA / STScI · WASP-96 b 凌日示意与韦伯 NIRISS 实测光变曲线','https://science.nasa.gov/asset/webb/exoplanet-wasp-96-b-niriss-transit-light-curve/'],
  'sun.jpg':['NASA / ESA / SOHO / EIT · 极紫外日珥观测影像','https://images.nasa.gov/details/PIA03149'],
  'europa.jpg':['NASA / JPL-Caltech / SETI Institute · 伽利略木卫二观测拼接','https://images.nasa.gov/details/PIA19048'],
  'pluto.jpg':['NASA / JHUAPL / SwRI · 新视野号多仪器观测合成','https://images.nasa.gov/details/PIA19857'],
  'earth.jpg':['NASA / NOAA / Suomi NPP · 多次观测合成','https://images.nasa.gov/details/GSFC_20171208_Archive_e001386'],
  'moon.jpg':['NASA / Apollo 8 / Bill Anders · 地出实拍','https://www.nasa.gov/image-article/apollo-8-earthrise/'],
  'mars.jpg':['NASA / JPL-Caltech / USGS · 轨道观测拼接','https://science.nasa.gov/mars/'],
- 'jupiter.jpg':['NASA / JPL-Caltech / SwRI / MSSS / Gerald Eichstädt / Seán Doran · 增强色观测影像','https://images.nasa.gov/details/PIA21395'],
+ 'jupiter.jpg':['NASA / JPL-Caltech / SwRI / MSSS · Kevin M. Gill 增强色处理（CC BY）','https://images.nasa.gov/details/PIA21395'],
  'saturn.jpg':['NASA / JPL / Space Science Institute · 卡西尼观测影像','https://images.nasa.gov/details/PIA06193'],
  'cosmic-cliffs.jpg':['NASA / ESA / CSA / STScI · NIRCam 近红外观测影像','https://esawebb.org/images/weic2205a/'],
  'nebula.jpg':['NASA / ESA / CSA / STScI · 创生之柱近红外观测影像','https://esawebb.org/images/weic2216a/'],
@@ -127,8 +128,8 @@ export const dossiers = [
  ['新视野号第一次近看冥王星','2015 年，新视野号飞越冥王星及其卫星系统，看到复杂的地形、冰层与大气现象。一个在望远镜里长期只能被看成微小光点的对象，变成了具有具体地貌的世界。远比“冰冷小球”这个想象丰富的细节，让科学家重新讨论小天体的活动与演化。'],
  ['再向外，遇见 Arrokoth','2019 年，新视野号飞越柯伊伯带天体 Arrokoth。它独特的接触双体形状，为早期小天体怎样聚集提供了重要线索。理解遥远的小世界，可以帮助解释更大天体形成前的步骤。'],
  ['尺度感需要不断更新','旅行者探测器与新视野号的任务和轨迹不同，不能把它们当作同一条线路上的前后班车。航行里程、距太阳距离、飞越目标和通信延迟，也各自回答不同问题。探索不是一条被画完的路线图，而是不断增加新问题的过程。']],sources:['newhorizons','voyager'],question:'一个很小的天体，为什么可能比一颗大行星更完整地保存太阳系早期的信息？'},
- {id:'another-earth',category:'宇宙',title:'怎样在一束星光里，找到另一颗行星',en:'A WORLD IN A SHADOW',image:'earth.jpg',read:'4 分钟',lead:'有些世界从来没有被直接拍到，但它们经过时，会让恒星的光轻轻颤动。',sections:[
- ['一小次变暗，可以是一次经过','凌日法通过测量行星从恒星前方经过时造成的周期性变暗寻找系外行星。亮度下降的深度可以约束行星与恒星的相对大小，周期则提供轨道信息。单次变暗也可能来自其他原因，通常需要重复观测与后续确认。'],
+ {id:'another-earth',category:'宇宙',title:'怎样在一束星光里，找到另一颗行星',en:'A WORLD IN A SHADOW',image:'wasp96-transit.webp',alt:'WASP-96 b 从恒星前方经过的示意图，以及恒星亮度先下降再恢复的实测曲线',read:'4 分钟',lead:'有些世界从来没有被直接拍到，但它们经过时，会让恒星的光轻轻颤动。',sections:[
+ ['一小次变暗，可以是一次经过','凌日法通过测量行星从恒星前方经过时造成的周期性变暗寻找系外行星。亮度下降的深度可以约束行星与恒星的相对大小，周期则提供轨道信息。单次变暗也可能来自其他原因，通常需要重复观测与后续确认。配图中的黄点来自韦伯对 WASP-96 b 的测量，横轴是时间，纵轴是恒星相对亮度。行星通过时，亮度下降约 1.4%。'],
  ['恒星也会被行星拉动','径向速度法利用恒星光谱的微小周期变化，探测恒星在行星引力作用下沿视线方向的运动。它常常与凌日观测结合，让研究者同时约束质量和大小，从而估计平均密度。密度提供组成线索，却不能单凭一个数字画出真实内部结构。'],
  ['宜居带不是生命证明','宜居带描述在某些假设下，行星表面可能允许液态水存在的轨道距离范围。大气、云层、反射率、恒星活动以及行星本身的演化都很重要。同样位于某个范围内的两个世界，实际环境也可能截然不同。'],
  ['下一步，是分析穿过大气的光','部分行星凌日时，恒星光会穿过其大气边缘，留下与化学成分有关的吸收特征。信号极其微弱，恒星活动、云雾和仪器效应会带来困难。潜在生命迹象需要结合环境和非生物解释谨慎判断，不能从单一分子直接跳到“发现生命”。']],sources:['exoplanets','webb'],question:'如果你同时知道一颗行星的半径和质量，你能推测什么，又还不能确定什么？'},
@@ -138,8 +139,8 @@ export const humanMilestones = [
  ['1968','从月球回望','阿波罗八号绕月飞行，回望共同的家园。','moon-memory','moon.jpg'],
  ['1977','向行星际出发','两艘旅行者飞船，开启跨越数十年的探索。','pale-blue-dot','pale-blue-dot.jpg'],
  ['2004','进入土星轨道','卡西尼开始近距离研究土星及其卫星。','saturn-rings','saturn.jpg'],
- ['2015','近看冥王星','新视野号把遥远光点变成真实的世界。','beyond-neptune','mars.jpg'],
- ['2021','飞入太阳日冕','帕克探测器在恒星大气中进行测量。','touch-the-sun','earth.jpg'],
+ ['2015','近看冥王星','新视野号把遥远光点变成真实的世界。','beyond-neptune','pluto.jpg'],
+ ['2021','飞入太阳日冕','帕克探测器在恒星大气中进行测量。','touch-the-sun','sun.jpg'],
  ['2022','看见古老的光','韦伯首批科学影像，打开红外宇宙。','webb-cold-light','deepfield.jpg'],
- ['2024','前往冰下海洋','Europa Clipper 发射，研究木卫二宜居条件。','ocean-worlds','jupiter.jpg'],
+ ['2024','前往冰下海洋','Europa Clipper 发射，研究木卫二宜居条件。','ocean-worlds','europa.jpg'],
 ];

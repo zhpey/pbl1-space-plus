@@ -1,38 +1,101 @@
+import {odysseyAsset} from '../js/odyssey-data.js';
+
 function chirpPath() {
-  return Array.from({length:161}, (_, index) => {
-    const t = index / 160;
-    const envelope = t < .77 ? 1 + 34 * (t / .77) ** 3 : 35 * Math.exp(-(t - .77) * 21);
-    const vibration = Math.sin(2 * Math.PI * (2 * t + 7 * t ** 3 + 3 * t ** 6));
-    return `${index === 0 ? 'M' : 'L'}${(15 + 330 * t).toFixed(1)} ${(76 + envelope * vibration).toFixed(1)}`;
+  return Array.from({length:221}, (_, index) => {
+    const t = index / 220;
+    const envelope = t < .72 ? 2 + 39 * (t / .72) ** 3 : 41 * Math.exp(-(t - .72) * 19);
+    const vibration = Math.sin(2 * Math.PI * (2 * t + 8 * t ** 3 + 4 * t ** 6));
+    return `${index ? 'L' : 'M'}${(47 + 288 * t).toFixed(1)} ${(87 + envelope * vibration).toFixed(1)}`;
   }).join('');
 }
 
 const sources = [
-  { id:'orbit', title:'恒星轨道', caption:'位置随时间变化 · 银河系中心', signal:'望远镜记录恒星 S2 在天空中的位置及其光谱。S2 每约 16 年绕银心完成一圈。', inference:'一颗恒星绕极小区域高速运行，可用轨道约束中心集中质量。多组数据指向约四百万倍太阳质量的致密天体。', limit:'轨道测量的是外部引力效应。它无法让我们看见被事件视界挡住的内部。', url:'https://www.eso.org/public/news/eso2006/', credit:'ESO · 银河系中心观测', drawing:'<ellipse cx="174" cy="69" rx="132" ry="40" transform="rotate(-13 174 69)"/><circle class="evidence-mark" cx="258" cy="50" r="6"/><circle class="evidence-bright" cx="84" cy="109" r="4"/><path d="M79 108H44"/>' },
-  { id:'wave', title:'引力波', caption:'应变随时间变化 · GW150914', signal:'LIGO 于 2015 年 9 月 14 日探测到一个短促信号，振荡越来越快，随后衰减。两台探测器都记录到了它。', inference:'把信号波形与广义相对论模型对照，可以推断两个黑洞经历了旋近、合并与振铃。', limit:'探测结果给出时空应变，读出质量等参数需要同波形模型比较。图中曲线为讲解示意。', url:'https://www.ligo.caltech.edu/page/press-release-gw150914', credit:'LIGO · 首次探测发布', drawing:`<path d="${chirpPath()}"/><path class="evidence-guide" d="M15 76H345"/>` },
-  { id:'shadow', title:'黑洞阴影', caption:'毫米波亮度分布 · M87*', signal:'事件视界望远镜合作组把多地射电望远镜联成一套网络，重建了 M87* 周围的环状毫米波亮度分布。', inference:'亮环来自黑洞周围辐射。引力使光线路径弯曲，部分光线落入黑洞，从而在中央形成较暗的区域。', limit:'亮环直径和事件视界直径是不同的量。画面中的环是讲解示意，实测图像见来源。', url:'https://www.eso.org/public/news/eso1907/', credit:'ESO / EHT · M87* 影像发布', drawing:'<circle cx="180" cy="74" r="43" class="evidence-ring"/><path class="evidence-bright" d="M143 94a43 43 0 0 0 74 0"/><circle cx="180" cy="74" r="24" class="evidence-guide"/>' },
+  {
+    id: 'orbit', title: '恒星轨道', kind: '轨道示意', subject: '银河系中心 · S2 与人马座 A*',
+    signal: '望远镜多年追踪恒星 S2 的位置和速度。它大约每 16 年绕银河系中心一圈。',
+    inference: '从轨道大小、周期和速度可以估计中心质量。多颗恒星的观测共同指向约四百万倍太阳质量的致密天体。',
+    limit: '观测约束的是中心质量与它所在的空间范围。图中的椭圆简化了 S2 轨道，实际观测还可测出轨道进动。',
+    url: 'https://www.eso.org/public/news/eso2006/', credit: 'ESO · S2 轨道观测',
+    graphic: `<svg viewBox="0 0 360 210" aria-hidden="true">
+      <ellipse cx="176" cy="100" rx="113" ry="65" transform="rotate(-12 176 100)"/>
+      <path class="evidence-guide" d="M115 164L266 81M115 164L79 178"/>
+      <circle class="evidence-bright" cx="115" cy="164" r="5"/>
+      <circle class="evidence-mark" cx="266" cy="81" r="5"/>
+      <text x="206" y="26">人马座 A*</text><path class="evidence-guide" d="M266 33V73"/>
+      <text x="24" y="195">恒星 S2</text><text x="203" y="190">简化运行轨迹</text>
+      <path class="evidence-guide" d="M239 145V171"/>
+    </svg>`,
+  },
+  {
+    id: 'wave', title: '引力波', kind: '波形示意', subject: 'GW150914 · 双黑洞合并',
+    signal: '2015 年 9 月 14 日，LIGO 的两台探测器都记录到了先加快、增强，随后迅速衰减的振荡。',
+    inference: '把信号与广义相对论预测的波形比较，可以推断两个黑洞先逐渐靠近，随后合并，最后形成的黑洞振荡衰减。',
+    limit: '探测器记录的是相对长度的微小变化，也叫应变。估计黑洞质量需要把实测波形和模型比较。',
+    url: 'https://www.ligo.caltech.edu/page/press-release-gw150914', credit: 'LIGO · GW150914 原始发布',
+    graphic: `<svg viewBox="0 0 360 210" aria-hidden="true">
+      <text x="24" y="23">相对应变</text>
+      <path class="evidence-axis" d="M40 38V145H335l-6-4m6 4l-6 4"/>
+      <path class="evidence-guide" d="M47 87H335M248 40V146M271 40V146"/>
+      <path d="${chirpPath()}"/>
+      <text x="83" y="174">旋近</text><text x="228" y="174">合并</text>
+      <text x="286" y="174">振铃</text><text x="284" y="198">时间 →</text>
+    </svg>`,
+  },
+  {
+    id: 'shadow', title: '黑洞阴影', kind: '射电观测重建', subject: 'M87* · 2019 年发布',
+    signal: '事件视界望远镜合作组把全球多地的射电望远镜联成网络，从 1.3 毫米波段的观测数据重建了这幅影像。',
+    inference: '环状亮区来自黑洞周围的辐射。引力弯折光的路径，部分光被黑洞捕获，中心因此形成较暗的区域。',
+    limit: '中央暗影的范围大于事件视界。画面的颜色用来呈现射电辐射亮度。',
+    url: 'https://www.eso.org/public/images/eso1907a/', credit: 'EHT Collaboration · ESO 原图',
+    graphic: `<div class="evidence-observation">
+      <img src="${odysseyAsset('m87-eht.jpg')}" width="720" height="420" alt="M87* 的射电重建图，橙色亮环围绕中央暗影，环的下部更亮" decoding="async">
+      <svg viewBox="0 0 360 210" aria-hidden="true">
+        <path class="evidence-axis" d="M175 91L121 54H62M192 122L229 153H268"/>
+        <circle class="evidence-bright" cx="175" cy="91" r="2.5"/><circle class="evidence-bright" cx="192" cy="122" r="2.5"/>
+        <text x="18" y="59">暗影</text><text x="275" y="158">亮环</text>
+      </svg>
+    </div>`,
+  },
 ];
 
 let selectedEvidence = sources[0];
 
 function evidenceReading(item) {
-  return `<figure class="evidence-figure"><svg viewBox="0 0 360 148" aria-hidden="true">${item.drawing}</svg><figcaption>${item.caption} / 示意</figcaption></figure>
-    <dl class="evidence-notes"><div><dt>测到了什么</dt><dd>${item.signal}</dd></div><div><dt>能推断什么</dt><dd>${item.inference}</dd></div><div><dt>证据的边界</dt><dd>${item.limit}</dd></div></dl><a class="evidence-source" href="${item.url}" target="_blank" rel="noopener">${item.credit} ↗</a>`;
+  return `<figure class="evidence-figure">
+    ${item.graphic}
+    <figcaption><span>${item.kind}</span> ${item.subject}</figcaption>
+  </figure>
+  <div class="evidence-explanation">
+    <dl class="evidence-notes">
+      <div><dt>测到了什么</dt><dd>${item.signal}</dd></div>
+      <div><dt>能推断什么</dt><dd>${item.inference}</dd></div>
+      <div><dt>读图提示</dt><dd>${item.limit}</dd></div>
+    </dl>
+    <a class="evidence-source" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.credit} ↗</a>
+  </div>`;
 }
 
 export function renderEvidence() {
-  return `<section class="pbl-instrument blackhole-evidence" id="blackhole-evidence" aria-labelledby="evidence-title"><header><div><span class="instrument-kicker">OBSERVING BLACK HOLES</span><h2 id="evidence-title">怎样知道那里有个黑洞？</h2></div></header><div class="evidence-tabs" role="group" aria-label="选择观测方法">${sources.map(item=>`<button data-evidence="${item.id}" aria-pressed="${item === selectedEvidence}">${item.title}</button>`).join('')}</div><div class="evidence-reading" data-evidence-reading aria-live="polite">${evidenceReading(selectedEvidence)}</div></section>`;
+  return `<section class="pbl-instrument blackhole-evidence" id="blackhole-evidence" aria-labelledby="evidence-title">
+    <header><h2 id="evidence-title">怎样知道那里有个黑洞？</h2></header>
+    <div class="evidence-tabs" role="group" aria-label="选择观测证据">
+      ${sources.map(item => `<button type="button" data-evidence="${item.id}" aria-pressed="${item === selectedEvidence}" aria-controls="evidence-reading">${item.title}</button>`).join('')}
+    </div>
+    <div class="evidence-reading" id="evidence-reading" data-evidence-reading aria-live="polite">${evidenceReading(selectedEvidence)}</div>
+  </section>`;
 }
 
 export function bindEvidence() {
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-evidence]');
-    if (!button) return;
-    const section = button.closest('.blackhole-evidence');
+    const section = button?.closest('.blackhole-evidence');
+    if (!section) return;
     const item = sources.find(source => source.id === button.dataset.evidence);
-    if (!item) return;
+    if (!item || item === selectedEvidence) return;
     selectedEvidence = item;
-    section.querySelectorAll('[data-evidence]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
+    for (const option of section.querySelectorAll('[data-evidence]')) {
+      option.setAttribute('aria-pressed', String(option === button));
+    }
     section.querySelector('[data-evidence-reading]').innerHTML = evidenceReading(item);
   });
 }

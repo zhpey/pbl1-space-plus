@@ -11,7 +11,7 @@ https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001386/GSFC_20171208
 
 ## jupiter.jpg
 
-观测影像 / NASA / JPL-Caltech / SwRI / MSSS / Gerald Eichstädt / Seán Doran
+增强色观测影像 / NASA / JPL-Caltech / SwRI / MSSS · Kevin M. Gill 增强色处理（CC BY）
 https://images.nasa.gov/details/PIA21395
 https://images-assets.nasa.gov/image/PIA21395/PIA21395~medium.jpg
 
@@ -174,10 +174,36 @@ https://marsoweb.nas.nasa.gov/globalData/images/fullscale/MOLA_cylin.jpg
 
 ## cliffs-composite.jpg
 
-??????????? / NASA / ESA / CSA / STScI
+观测合成影像 / NASA / ESA / CSA / STScI
 
-ESA/Webb ??????????????????????
+NGC 3324 宇宙悬崖的 NIRCam 与 MIRI 联合合成图。和近红外图的取景范围不同。
 
 https://esawebb.org/images/weic2205b/
 
 https://esawebb.org/media/archives/images/screen/weic2205b.jpg
+
+
+## m87-eht.jpg
+
+射电观测重建 / EHT Collaboration
+2019 年公开的 M87* 黑洞阴影影像。按比例缩小并压缩为 JPEG。
+https://www.eso.org/public/images/eso1907a/
+https://www.eso.org/public/archives/images/screen/eso1907a.jpg
+
+
+## hubble-orbit.webp
+
+轨道实拍 / NASA
+轨道实拍 · 哈勃空间望远镜飞行在地球上方
+https://science.nasa.gov/mission/hubble/observatory/
+https://science.nasa.gov/wp-content/uploads/2023/04/27946391011_d40ff10573_h-jpg.webp
+
+
+## wasp96-transit.webp
+
+观测光变曲线与教学示意 / NASA / ESA / CSA / STScI
+WASP-96 b 凌日示意与韦伯 NIRISS 实测光变曲线。按比例缩小并转为 WebP。
+https://science.nasa.gov/asset/webb/exoplanet-wasp-96-b-niriss-transit-light-curve/
+https://stsci-opo.org/STScI-01G7NBMAX4TKZ19GD4W26SMYBY.png
+
+ESO 影像使用说明：https://www.eso.org/public/outreach/copyright/

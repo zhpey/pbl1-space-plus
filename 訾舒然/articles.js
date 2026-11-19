@@ -1,3 +1,4 @@
+import { odysseyAsset } from "../js/odyssey-data.js";
 import { fieldnotes } from "./fieldnotes.js";
 import { topics } from "./topics.js";
 // Original educational summaries. Images and article text are stored locally.
@@ -6,7 +7,8 @@ const foundationalArticles = [
     id: "image-hubble",
     title: "哈勃：清晰图像从哪里来？",
     lead: "哈勃在地球大气层之外工作，减少大气扰动和部分吸收的影响。它的贡献还来自仪器、长期观测与精密校准。",
-    image: "hubble-telescope.jpg",
+    image: "hubble-orbit.webp",
+    sharedImage: true,
     sections: [
       {
         title: "轨道位置带来的优势",
@@ -22,16 +24,17 @@ const foundationalArticles = [
       },
     ],
     source: "NASA Hubble Space Telescope",
-    caption: "哈勃空间望远镜",
-    credit: "JSC",
-    sourceUrl: "https://images.nasa.gov/details/sts061-57-021",
+    caption: "轨道实拍 · 哈勃空间望远镜飞行在地球上方",
+    credit: "NASA",
+    sourceUrl: "https://science.nasa.gov/mission/hubble/observatory/",
     module: "observatory",
   },
   {
     id: "image-webb",
     title: "韦布与哈勃，谁看得更远？",
     lead: "两者的研究重点与波段不同，“谁更先进”无法概括全部差别。把观测互相对照，往往比单独比较照片更有价值。",
-    image: "webb-telescope.jpg",
+    image: "webb.jpg",
+    sharedImage: true,
     sections: [
       {
         title: "为什么韦布重视红外",
@@ -47,9 +50,9 @@ const foundationalArticles = [
       },
     ],
     source: "NASA James Webb Space Telescope / Hubble",
-    caption: "韦布望远镜与分段主镜",
-    credit: "NASA/GSFC/Bill Hrybyk",
-    sourceUrl: "https://images.nasa.gov/details/GSFC_20161102_2016-21507_012",
+    caption: "艺术概念图 · 韦伯望远镜的金色分段主镜与多层遮阳板",
+    credit: "NASA / GSFC / CIL",
+    sourceUrl: "https://science.nasa.gov/mission/webb/",
     module: "observatory",
   },
   {
@@ -105,7 +108,7 @@ const foundationalArticles = [
   },
 ].map((a) => ({
   ...a,
-  image: new URL("../訾舒然/images/" + a.image, import.meta.url).href,
+  image: a.sharedImage ? odysseyAsset(a.image) : new URL("../訾舒然/images/" + a.image, import.meta.url).href,
 }));
 
 const diagramAsCover = new Set([
