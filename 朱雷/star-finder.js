@@ -25,23 +25,33 @@ function feedback(id) {
 
 export function renderFinder(id) {
   const target = targets[id];
-  return `<section class="pbl-instrument star-finder" data-finder="${id}" aria-labelledby="finder-title"><header><div><span class="instrument-kicker">FIND A STAR</span><h2 id="finder-title">试着从星图认一次路</h2></div></header><p>${target.prompt}</p><div class="finder-options" role="group" aria-label="选择答案">${target.options.map((option,index) => `<button data-finder-option="${index}" aria-pressed="${attempts.get(id) === index}">${option}</button>`).join('')}</div><p data-finder-result data-correct="${attempts.get(id) === target.answer}" role="status">${feedback(id)}</p></section>`;
+  return `<section class="pbl-instrument star-finder" data-finder="${id}" aria-labelledby="finder-title"><header><div><span class="instrument-kicker">FIND A STAR</span><h2 id="finder-title">试着从星图认一次路</h2></div></header><p>${target.prompt}</p><div class="finder-options" role="group" aria-label="选择答案">${target.options.map((option,index) => `<button data-finder-option="${index}" aria-pressed="${attempts.get(id) === index}">${option}</button>`).join('')}<button data-finder-reset ${attempts.has(id) ? '' : 'disabled'}>重做</button><button data-finder-map>返回星图</button></div><p data-finder-result data-correct="${attempts.get(id) === target.answer}" role="status">${feedback(id)}</p></section>`;
 }
 
 export function bindFinder() {
   document.addEventListener('click', event => {
+    const section = event.target.closest('[data-finder]');
+    if (!section) return;
+    const workbench = section.closest('.sky-workbench');
+    if (event.target.closest('[data-finder-map]')) {
+      const map = workbench.querySelector('.star-map');
+      map.focus({preventScroll:true});
+      map.scrollIntoView({block:'center'});
+      return;
+    }
     const button = event.target.closest('[data-finder-option]');
-    if (!button) return;
-    const section = button.closest('[data-finder]');
+    const reset = event.target.closest('[data-finder-reset]');
+    if (!button && !reset) return;
     const id = section.dataset.finder;
-    const choice = Number(button.dataset.finderOption);
-    attempts.set(id, choice);
-    const correct = choice === targets[id].answer;
+    if (reset) attempts.delete(id);
+    else attempts.set(id, Number(button.dataset.finderOption));
+    section.querySelectorAll('[data-finder-option]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+    if (reset) section.querySelector('[data-finder-option]').focus();
+    section.querySelector('[data-finder-reset]').disabled = !attempts.has(id);
     const result = section.querySelector('[data-finder-result]');
-    section.querySelectorAll('[data-finder-option]').forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
     result.textContent = feedback(id);
-    result.dataset.correct = String(correct);
-    section.closest('.sky-workbench').querySelectorAll('[data-map-star]').forEach((star,index) => {
+    result.dataset.correct = String(attempts.get(id) === targets[id].answer);
+    workbench.querySelectorAll('[data-map-star]').forEach((star,index) => {
       star.classList.toggle('finder-highlight', isFinderStar(id, index));
     });
   });

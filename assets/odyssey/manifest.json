@@ -446,5 +446,35 @@
     "bytes": 41682,
     "sha256": "6fc917bc633cde81a60f475a09d5e4d1bee005bb14552c57be6597490df1cb5e",
     "checked": "2026-11-19"
+  },
+  {
+    "file": "cliffs-detail-nircam.webp",
+    "url": "https://esawebb.org/media/archives/images/large/weic2205a.jpg",
+    "source": "https://esawebb.org/images/weic2205a/",
+    "credit": "NASA, ESA, CSA, STScI",
+    "kind": "官方观测合成图的对齐局部",
+    "saved_size": [
+      1176,
+      380
+    ],
+    "bytes": 97516,
+    "sha256": "59f2a6f041e5b8068cf717662b37c41df5a82550a2628cc960ec593ff70d12f6",
+    "checked": "2026-11-19",
+    "note": "由站内 cosmic-cliffs.jpg 派生。按共同星点对齐，裁出重叠区域并编码为 WebP。"
+  },
+  {
+    "file": "cliffs-detail-composite.webp",
+    "url": "https://esawebb.org/media/archives/images/screen/weic2205b.jpg",
+    "source": "https://esawebb.org/images/weic2205b/",
+    "credit": "NASA / ESA / CSA / STScI",
+    "kind": "官方观测合成图的对齐局部",
+    "saved_size": [
+      1176,
+      380
+    ],
+    "bytes": 69732,
+    "sha256": "bd6ef796a25b3f21b25ea38ec976ffafeb49bcae12a6e2097860ab5d961394fa",
+    "checked": "2026-11-19",
+    "note": "由站内 cliffs-composite.jpg 派生。按共同星点对齐，裁出重叠区域并编码为 WebP。"
   }
 ]

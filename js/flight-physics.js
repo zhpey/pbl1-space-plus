@@ -16,6 +16,13 @@ export function crossedFlightGate(previous,current,gate){
 
 // Steering moves across the flight corridor. Attitude follows the controls visually,
 // so releasing them levels the ship and never leaves thrust pointing off course.
+export function assistFlightInput(state,input,gate){
+ if(!input.thrust||input.brake||input.yaw||input.pitch||!gate)return input;
+ const {position}=state;
+ const x=gate.x-position.x,y=gate.y-position.y;
+ return {...input,yaw:clamp(x*.36,-1,1),pitch:clamp(y*.36,-1,1)};
+}
+
 export function stepFlight(state,input,dt){
  const h=clamp(Number(dt)||0,0,.05);
  const horizontal=input.yaw||0,vertical=input.pitch||0;

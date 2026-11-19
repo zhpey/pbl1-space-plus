@@ -93,7 +93,7 @@ export function createFlightField(root){
    const checkpoint=gates[gate-1];
    const restart=createFlightState();
    if(checkpoint)Object.assign(restart.position,{x:checkpoint.x,y:checkpoint.y,z:checkpoint.z-2});
-   Object.assign(state,restart,{active:true,cockpit:state.cockpit});
+   Object.assign(state,restart,{active:true,cockpit:state.cockpit,assist:state.assist});
    misses++;previous.copy(state.position);return 'miss';
   }
   let result=null;

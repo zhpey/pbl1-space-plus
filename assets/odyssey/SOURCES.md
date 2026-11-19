@@ -207,3 +207,8 @@ https://science.nasa.gov/asset/webb/exoplanet-wasp-96-b-niriss-transit-light-cur
 https://stsci-opo.org/STScI-01G7NBMAX4TKZ19GD4W26SMYBY.png
 
 ESO 影像使用说明：https://www.eso.org/public/outreach/copyright/
+
+
+## cliffs-detail-nircam.webp 与 cliffs-detail-composite.webp
+
+原始观测合成图由 NASA / ESA / CSA / STScI 发布，分别来自 [NIRCam](https://esawebb.org/images/weic2205a/) 和 [NIRCam 与 MIRI](https://esawebb.org/images/weic2205b/)。两张局部图使用共同星点对齐。近红外图经过仿射变换，两图裁出相同区域并转换为 WebP，用于课设的图像对照。

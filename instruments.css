@@ -112,3 +112,15 @@ body[data-atlas-night=true] .sky-workbench .star-map svg .finder-highlight {fill
   .od-distance-note dl {grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(prefers-reduced-motion:reduce){.pbl-instrument * {transition:none!important}}
+
+.pbl-instrument button:disabled {opacity:.45;cursor:default}
+.instrument-detail summary {min-height:44px;align-content:center;color:var(--instrument-accent);cursor:pointer}
+.instrument-detail summary:focus-visible {outline:2px solid var(--instrument-accent);outline-offset:3px}
+.instrument-detail p {margin:0 0 10px}
+.mission-progress {font-size:.8rem;margin:10px 0 0;color:var(--instrument-accent)!important}
+.evidence-unlabeled .evidence-observation svg {display:none}
+.evidence-figure [data-evidence-labels] {margin-inline-start:auto;padding:5px 9px;font-size:.78rem}
+.webb-frame[data-detail=true] {position:relative;aspect-ratio:1176/380}
+.webb-frame[data-detail=true] img {height:100%;display:block}
+.webb-marker {position:absolute;inset:auto;left:var(--webb-x);top:var(--webb-y);width:13%;aspect-ratio:1;border:1px solid #fff4d1;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 1px #291b21,0 0 10px #fe9a635c;pointer-events:none}
+.star-map:focus-visible {outline:2px solid #bbcdfa;outline-offset:4px}

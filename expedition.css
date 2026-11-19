@@ -110,3 +110,15 @@ body[data-piloting=true] .ship-heading,body[data-piloting=true] .ship-orbit-labe
 @media(prefers-reduced-motion:reduce){.exp-signal-path b{animation:none}}
 
 body[data-piloting=true] .od-key-hint,body[data-piloting=true] .controls,body[data-piloting=true] .od-bottom-hud,body[data-piloting=true] .od-station-rail,body[data-piloting=true] .od-facts{display:none!important}
+
+body[data-piloting=true], body[data-ship-warp=true] {overflow:hidden}
+.exp-flight-reticle {position:absolute;top:50%;left:50%;width:36px;height:36px;transform:translate(-50%,-50%);color:var(--flight-accent,#b9e9ff);filter:drop-shadow(0 0 5px #01060c)}
+.exp-flight-reticle i {position:absolute;inset:0;border:1px dashed currentColor;border-radius:50%;opacity:.75}
+.exp-flight-reticle span {position:absolute;top:50%;left:50%;width:8px;height:8px;background:currentColor;border-radius:50%;transform:translate(calc(-50% + var(--aim-x)),calc(-50% + var(--aim-y)))}
+.exp-flight-reticle[data-centered=true] i {border-style:solid}
+.exp-flight-ui [data-flight-assist][aria-pressed=true] {border-color:var(--flight-accent,#b9e9ff);color:var(--flight-accent,#b9e9ff)}
+@media(max-width:759px){
+ .exp-flight-actions button {min-height:44px;padding-inline:8px}
+ .exp-flight-actions {column-gap:5px}
+ .exp-flight-readout select {min-height:44px}
+}

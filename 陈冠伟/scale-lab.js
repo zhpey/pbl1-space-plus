@@ -25,14 +25,15 @@ export function renderScaleReading(planet) {
   const ratio = radius(planet) / radius(earth);
   return `<div class="scale-disks">${disk(earth, maxRadius)}${disk(planet, maxRadius)}</div>
     <dl class="scale-measures"><div><dt>直径 / 地球</dt><dd>${ratio.toFixed(2)} 倍</dd></div><div><dt>体积 / 地球（球体近似）</dt><dd>${Number((ratio ** 3).toPrecision(3)).toLocaleString('zh-CN')} 倍</dd></div></dl>
-    <p class="instrument-note">${details[planet.id]}</p>`;
+    <p class="instrument-note">${details[planet.id]}</p>
+    <details class="instrument-detail"><summary>这个倍数怎么来的？</summary><p>直径比 = ${diameter(planet)} ÷ ${diameter(earth)}。把行星近似成球体时，体积比 = 直径比的三次方。</p></details>`;
 }
 
 let currentPlanetId;
 let comparisonPlanetId;
 
 export function renderScaleLab(planetId) {
-  if (currentPlanetId !== planetId) comparisonPlanetId = planetId;
+  if (currentPlanetId !== planetId) comparisonPlanetId = planetId === 'earth' ? 'mars' : planetId;
   currentPlanetId = planetId;
   const planet = planets.find(item => item.id === comparisonPlanetId) || earth;
   return `<section class="pbl-instrument scale-lab" id="planet-scale" aria-labelledby="scale-title">

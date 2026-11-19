@@ -1,6 +1,7 @@
 import {destinations} from './odyssey-data.js';
 import {playShipCue} from './ambient.js';
 
+const flightPrompt='按住 W 或「推进」，朝发光航标飞行。';
 const launchSystems=['engine','power','radar'];
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const initialMessage='选择目的地后可亲自驾驶或直接跃迁，也可以逐个查看飞船部件。';
@@ -14,6 +15,7 @@ export const shipSystems=[
  {id:'bay',no:'06',name:'探测器舱',en:'PROBE BAY',action:'释放探测器',off:'召回探测器',ready:'探测器已释放',description:'滑开尾部舱门，释放一架探测器。再次操作会召回探测器并关闭舱门。',response:'舱门开启，探测器正在离船。',article:'beyond-neptune'}
 ];
 const active=Object.fromEntries(shipSystems.map(s=>[s.id,false])),inspected=new Set();
+let flightAssist=true;
 let selected=null,view='scene',inspection=false,lamps=true,orbit=false,deck=false,guided=false,motion=null,warping=false,piloting=false,flightCockpit=false,message=initialMessage,targetIndex=1;
 const cmd=(action,extra={})=>document.dispatchEvent(new CustomEvent('space-ship-command',{detail:{action,...extra}}));
 export function renderShipboard(){return `<div class="ship-mode-switch" role="group" aria-label="首页视图"><button data-flight-view="ship" aria-pressed="${view==='ship'}">飞船操作</button><button data-flight-view="scene" aria-pressed="${view==='scene'}">宇宙观景</button></div>
@@ -37,8 +39,10 @@ export function renderShipboard(){return `<div class="ship-mode-switch" role="gr
     <p data-flight-message role="status">按住推进，朝发光航标飞行。</p>
     <button data-flight-depart hidden>抵达目的地</button>
    </div>
+   <div class="exp-flight-reticle" data-flight-reticle aria-hidden="true" hidden><i></i><span data-flight-aim></span></div>
    <div class="exp-flight-actions" aria-label="驾驶设置">
     <button data-flight-pause data-action="pause">暂停</button>
+    <button data-flight-assist aria-pressed="true" title="按住推进时自动修正航向，方向键可接管">辅助开</button>
     <button data-flight-camera>驾驶席</button>
     <button data-flight-reset>重飞</button>
     <button data-flight-exit>退出驾驶</button>
@@ -59,7 +63,7 @@ export function renderShipboard(){return `<div class="ship-mode-switch" role="gr
   </section>
   <div class="ship-deck-ui"><header><span>WAYFARER / FLIGHT DECK</span><b>驾驶席</b><button data-ship-exit-deck>返回船外 · V</button></header><p>拖动环顾 · 点击仪表操作系统 · Esc 返回船外</p><div class="ship-deck-route"><label>下一站<select data-ship-deck-destination aria-label="驾驶席跃迁目的地">${destinations.map((d,i)=>`<option value="${i}"${i===targetIndex?' selected':''}>${d.name}</option>`).join('')}</select></label><button data-ship-deck-launch disabled>等待系统就绪</button><small data-ship-region-kind></small><button class="ship-arrival-file" data-ship-arrival-file hidden></button></div><nav aria-label="驾驶席系统">${shipSystems.map(s=>`<button data-ship-select="${s.id}" aria-pressed="false"><small>${s.no}</small>${s.name}</button>`).join('')}</nav></div>
   <footer class="ship-command-bar"><span><b data-ship-progress>0 / 6</b> 部件已检查</span><div><button data-od-film-start>播放远航电影</button><button data-ship-library>档案终端</button><button data-od-jump="od-worlds">任务分区</button><button data-ship-pause>暂停动画</button><label class="ship-quality">画质<select data-ship-quality aria-label="飞船场景画质"><option value="auto">自动</option><option value="high">精细</option><option value="low">流畅</option></select></label></div><small>WAYFARER / OPERATIONS</small></footer>
-  <div class="ship-warp-overlay" aria-hidden="true"><span data-ship-warp-phase>航线锁定</span><b data-ship-warp-target>月球静海</b><i></i><small>WAYFARER / TRANSIT IN PROGRESS</small></div>
+  <div class="ship-warp-overlay" hidden><span data-ship-warp-phase>航线锁定</span><b data-ship-warp-target>月球静海</b><i></i><button data-ship-cancel>取消跃迁 · Esc</button></div>
  </div>`;}
 
 export function setupShipboardExperience(){
@@ -80,13 +84,17 @@ export function setupShipboardExperience(){
   if(!inHome())return;
   const panel=document.querySelector('.shipboard');
   if(panel)panel.hidden=!inShip();
+  document.querySelectorAll('[data-flight-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.flightView===view)));
+  if(!inShip())return;
+  const overlay=document.querySelector('.ship-warp-overlay');
+  overlay.hidden=!warping;
+  for(const element of panel.children)if(element!==overlay)element.inert=warping;
   document.body.dataset.shipSelected=selected||'overview';
   document.body.dataset.shipPerspective=deck?'deck':'external';document.querySelector('button[data-ship-deck]')?.setAttribute('aria-pressed',String(deck));
   const angles=document.querySelector('.ship-inspect-angles');if(angles)angles.hidden=!inspection;
   const guideButton=document.querySelector('button[data-ship-guided]');if(guideButton){guideButton.setAttribute('aria-pressed',String(guided));guideButton.textContent=guided?'停止巡检':'自动巡检';guideButton.disabled=matchMedia('(prefers-reduced-motion: reduce)').matches;}
   document.body.dataset.shipOrbiting=String(orbit);const orbitButton=document.querySelector('button[data-ship-orbit]');if(orbitButton){orbitButton.setAttribute('aria-pressed',String(orbit));orbitButton.textContent=orbit?'停止环绕':'环绕展示';orbitButton.disabled=matchMedia('(prefers-reduced-motion: reduce)').matches;}
   document.body.dataset.flightMode=view;document.body.dataset.piloting=String(piloting);document.body.dataset.shipWarp=String(warping);document.body.dataset.shipInspection=String(inspection);const flightUI=document.querySelector('[data-exp-flight-ui]');if(flightUI)flightUI.hidden=!piloting;const inspect=document.querySelector('[data-ship-inspect]');if(inspect){inspect.hidden=!selected;inspect.textContent=inspection?'返回全船':'近看部件';inspect.setAttribute('aria-pressed',String(inspection));}const reset=document.querySelector('[data-ship-reset]');if(reset)reset.textContent=inspection?'返回全船':'复位视角';const lampButton=document.querySelector('[data-ship-lighting]');if(lampButton){lampButton.textContent=lamps?'关闭舷灯':'开启舷灯';lampButton.setAttribute('aria-pressed',String(lamps));}renderMotion();
-  document.querySelectorAll('[data-flight-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.flightView===view)));
   document.querySelectorAll('[data-ship-select]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.shipSelect===selected));b.dataset.powered=String(!!active[b.dataset.shipSelect]);});
   document.querySelectorAll('[data-ship-menu-state]').forEach(e=>e.textContent=active[e.dataset.shipMenuState]?'已启动':inspected.has(e.dataset.shipMenuState)?'已检查':'待检查');
   const system=shipSystems.find(s=>s.id===selected),title=document.querySelector('#ship-inspector-title'),toggle=document.querySelector('[data-ship-toggle]'),read=document.querySelector('[data-ship-read]');
@@ -121,6 +129,9 @@ export function setupShipboardExperience(){
   startFlight.title=rendererReady()?'自动完成启航准备并进入航道':'可在操作台选择目的地并直接跃迁';
   document.querySelector('[data-flight-destination]').value=String(targetIndex);
   flightUI?.style.setProperty('--flight-accent',destinations[targetIndex].accent);
+  const assist=document.querySelector('[data-flight-assist]');
+  assist.setAttribute('aria-pressed',String(flightAssist));
+  assist.textContent=flightAssist?'辅助开':'辅助关';
   document.querySelector('[data-flight-camera]').textContent=flightCockpit?'船外视角':'驾驶席';
   renderFlightStatus();
   document.querySelector('[data-ship-quality]').value=document.querySelector('[data-od-quality]')?.value||'auto';
@@ -159,8 +170,9 @@ export function setupShipboardExperience(){
  function leaveShip(){
   view='scene';pendingFlight=false;
   stopFlight();
+  if(warping)cmd('cancel-warp');
   selected=null;inspection=false;deck=false;guided=false;orbit=false;motion=null;warping=false;
-  lamps=true;arrivedAt=null;
+  lamps=true;arrivedAt=null;flightAssist=true;inspected.clear();
   for(const id of Object.keys(active))active[id]=false;
   message=initialMessage;
   clearTransit();
@@ -200,7 +212,7 @@ export function setupShipboardExperience(){
   cmd('reset');prepareFlight();
   message='启航准备已完成。';
   deck=false;selected=null;inspection=false;flightCockpit=false;piloting=true;flightStatus=null;
-  reflect();sceneState();flightCommand('start',{index:targetIndex});
+  reflect();sceneState();flightCommand('start',{index:targetIndex,assist:flightAssist});
   window.scrollTo({top:0,behavior:'instant'});
   document.querySelector('[data-exp-flight-ui]')?.focus({preventScroll:true});
  }
@@ -221,6 +233,16 @@ export function setupShipboardExperience(){
   ui.querySelector('[data-flight-speed]').textContent=Number(d?.speed??0).toFixed(1);
   ui.querySelector('[data-flight-gates]').textContent=`航标 ${d?.gate??0} / ${d?.total??3}`;
   const offset=d?.offset;
+  const reticle=ui.querySelector('[data-flight-reticle]');
+  reticle.hidden=!offset;
+  if(offset){
+   const aim=reticle.querySelector('[data-flight-aim]');
+   const span=Math.max(9,d.distance*.45);
+   const limit=value=>Math.max(-1,Math.min(1,value/span));
+   aim.style.setProperty('--aim-x',`${limit(offset.x)*42}px`);
+   aim.style.setProperty('--aim-y',`${limit(-offset.y)*42}px`);
+   reticle.dataset.centered=String(Math.hypot(offset.x,offset.y)<=2.5);
+  }
   const correction=[];
   if(offset){
    if(Math.abs(offset.x)>2.5)correction.push(offset.x>0?'右':'左');
@@ -228,7 +250,8 @@ export function setupShipboardExperience(){
   }
   ui.querySelector('[data-flight-guidance]').textContent=d?.complete?'已通过全部航标':offset?`航标距 ${d.distance} m · ${correction.length?'向'+correction.join('')+'调整':'保持当前航线'}`:'正在定位航标';
   const status=ui.querySelector('[data-flight-message]');
-  const text=d?.message??'按住 W 或「推进」，朝发光航标飞行。';
+  const initial=!d||d.message===flightPrompt;
+  const text=initial&&flightAssist?'按住 W 或「推进」，飞船会辅助对准航标。':d?.message??flightPrompt;
   if(status.textContent!==text)status.textContent=text;
   const depart=ui.querySelector('[data-flight-depart]');
   depart.hidden=!d?.complete;
@@ -236,7 +259,7 @@ export function setupShipboardExperience(){
   depart.disabled=body.dataset.paused==='true';
  }
  const acceptsInput=()=>inShip()&&piloting&&body.dataset.paused!=='true'&&body.dataset.spaceFilm!=='true'&&!document.querySelector('dialog[open]');
- function resetFlight(){clearInput();flightStatus=null;renderFlightStatus();flightCommand('reset',{index:targetIndex});}
+ function resetFlight(){clearInput();flightStatus=null;renderFlightStatus();flightCommand('reset',{index:targetIndex,assist:flightAssist});}
  document.addEventListener('pointerdown',e=>{
   const button=e.target.closest('[data-flight-hold]');
   if(!button||e.button!==0||!acceptsInput())return;
@@ -255,6 +278,7 @@ export function setupShipboardExperience(){
  }
  for(const type of ['pointerup','pointercancel','lostpointercapture'])document.addEventListener(type,releasePointer);
  document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&inShip()&&warping){e.preventDefault();cancelWarp();return;}
   if(e.key==='Escape'&&inShip()&&piloting&&!document.querySelector('dialog[open]')&&!e.target.closest('select')){e.preventDefault();exitFlight();return;}
   if(!acceptsInput()||e.ctrlKey||e.metaKey||e.altKey||e.target.closest('input,select,textarea,[contenteditable=true]'))return;
   const spec=flightKeys[e.key.toLowerCase()];
@@ -269,7 +293,7 @@ export function setupShipboardExperience(){
  addEventListener('blur',clearInput);
  addEventListener('pagehide',()=>{if(inShip())leaveShip();});
  addEventListener('scroll',()=>{
-  if(!inShip())return;
+  if(!inShip()||piloting||warping)return;
   const hero=document.querySelector('#od-hero');
   if(hero&&hero.getBoundingClientRect().bottom<=0)leaveShip();
  },{passive:true});
@@ -290,6 +314,11 @@ export function setupShipboardExperience(){
  document.addEventListener('space-ship-transit',e=>{if(!inShip()||!warping)return;document.body.style.setProperty('--ship-transit',e.detail.progress);document.body.style.setProperty('--ship-surge',e.detail.surge);const phase=document.querySelector('[data-ship-warp-phase]');if(phase)phase.textContent=e.detail.phase;});
  document.addEventListener('space-ship-miss',()=>{if(inShip()&&!piloting)feedback('点击船体部件可操作，按住鼠标拖动可旋转飞船。');});
  document.addEventListener('space-odyssey-command',e=>{if(e.detail?.action==='quality'){const q=document.querySelector('[data-ship-quality]');if(q)q.value=e.detail.quality;}});
+ function focusShipControl(selector){
+  const control=document.querySelector(selector);
+  control?.scrollIntoView({block:'nearest',behavior:'instant'});
+  control?.focus({preventScroll:true});
+ }
  function arrive(index){
   if(!inShip()||!warping||index!==targetIndex)return;
   warping=false;arrivedAt=index;
@@ -297,6 +326,15 @@ export function setupShipboardExperience(){
   message='已抵达'+destinations[index].name+'。打开本站档案，查看观测影像和科学资料。';
   document.dispatchEvent(new CustomEvent('space-ship-navigation',{detail:{index}}));
   reflect();feedback(message);
+  focusShipControl(deck?'.ship-deck-ui [data-ship-arrival-file]':'.ship-inspector [data-ship-arrival-file]');
+ }
+ function cancelWarp(){
+  if(!warping)return;
+  warping=false;
+  cmd('cancel-warp');clearTransit();
+  message='已取消跃迁，飞船留在当前站点。';
+  reflect();feedback(message);
+  focusShipControl(deck?'[data-ship-deck-launch]':'[data-ship-launch]');
  }
  function launch(){
   if(!inShip()||warping||piloting)return;
@@ -308,8 +346,12 @@ export function setupShipboardExperience(){
   cmd('orbit',{active:false});
   pendingFlight=false;prepareFlight();warping=true;selected=null;inspection=false;
   message='航线锁定，正在前往'+destinations[targetIndex].name+'。';
+  window.scrollTo({top:0,behavior:'instant'});
   clearTransit();reflect();sceneState();
-  if(rendererReady())cmd('warp',{index:targetIndex});
+  if(rendererReady()){
+   cmd('warp',{index:targetIndex});
+   document.querySelector('[data-ship-cancel]')?.focus({preventScroll:true});
+  }
   else arrive(targetIndex);
  }
  document.addEventListener('space-ship-arrival',e=>arrive(e.detail.index));
@@ -324,8 +366,12 @@ export function setupShipboardExperience(){
   const pilotButton=e.target.closest('[data-ship-start-flight],[data-exp-pilot]');
   if(pilotButton){startFlight(pilotButton.hasAttribute('data-exp-pilot'));return;}
   if(!inShip())return;
+  if(warping){if(e.target.closest('[data-ship-cancel]'))cancelWarp();return;}
   if(piloting){
    if(e.target.closest('[data-flight-pause]'))clearInput();
+   if(e.target.closest('[data-flight-assist]')){
+    flightAssist=!flightAssist;flightCommand('assist',{assist:flightAssist});reflect();
+   }
    if(e.target.closest('[data-flight-camera]')){
     flightCockpit=!flightCockpit;flightCommand('camera',{cockpit:flightCockpit});reflect();
    }
@@ -359,7 +405,6 @@ export function setupShipboardExperience(){
    const index=Number(e.target.value);
    if(destinations[index]&&index!==targetIndex){
     targetIndex=index;reflect();resetFlight();
-    document.querySelector('[data-exp-flight-ui]')?.focus({preventScroll:true});
    }
    return;
   }

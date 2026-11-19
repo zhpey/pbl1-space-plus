@@ -6,22 +6,40 @@ const entries = [
   { year: '1989', date: '1989-08-25', title: '飞越海王星', planet: 'neptune', x: 650, y: 48, text: '探测器观测了海王星的大暗斑与海卫一，并完成这段外行星巡访的最后一次行星飞越。', question: '从发射到飞越海王星，大约用了多少年？' },
 ];
 
+const answers = [
+  '旅行者 2 号于 1977 年 8 月 20 日发射，旅行者 1 号于同年 9 月 5 日发射。',
+  '行星绕太阳的公转。飞船从合适的方向掠过行星时，相对太阳的速度可以增加。',
+  '两艘探测器飞越土星的路径不同。旅行者 1 号近距离飞越泰坦后离开了外行星巡访路线，旅行者 2 号继续前往天王星。',
+  '土星到天王星约隔 4 年 5 个月，天王星到海王星约隔 3 年 7 个月。',
+  '约 12 年，从 1977 年 8 月 20 日到 1989 年 8 月 25 日。',
+];
 let selectedStep = 0;
 
 function reading(index) {
   const item = entries[index];
-  return `<time datetime="${item.date}">${item.date.replaceAll('-', ' / ')}</time><h3>${item.title}</h3><p>${item.text}</p><p class="mission-question">${item.question}</p><a href="#explore/${item.planet}">到行星漫游查看这颗行星 →</a>`;
+  return `<time datetime="${item.date}">${item.date.replaceAll('-', ' / ')}</time><h3>${item.title}</h3><p>${item.text}</p><details class="instrument-detail mission-question"><summary>${item.question}</summary><p>${answers[index]}</p></details><a href="#explore/${item.planet}">到行星漫游查看这颗行星 →</a>`;
 }
 
 export function renderMissionLog() {
   return `<section class="pbl-instrument voyager-log" id="voyager-log" aria-labelledby="voyager-title"><header><div><span class="instrument-kicker">VOYAGER 2</span><h2 id="voyager-title">一艘探测器，四次外行星飞越</h2></div><p>沿时间轴回看 1977–1989 年的旅行者 2 号任务。</p></header>
     <svg class="mission-map" viewBox="0 0 710 186" aria-hidden="true"><defs><pattern id="mission-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="currentColor" opacity=".22"/></pattern></defs><rect width="710" height="186" fill="url(#mission-grid)"/><path class="mission-path" d="M58 143C111 143 145 92 200 96S300 147 359 132S450 89 521 79S601 67 650 48"/>${entries.map(({x,y},i)=>`<g data-mission-node="${i}" class="${i === selectedStep ? 'current' : ''}"><circle cx="${x}" cy="${y}" r="15" class="mission-halo"/><circle cx="${x}" cy="${y}" r="5" class="mission-point"/></g>`).join('')}</svg>
     <div class="mission-dates" role="group" aria-label="飞越里程碑">${entries.map((item,i)=>`<button data-voyager-step="${i}" aria-pressed="${i === selectedStep}"><strong>${item.year}</strong><span>${item.title}</span></button>`).join('')}</div>
+    <p class="mission-progress" data-mission-progress>第 ${selectedStep + 1} 站 / ${entries.length} 站</p>
     <article class="mission-reading" data-mission-reading aria-live="polite">${reading(selectedStep)}</article>
     <footer>路线与间距为示意。飞越日期以最接近时刻的 UTC 日期为准。 <a href="https://science.nasa.gov/mission/voyager/voyager-2/" target="_blank" rel="noopener">NASA 任务档案 ↗</a></footer></section>`;
 }
 
 export function bindMissionLog() {
+  document.addEventListener('keydown', event => {
+    const button = event.target.closest('[data-voyager-step]');
+    if (!button || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    const buttons = [...button.parentElement.querySelectorAll('[data-voyager-step]')];
+    const index = buttons.indexOf(button);
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowLeft' ? -1 : 1) + buttons.length) % buttons.length;
+    event.preventDefault();
+    buttons[next].focus();
+    buttons[next].click();
+  });
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-voyager-step]');
     if (!button) return;
@@ -29,6 +47,7 @@ export function bindMissionLog() {
     selectedStep = Number(button.dataset.voyagerStep);
     section.querySelectorAll('[data-voyager-step]').forEach(step => step.setAttribute('aria-pressed', String(step === button)));
     section.querySelectorAll('[data-mission-node]').forEach((node,i) => node.classList.toggle('current', i === selectedStep));
+    section.querySelector('[data-mission-progress]').textContent = `第 ${selectedStep + 1} 站 / ${entries.length} 站`;
     section.querySelector('[data-mission-reading]').innerHTML = reading(selectedStep);
   });
 }

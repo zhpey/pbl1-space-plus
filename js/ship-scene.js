@@ -12,7 +12,7 @@ import {createShipThermal} from './ship-thermal.js';
 import {createShipFlightDeck} from './ship-flight-deck.js';
 import {shipOrbits} from './ship-orbits.js';
 import {createShipGuidance} from './ship-guidance.js';
-import {createFlightState,stepFlight} from './flight-physics.js';
+import {createFlightState,stepFlight,assistFlightInput} from './flight-physics.js';
 import {createFlightField} from './flight-field.js';
 
 // Original fictional spacecraft. Each selectable assembly is actual scene geometry.
@@ -194,6 +194,7 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   if(d.action==='reset'){setOrbit(false);yaw=pitch=0;zoom=1;selected=null;inspection=false;settling=true;}
   if(d.action==='orbit'){setOrbit(!!d.active&&!reduced.matches);settling=true;}
   if(d.action==='angle'){angle=['default','side','aft','top'].includes(d.value)?d.value:'default';settling=true;}
+  if(d.action==='cancel-warp'){warp=null;settling=true;}
   if(d.action==='warp'&&!warp){setOrbit(false);warp={index:d.index,time:0};settling=true;}
   invalidate();
  }
@@ -206,10 +207,11 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   camera.far=normalCameraFar;camera.updateProjectionMatrix();
  }
  function flightCommand(e){
-  const {action,cockpit,index}=e.detail||{};
+  const {action,cockpit,index,assist}=e.detail||{};
+  if(action==='assist'&&flight.active)flight.assist=!!assist;
   if(action==='stop')stopFlight();
   if(action==='start'||(action==='reset'&&flight.active)){
-   Object.assign(flight,createFlightState(),{active:true,cockpit:action==='reset'&&flight.cockpit});
+   Object.assign(flight,createFlightState(),{active:true,cockpit:action==='reset'&&flight.cockpit,assist:!!assist});
    flightInput={...neutralInput};
    if(destinations[index])flightTarget=index;
    backdrop(flightTarget);
@@ -270,7 +272,8 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   for(const [id,collection]of surfaces)for(const m of collection.values()){const intensity=id===hovered?.18:id===selected?.105:0;m.emissive.copy(m.userData.originalEmissive);m.emissiveIntensity=m.userData.originalIntensity;if(intensity){m.emissive.add(new THREE.Color(0x5a99b2).multiplyScalar(intensity));m.emissiveIntensity=Math.max(1,m.emissiveIntensity);}}
   if(flight.active){
    if(moving&&!flightField.complete){
-    stepFlight(flight,flightInput,dt);
+    const input=flight.assist?assistFlightInput(flight,flightInput,flightField.next):flightInput;
+    stepFlight(flight,input,dt);
     const result=flightField.update(flight,time);
     if(result==='gate')flightMessage=flightField.complete?'航道已通过，可以前往目的地。':'本段通过，请对准下一道航标。';
     if(result==='miss')flightMessage='已回到上一检查点，保留已通过的航标。';
@@ -309,7 +312,7 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
    atmosphere.update({time,quality,moving});
    flightDeck.update({active:flight.cockpit,lamps,quaternion:camera.quaternion,values,selected,hovered,index:flightTarget});
    root.updateMatrixWorld(true);
-   if(time-lastFlightStatus>.09||!moving){
+   if(time-lastFlightStatus>.09||lastFlightStatus===-Infinity){
     lastFlightStatus=time;
     const next=flightField.next;
     const offset=next?{x:next.x-flight.position.x,y:next.y-flight.position.y}:null;

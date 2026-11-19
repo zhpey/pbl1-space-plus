@@ -137,3 +137,8 @@ body[data-portal-renderer=fallback] [data-ship-inspect],body[data-portal-rendere
 }
 .ship-arrival-file:hover { text-decoration: underline; }
 .ship-inspector .ship-arrival-file { clear: both; }
+
+.ship-warp-overlay[hidden] {display:none}
+.ship-warp-overlay {position:fixed;inset:0;justify-content:center;padding:0}
+.ship-warp-overlay button {pointer-events:auto;min-height:44px;padding:8px 16px;color:#d3e3df;background:#0b1721;border:1px solid #a7c7c7;border-radius:5px;cursor:pointer}
+.ship-warp-overlay button:focus-visible {outline:2px solid #e4f9f6;outline-offset:4px}

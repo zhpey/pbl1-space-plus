@@ -63,7 +63,7 @@ let selectedEvidence = sources[0];
 function evidenceReading(item) {
   return `<figure class="evidence-figure">
     ${item.graphic}
-    <figcaption><span>${item.kind}</span> ${item.subject}</figcaption>
+    <figcaption><span>${item.kind}</span> ${item.subject}${item.id === 'shadow' ? '<button data-evidence-labels aria-pressed="true">图上标注</button>' : ''}</figcaption>
   </figure>
   <div class="evidence-explanation">
     <dl class="evidence-notes">
@@ -77,7 +77,7 @@ function evidenceReading(item) {
 
 export function renderEvidence() {
   return `<section class="pbl-instrument blackhole-evidence" id="blackhole-evidence" aria-labelledby="evidence-title">
-    <header><h2 id="evidence-title">怎样知道那里有个黑洞？</h2></header>
+    <header><h2 id="evidence-title">怎样知道那里有个黑洞？</h2><p>从恒星运动、时空振荡和射电影像三个角度，比较观测量和能推断的结论。</p></header>
     <div class="evidence-tabs" role="group" aria-label="选择观测证据">
       ${sources.map(item => `<button type="button" data-evidence="${item.id}" aria-pressed="${item === selectedEvidence}" aria-controls="evidence-reading">${item.title}</button>`).join('')}
     </div>
@@ -87,6 +87,13 @@ export function renderEvidence() {
 
 export function bindEvidence() {
   document.addEventListener('click', event => {
+    const labels = event.target.closest('[data-evidence-labels]');
+    if (labels) {
+      const enabled = labels.getAttribute('aria-pressed') !== 'true';
+      labels.setAttribute('aria-pressed', String(enabled));
+      labels.closest('figure').classList.toggle('evidence-unlabeled', !enabled);
+      return;
+    }
     const button = event.target.closest('[data-evidence]');
     const section = button?.closest('.blackhole-evidence');
     if (!section) return;
