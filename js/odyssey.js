@@ -14,6 +14,7 @@ try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){visited=new Set(
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icon=`<svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="10"/><ellipse cx="22" cy="22" rx="21" ry="7" transform="rotate(-33 22 22)"/><circle cx="37" cy="10" r="2" fill="currentColor" stroke="none"/></svg>`;
 const arrow='<span aria-hidden="true">↗</span>';
+const sunrisePage=new URL('../sunrise.html',import.meta.url).href;
 const sceneTitles={earth:['向群星，','出发。'],moon:['月球。','静寂之地'],mars:['火星。','红色边境'],jupiter:['木星。','风暴之眼'],saturn:['土星。','引力的诗'],nebula:['恒星。','正在诞生'],blackhole:['事件视界。','光的边境'],deepfield:['深空。','时间尽头']};
 function persist(){try{localStorage.setItem(KEY,JSON.stringify({visited:[...visited],saved:[...saved]}));storageAvailable=true;}catch{storageAvailable=false;}const note=document.querySelector('.od-last-word p small');if(note)note.textContent=storageAvailable?'发现记录保存在当前浏览器。':'浏览器存储暂不可用，记录仅保留在本次访问。';}
 function command(action,extra={}){document.dispatchEvent(new CustomEvent('space-odyssey-command',{detail:{action,...extra}}));}
@@ -35,6 +36,7 @@ function heroCopy(d){
    <button class="od-tour-compact" data-od-tour aria-pressed="${touring}"><span class="od-play-symbol" aria-hidden="true">${touring?'Ⅱ':'▶'}</span><span data-od-tour-label>${touring?'暂停自动远航':'自动漫游'}</span></button>
    <button data-od-article="${d.article}">读懂这一站 ${arrow}</button>
    <button data-od-clean>纯净观景 ${arrow}</button>
+   ${d.id==='earth'?`<a class="od-sunrise-link" href="${sunrisePage}">轨道日出 ${arrow}</a>`:''}
    ${hasObservation(d.id)?'<button class="od-observation-launch" data-od-observation>观测实验 <span aria-hidden="true">↗</span></button>':''}
   </div>
   <div class="od-view-controls"><button data-od-bridge aria-pressed="${bridge}"><span>${bridge?'切换外部视角':'进入飞船舰桥'}</span></button><span>拖动星球，换个角度看宇宙</span></div>`;

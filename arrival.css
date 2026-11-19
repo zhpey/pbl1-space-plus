@@ -54,7 +54,7 @@ body[data-flight-mode=scene] .od-key-hint {
   margin-top: 10px;
   max-width: none;
 }
-body[data-flight-mode=scene] .od-key-hint button {
+body[data-flight-mode=scene] .od-key-hint :is(button, .od-sunrise-link) {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -62,7 +62,16 @@ body[data-flight-mode=scene] .od-key-hint button {
   font-size: 11px;
   color: #b5c9dc;
 }
-body[data-flight-mode=scene] .od-key-hint button:hover { color: #f0f8ff; }
+body[data-flight-mode=scene] .od-key-hint :is(button, .od-sunrise-link):hover { color: #f0f8ff; }
+body[data-flight-mode=scene] .od-key-hint .od-sunrise-link {
+  color: #ffe1b6;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.od-sunrise-link:focus-visible { outline: 2px solid #c8ebff; outline-offset: 3px; }
+@media (pointer: coarse) {
+  body[data-flight-mode=scene] .od-key-hint .od-sunrise-link { min-height: 44px; }
+}
 body[data-flight-mode=scene] .od-view-controls { margin-top: 5px; }
 body[data-odyssey-clean=true][data-flight-mode=scene] .ship-mode-switch { visibility: hidden; }
 

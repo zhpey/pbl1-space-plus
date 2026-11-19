@@ -112,7 +112,7 @@ export function createUniverse(canvas,callbacks={}){
  const lensMaterial=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,uniforms:{uColor:{value:new THREE.Color('#ffbe72')}},vertexShader:`varying vec2 vP;void main(){vP=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,fragmentShader:`varying vec2 vP;uniform vec3 uColor;void main(){float r=length(vP);float sharp=exp(-pow((r-.788)*90.,2.));float glow=exp(-pow((r-.80)*14.,2.))*.26;gl_FragColor=vec4(mix(uColor,vec3(1.,.93,.76),sharp),sharp+glow);}`});
  const lens=new THREE.Mesh(new THREE.RingGeometry(.741,1.1,180,20),lensMaterial);hole.add(lens);scene.add(hole);
 
- let state=callbacks.initialState||{route:'explore',planet:'earth',paused:false,mystery:'blackhole',chapter:0};let dragX=0,dragY=0,zoomValue=1,targetZoom=1;let pointerStart=null,lastPointer=null;let sceneKey='',transition=1;let frame=0,disposed=false;const clock=new THREE.Clock();let elapsed=0;let layoutDirty=true,sceneBounds=null;
+ let state=callbacks.initialState||{route:'explore',planet:'earth',paused:false,mystery:'blackhole',chapter:0};let dragX=0,dragY=0,zoomValue=1,targetZoom=1;let pointerStart=null,lastPointer=null,capturedPointer=null;let sceneKey='',transition=1;let frame=0,disposed=false;const clock=new THREE.Clock();let elapsed=0;let layoutDirty=true,sceneBounds=null;
  const portal=createPortalScene({scene,camera,makePlanet,invalidate,onWorld:callbacks.onWorld});
  const voyage=createVoyageScene({scene,camera,makePlanet});
  const odyssey=createOdysseyScene({scene,camera,makePlanet,invalidate,mainLight,renderer});
@@ -121,7 +121,17 @@ export function createUniverse(canvas,callbacks={}){
  document.addEventListener('space-odyssey-command',qualityCommand);
  function invalidate(){if(!disposed&&!frame&&!document.hidden)frame=requestAnimationFrame(animate);}
  function visibility(){clock.getDelta();if(document.hidden){cancelAnimationFrame(frame);frame=0;}else invalidate();}
+ function clearCanvasPointer(){
+  pointerStart=null;lastPointer=null;
+  if(capturedPointer===null)return;
+  if(odyssey.shipActive)odyssey.shipPointer('cancel');
+  if(canvas.hasPointerCapture(capturedPointer))canvas.releasePointerCapture(capturedPointer);
+  capturedPointer=null;
+ }
+ function clearPointerOnMode(e){if(e.detail?.action==='ship-mode')clearCanvasPointer();}
+ document.addEventListener('space-odyssey-command',clearPointerOnMode);
  function setView(s){
+  if(s.route!==state.route)clearCanvasPointer();
   const id=s.route==='story'?chapters[s.chapter].planet:s.planet;const key=s.route+'/'+(s.route==='unknown'?s.mystery:id);
   if(key!==sceneKey){sceneKey=key;transition=.1;dragX=0;dragY=0;targetZoom=1;if(['explore','story'].includes(s.route)){if(current)hero.remove(current);current=getPlanet(id);hero.add(current);}}
   if(s.route==='solar')setupSolarBodies();
@@ -132,13 +142,16 @@ export function createUniverse(canvas,callbacks={}){
  function scroll(){if(scrollY>2)portal.cancelCinematic('scroll');invalidate();}
  function zoom(amount){portal.cancelCinematic('interaction');targetZoom=THREE.MathUtils.clamp(targetZoom-amount*.12,.58,state.route==='universe'?1.7:1.42);invalidate();}
  function reset(){portal.cancelCinematic('interaction');dragX=0;dragY=0;targetZoom=1;invalidate();}
- function down(e){if(e.button!==0||odyssey.filmActive)return;if(odyssey.shipActive){odyssey.shipPointer('down',e);canvas.setPointerCapture(e.pointerId);return;}portal.cancelCinematic('interaction');pointerStart={x:e.clientX,y:e.clientY};lastPointer=pointerStart;canvas.setPointerCapture(e.pointerId);}
+ function down(e){if(e.button!==0||odyssey.filmActive||capturedPointer!==null)return;capturedPointer=e.pointerId;if(odyssey.shipActive){odyssey.shipPointer('down',e);canvas.setPointerCapture(e.pointerId);return;}portal.cancelCinematic('interaction');pointerStart={x:e.clientX,y:e.clientY};lastPointer=pointerStart;canvas.setPointerCapture(e.pointerId);}
  function playCinematic(){if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&state.paused)callbacks.onPause?.();return portal.playCinematic();}
  function cinemaCommand(event){if(event.detail?.action==='play')playCinematic();else if(event.detail?.action==='cancel')portal.cancelCinematic('cancelled');}
  function cinemaInteraction(event){if(event.type==='pointerdown'&&event.target.closest('button[data-space-cinema],[data-cinema-controls],.cinema-presentation,[data-action="cinema-start"],[data-action="cinema-stop"],[data-action="cinema-cancel"]'))return;portal.cancelCinematic(event.type==='wheel'?'scroll':'interaction');}
  document.addEventListener('space-cinema-command',cinemaCommand);document.addEventListener('pointerdown',cinemaInteraction,{passive:true});document.addEventListener('wheel',cinemaInteraction,{passive:true});
  function move(e){if(odyssey.shipActive){odyssey.shipPointer('move',e);return;}if(!lastPointer)return;const dx=e.clientX-lastPointer.x,dy=e.clientY-lastPointer.y;dragX+=dx*.007;dragY=THREE.MathUtils.clamp(dragY+dy*.004,-.65,.65);lastPointer={x:e.clientX,y:e.clientY};invalidate();}
+ function onCanvasCaptureLost(e){if(capturedPointer===e.pointerId)clearCanvasPointer();}
  function up(e){
+  if(capturedPointer!==e.pointerId)return;
+  capturedPointer=null;
   if(odyssey.shipActive){odyssey.shipPointer(e.type==='pointercancel'?'cancel':'up',e);if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);return;}
   if(e.type!=='pointercancel'&&pointerStart&&Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)<6&&state.route==='universe')portal.pick(e,true);
   if(e.type!=='pointercancel'&&pointerStart&&Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)<6&&state.route==='solar'){
@@ -148,7 +161,7 @@ export function createUniverse(canvas,callbacks={}){
  function wheel(e){if(odyssey.shipActive){if(e.shiftKey&&!e.ctrlKey){e.preventDefault();odyssey.shipZoom(Math.sign(e.deltaY));}return;}if(!e.ctrlKey||innerWidth<760||['atlas','observatory'].includes(state.route))return;e.preventDefault();zoom(Math.sign(e.deltaY));}
  function key(e){if(state.route==='universe'&&['ArrowLeft','ArrowRight'].includes(e.key))return;if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','=',' ','0'].includes(e.key))return;e.preventDefault();if(e.key==='ArrowLeft')dragX-=.13;if(e.key==='ArrowRight')dragX+=.13;if(e.key==='ArrowUp')dragY-=.08;if(e.key==='ArrowDown')dragY+=.08;if(e.key==='+'||e.key==='=')zoom(-1);if(e.key==='-')zoom(1);if(e.key==='0')reset();if(e.key===' ')callbacks.onPause?.();invalidate();}
  function leave(e){if(odyssey.shipActive)odyssey.shipPointer('leave',e);}
- canvas.addEventListener('pointerleave',leave);canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('wheel',wheel,{passive:false});canvas.addEventListener('keydown',key);addEventListener('resize',resize);addEventListener('scroll',scroll,{passive:true});
+ canvas.addEventListener('pointerleave',leave);canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('lostpointercapture',onCanvasCaptureLost);canvas.addEventListener('wheel',wheel,{passive:false});canvas.addEventListener('keydown',key);addEventListener('resize',resize);addEventListener('scroll',scroll,{passive:true});
  function animate(){
   frame=0;if(disposed||document.hidden)return;const delta=Math.min(clock.getDelta(),.05);const active=!state.paused&&!state.dialog&&!document.body.dataset.odysseyDialog&&!matchMedia('(prefers-reduced-motion: reduce)').matches;if(active)elapsed+=delta;
   const mobile=innerWidth<760;const k=matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-delta*5);transition=THREE.MathUtils.lerp(transition,1,k);zoomValue=THREE.MathUtils.lerp(zoomValue,targetZoom,k);
@@ -173,5 +186,5 @@ export function createUniverse(canvas,callbacks={}){
   if(odyssey.filmActive||odyssey.bridgeActive){renderer.setClearColor(0x000000);if(!filmPost){filmPost=createFilmPost(renderer,scene,camera);filmPost.resize(quality);}filmPost.render(delta,odyssey.filmActive?odyssey.filmLook:odyssey.bridgeLook,elapsed);}else{renderer.setClearColor(0x080c10);renderer.render(scene,camera);}if(odysseyAnimating||portalAnimating||voyageState.settling||(active&&!odyssey.filmActive&&(state.route!=='universe'||foregroundVisible))||Math.abs(transition-1)>.001||Math.abs(zoomValue-targetZoom)>.001)invalidate();
  }
  document.addEventListener('visibilitychange',visibility);setView(state);
- return {setView,zoom,reset,enterWorld:portal.enterWorld,playCinematic,cancelCinematic:portal.cancelCinematic,dispose(){disposed=true;odyssey.dispose();filmPost?.dispose();document.removeEventListener('space-odyssey-command',qualityCommand);document.removeEventListener('space-cinema-command',cinemaCommand);document.removeEventListener('pointerdown',cinemaInteraction);document.removeEventListener('wheel',cinemaInteraction);voyage.dispose();portal.dispose();cancelAnimationFrame(frame);document.removeEventListener('visibilitychange',visibility);assetStatus.remove();removeEventListener('resize',resize);removeEventListener('scroll',scroll);delete document.body.dataset.spaceForeground;canvas.removeEventListener('pointerleave',leave);canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('pointercancel',up);canvas.removeEventListener('wheel',wheel);canvas.removeEventListener('keydown',key);scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material])m.dispose();}});for(const t of textures.values())t.dispose();glowTexture.dispose();renderer.dispose();}};
+ return {setView,zoom,reset,enterWorld:portal.enterWorld,playCinematic,cancelCinematic:portal.cancelCinematic,dispose(){disposed=true;clearCanvasPointer();document.removeEventListener('space-odyssey-command',clearPointerOnMode);odyssey.dispose();filmPost?.dispose();document.removeEventListener('space-odyssey-command',qualityCommand);document.removeEventListener('space-cinema-command',cinemaCommand);document.removeEventListener('pointerdown',cinemaInteraction);document.removeEventListener('wheel',cinemaInteraction);voyage.dispose();portal.dispose();cancelAnimationFrame(frame);document.removeEventListener('visibilitychange',visibility);assetStatus.remove();removeEventListener('resize',resize);removeEventListener('scroll',scroll);delete document.body.dataset.spaceForeground;canvas.removeEventListener('pointerleave',leave);canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('pointercancel',up);canvas.removeEventListener('lostpointercapture',onCanvasCaptureLost);canvas.removeEventListener('wheel',wheel);canvas.removeEventListener('keydown',key);scene.traverse(o=>{o.geometry?.dispose();if(o.material){for(const m of Array.isArray(o.material)?o.material:[o.material])m.dispose();}});for(const t of textures.values())t.dispose();glowTexture.dispose();renderer.dispose();}};
 }

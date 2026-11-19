@@ -122,3 +122,20 @@ body[data-portal-renderer=fallback] [data-ship-inspect],body[data-portal-rendere
  .ship-motion{font-size:8px;margin-bottom:10px}.ship-motion>span{min-width:43px}.ship-view-tools{top:543px;max-width:88%;gap:12px}.ship-view-tools>span{min-width:0}
 }
 
+
+.shipboard[hidden], .ship-arrival-file[hidden] { display: none; }
+.ship-arrival-file {
+  display: block;
+  padding: 7px 0;
+  margin: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #e7cf9d;
+  text-align: left;
+  font: 11px var(--sans);
+  cursor: pointer;
+}
+.ship-arrival-file:hover { text-decoration: underline; }
+.ship-inspector .ship-arrival-file { clear: both; }
+.exp-flight-progress [data-flight-depart] { border-color: #dfc28b; color: #ffe7b7; }
+.exp-flight-progress [data-flight-depart][hidden] { display: none; }

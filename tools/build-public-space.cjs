@@ -31,7 +31,7 @@ function launchMarkup(base, title, intro) {
   return `<main id="launch-preview" class="launch-preview">
     <a class="launch-brand" href="${base}">太空<sup>+</sup> <span>SPACE PLUS</span></a>
     <section class="launch-intro"><h1>${title}</h1><p>${intro}</p></section>
-    <nav aria-label="五人作品">${pages.slice(1).map(([dir], i) => `<a href="${base}${dir}/">${names[i]} <span aria-hidden="true">↗</span></a>`).join('')}</nav>
+    <nav aria-label="探索入口">${base === './' ? `<a href="${base}sunrise.html">轨道日出 <span aria-hidden="true">↗</span></a>` : ''}${pages.slice(1).map(([dir], i) => `<a href="${base}${dir}/">${names[i]} <span aria-hidden="true">↗</span></a>`).join('')}</nav>
   </main>`;
 }
 async function run() {

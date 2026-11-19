@@ -20,7 +20,9 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
  const root=new THREE.Group();root.name='ship-operations';scene.add(root);
  const vessel=new THREE.Group();vessel.name='wa01-vessel';root.add(vessel);
  const modules={},surfaces=new Map(),textures=[],backgrounds=new Map();
- const flight=createFlightState();let flightInput={thrust:false,reverse:false,brake:false,boost:false,yaw:0,pitch:0,roll:0},flightField=null,lastFlightStatus=0,flightMessage='等待起飞';
+ const flight=createFlightState();
+ const neutralInput={thrust:false,reverse:false,brake:false,boost:false,yaw:0,pitch:0,roll:0};
+ let flightInput={...neutralInput},flightField=null,lastFlightStatus=0,flightMessage='等待起飞';
  let selected=null,hovered=null,visible=false,paused=false,time=0,stationIndex=0,warp=null,drag=null,yaw=0,pitch=0,shownYaw=0,shownPitch=0,zoom=1,inspection=false,lamps=true,orbit=false,deck=false,angle='default',settling=true,anchors=[],lastMotion='';
  const active=Object.fromEntries(['bridge','engine','radar','power','lab','bay'].map(id=>[id,false]));
  const values={...Object.fromEntries(Object.keys(active).map(id=>[id,0]))};
@@ -195,10 +197,43 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   if(d.action==='warp'&&!warp){setOrbit(false);warp={index:d.index,time:0};settling=true;}
   invalidate();
  }
- function flightCommand(e){const action=e.detail?.action;if(action==='start'){flight.active=true;flight.cockpit=false;flightField??=createFlightField(root,makePlanet);flightField.reset(flight);flightMessage='推进器已待命，按住 W 前进';warp=null;setOrbit(false);guidance.stop();invalidate();}if(action==='camera'&&flight.active)flight.cockpit=!!e.detail.cockpit;if(action==='stop'){flight.active=false;flightInput={thrust:false,reverse:false,brake:false,boost:false,yaw:0,pitch:0,roll:0};document.body.dataset.piloting='false';}if(action==='reset'&&flight.active){Object.assign(flight,createFlightState(),{active:true});flightField?.reset(flight);flightMessage='航线已重置';invalidate();}}
- function flightInputChange(e){flightInput={...flightInput,...(e.detail||{})};invalidate();}
+ function stopFlight(){
+  if(!flight.active)return;
+  Object.assign(flight,createFlightState(),{cockpit:false});
+  flightInput={...neutralInput};
+  flightField.group.visible=false;
+  camera.up.set(0,1,0);
+ }
+ function flightCommand(e){
+  const {action,cockpit}=e.detail||{};
+  if(action==='stop')stopFlight();
+  if(action==='start'||(action==='reset'&&flight.active)){
+   Object.assign(flight,createFlightState(),{active:true,cockpit:action==='reset'&&flight.cockpit});
+   flightInput={...neutralInput};
+   flightField??=createFlightField(root,makePlanet);
+   flightField.reset(flight);
+   flightField.group.visible=true;
+   flightMessage='按住 W 或「推进」，穿过高亮星环。';
+   lastFlightStatus=-Infinity;
+   warp=null;setOrbit(false);guidance.stop();
+  }
+  if(action==='camera'&&flight.active)flight.cockpit=!!cockpit;
+  invalidate();
+ }
+ function flightInputChange(e){if(flight.active){flightInput={...neutralInput,...e.detail};invalidate();}}
  document.addEventListener('space-ship-command',command);
  document.addEventListener('space-flight-command',flightCommand);document.addEventListener('space-flight-input',flightInputChange);
+ function hide(){
+  root.visible=visible=false;
+  guidance.stop();setOrbit(false);stopFlight();lighting.hide();
+  warp=null;drag=null;hovered=null;selected=null;
+  document.querySelector('#universe').style.removeProperty('cursor');
+  deck=inspection=false;angle='default';
+  yaw=pitch=shownYaw=shownPitch=0;zoom=1;
+  time=0;lastMotion='';anchors=[];
+  focus.set(0,0,0);cameraPosition.set(0,0,10);
+  for(const id of Object.keys(values))values[id]=0;
+ }
  function setOrbit(value){if(orbit===value)return;orbit=value;document.dispatchEvent(new CustomEvent('space-ship-orbit',{detail:{active:orbit}}));}
  root.visible=false;
  function update({visible:show,moving,delta,scrollPixels,index,quality='auto'}){
@@ -229,12 +264,23 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   const probeUnfold=THREE.MathUtils.smoothstep(deployment,.35,.8);probeWings.forEach(({hinge,side})=>hinge.rotation.y=side*(1-probeUnfold)*Math.PI/2);probeMast.scale.y=.1+probeUnfold*.9;probeMast.position.y=.14+.165*probeMast.scale.y;
   if(selected){const value=values[selected],moving=Math.abs(value-(active[selected]?1:0))>.015,key=[selected,Math.round(value*40),active[selected],moving].join(':');if(key!==lastMotion){lastMotion=key;document.dispatchEvent(new CustomEvent('space-ship-mechanism',{detail:{id:selected,value,active:active[selected],moving}}));}}else lastMotion='';
   for(const [id,collection]of surfaces)for(const m of collection.values()){const intensity=id===hovered?.18:id===selected?.105:0;m.emissive.copy(m.userData.originalEmissive);m.emissiveIntensity=m.userData.originalIntensity;if(intensity){m.emissive.add(new THREE.Color(0x5a99b2).multiplyScalar(intensity));m.emissiveIntensity=Math.max(1,m.emissiveIntensity);}}
-  if(flight.active){if(moving){stepFlight(flight,flightInput,dt);const report=flightField.update(flight,dt,time);if(report.event?.type==='gate')flightMessage=report.complete?'航道完成，远行者号已通过全部星环。':`通过第 ${report.gate} 道星环，继续前往下一站。`;else if(report.event?.type==='impact')flightMessage='擦碰障碍物，速度已衰减；调整航向继续。';}
+  if(flight.active){
+   if(moving&&!flightField.complete&&!flightField.missed){
+    stepFlight(flight,flightInput,dt);
+    const report=flightField.update(flight,time);
+    if(report.type==='gate')flightMessage=flightField.complete?'三个航道环全部通过，可以跃迁。':`已通过第 ${flightField.gate} 道星环，朝下一道高亮星环推进。`;
+    if(report.type==='miss')flightMessage='错过当前星环，选择「重置航线」重试。';
+    if(report.type==='impact')flightMessage='擦碰障碍物，速度已下降。';
+    if(flightField.complete||flightField.missed){
+     Object.assign(flight.velocity,{x:0,y:0,z:0});flight.speed=0;
+    }
+    if(report.type)lastFlightStatus=-Infinity;
+   }
    vessel.position.set(flight.position.x,flight.position.y,flight.position.z);vessel.rotation.set(flight.pitch,flight.yaw,flight.roll,'YXZ');vessel.quaternion.setFromEuler(vessel.rotation);root.position.set(0,0,0);
    const orientation=vessel.quaternion,forward=new THREE.Vector3(0,0,-1).applyQuaternion(orientation),up=new THREE.Vector3(0,1,0).applyQuaternion(orientation);vessel.visible=!flight.cockpit;camera.up.copy(up);camera.fov=66;camera.updateProjectionMatrix();
    if(flight.cockpit){camera.position.copy(vessel.position);camera.quaternion.copy(orientation);camera.lookAt(vessel.position.clone().addScaledVector(forward,8));}else{const offset=new THREE.Vector3(0,2.6,10).applyQuaternion(orientation);camera.position.copy(vessel.position).add(offset);camera.lookAt(vessel.position.clone().addScaledVector(forward,8));}camera.updateMatrixWorld(true);
    for(const [i,o]of backgrounds)o.visible=false;atmosphere.update({time,quality,moving});flightDeck.update({active:flight.cockpit,lamps,quaternion:camera.quaternion,values,selected,hovered,index});root.updateMatrixWorld(true);
-   if(time-lastFlightStatus>.12||!moving){lastFlightStatus=time;document.dispatchEvent(new CustomEvent('space-flight-status',{detail:{speed:flight.speed,gate:flightField.gate,collisions:flightField.collisions,heading:Math.round((((-flight.yaw*180/Math.PI)%360)+360)%360),message:flightMessage}}));}
+   if(time-lastFlightStatus>.12||!moving){lastFlightStatus=time;document.dispatchEvent(new CustomEvent('space-flight-status',{detail:{speed:flight.speed,gate:flightField.gate,complete:flightField.complete,collisions:flightField.collisions,heading:Math.round((((-flight.yaw*180/Math.PI)%360)+360)%360),message:flightMessage}}));}
    settling=false;return moving;
   }
   const targetFocus=!deck&&selected?anchorPoints[selected].clone().applyEuler(vessel.rotation).multiplyScalar(inspection?scale:.3):new THREE.Vector3();targetFocus.x-=inspection||mobile||deck?0:.55;targetFocus.y+=inspection||deck?0:mobile?.3:.1;
@@ -245,7 +291,7 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   const fitDistance=Math.max(12,5.8/tangent*canvasRect.height/Math.max(viewport.height,120),7.2/tangent*canvasRect.height/Math.max(viewport.width,180));
   const directions={default:[.63,.47,.8],side:[1,.16,.12],aft:[.1,.22,1],top:[.1,1,.05]},distance=fitDistance*zoom*(inspection?.64:1),desired=new THREE.Vector3(...directions[inspection?angle:'default']).normalize().multiplyScalar(distance).add(focus);cameraPosition.lerp(desired,f);
   if(cameraPosition.distanceTo(desired)>.01||focus.distanceTo(targetFocus)>.01)settling=true;
-  camera.position.copy(cameraPosition);camera.fov=fov;camera.updateProjectionMatrix();aim.copy(focus);camera.lookAt(aim);camera.updateMatrixWorld(true);
+  camera.up.set(0,1,0);camera.position.copy(cameraPosition);camera.fov=fov;camera.updateProjectionMatrix();aim.copy(focus);camera.lookAt(aim);camera.updateMatrixWorld(true);
   // Place the vessel in its layout box using camera axes, including document scroll.
   // A world-Y scroll offset is incorrect with this oblique camera.
   const worldPerPixel=tangent*cameraPosition.distanceTo(focus)/canvasRect.height;
@@ -282,8 +328,8 @@ export function createShipScene({scene,camera,makePlanet,invalidate,renderer,mai
   }
   return (moving||settling)&&!document.hidden;
  }
- return {update,pointer(type,e){if(!visible)return;if(type==='leave'){if(hovered){hovered=null;document.dispatchEvent(new CustomEvent('space-ship-hover',{detail:{id:null}}));invalidate();}return;}if(type==='down'){guidance.stop();setOrbit(false);drag={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,moved:false};return;}
+ return {update,pointer(type,e){if(!visible||flight.active||warp)return;if(type==='leave'){if(hovered){hovered=null;document.dispatchEvent(new CustomEvent('space-ship-hover',{detail:{id:null}}));invalidate();}return;}if(type==='down'){guidance.stop();setOrbit(false);drag={x:e.clientX,y:e.clientY,lastX:e.clientX,lastY:e.clientY,moved:false};return;}
   if(type==='move'){if(drag){const threshold=e.pointerType==='touch'?12:7;if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>threshold)drag.moved=true;if(drag.moved){yaw=deck?THREE.MathUtils.clamp(yaw+(e.clientX-drag.lastX)*.005,-.75,.75):yaw+(e.clientX-drag.lastX)*.008;pitch=THREE.MathUtils.clamp(pitch+(e.clientY-drag.lastY)*.005,-.55,.6);settling=true;invalidate();}drag.lastX=e.clientX;drag.lastY=e.clientY;}else{const id=hit(e);if(id!==hovered){hovered=id;document.querySelector('#universe').style.cursor=id?'pointer':'grab';document.dispatchEvent(new CustomEvent('space-ship-hover',{detail:{id}}));invalidate();}}return;}
   if(type==='up'){if(drag&&!drag.moved){const id=hit(e);document.dispatchEvent(new CustomEvent(id?'space-ship-pick':'space-ship-miss',{detail:{id}}));}drag=null;return;}if(type==='cancel')drag=null;
- },zoom(amount){zoom=THREE.MathUtils.clamp(zoom+amount*.07,.62,1.5);settling=true;invalidate();},hide(){guidance.stop();lighting.hide();root.visible=visible=false;drag=null;if(warp){warp=null;document.dispatchEvent(new CustomEvent('space-ship-cancel'));}},dispose(){lighting.dispose();root.removeFromParent();document.removeEventListener('space-ship-command',command);document.removeEventListener('space-flight-command',flightCommand);document.removeEventListener('space-flight-input',flightInputChange);const geos=new Set(boxGeometries.values()),mats=new Set(Object.values(materials));root.traverse(o=>{if(o.geometry)geos.add(o.geometry);for(const m of [].concat(o.material||[]))mats.add(m);});geos.forEach(g=>g.dispose());mats.forEach(m=>{for(const v of Object.values(m))if(v?.isTexture)textures.push(v);m.dispose();});new Set(textures).forEach(t=>t.dispose());}};
+ },zoom(amount){zoom=THREE.MathUtils.clamp(zoom+amount*.07,.62,1.5);settling=true;invalidate();},hide,dispose(){lighting.dispose();root.removeFromParent();document.removeEventListener('space-ship-command',command);document.removeEventListener('space-flight-command',flightCommand);document.removeEventListener('space-flight-input',flightInputChange);const geos=new Set(boxGeometries.values()),mats=new Set(Object.values(materials));root.traverse(o=>{if(o.geometry)geos.add(o.geometry);for(const m of [].concat(o.material||[]))mats.add(m);});geos.forEach(g=>g.dispose());mats.forEach(m=>{for(const v of Object.values(m))if(v?.isTexture)textures.push(v);m.dispose();});new Set(textures).forEach(t=>t.dispose());}};
 }

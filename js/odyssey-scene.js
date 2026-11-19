@@ -139,11 +139,12 @@ export function createOdysseyScene({scene,camera,makePlanet,invalidate,mainLight
  invalidate();}
  function stop(){touring=false;hold=0;notify();}
  function command(event){const d=event.detail||{};if(d.action==='ship-mode'){
-  shipMode=!!d.enabled;
+  const wasInShip=shipMode;
+  shipMode=enabled&&!!d.enabled;
   if(shipMode&&enabled){
    shipyard??=createShipScene({scene,camera,makePlanet,invalidate,renderer,mainLight});
    if(touring)stop();
-  }else if(!shipMode){shipyard?.hide();}
+  }else if(wasInShip){shipyard?.hide();}
  }if(d.action==='observation'){
   if(d.mode===null){observation=null;}
   else{
@@ -160,13 +161,12 @@ export function createOdysseyScene({scene,camera,makePlanet,invalidate,mainLight
  document.addEventListener('space-odyssey-command',command);
  function reducedChange(){if(reduced.matches){stop();if(flight){apply(flight.index);flight=null;}document.body.style.setProperty('--od-flight','0');}invalidate();}
  reduced.addEventListener('change',reducedChange);
- function setActive(value,state){if(!value&&film.active)film.stop('navigation');paused=state.paused;if(paused&&flight){apply(flight.index);flight=null;document.body.style.setProperty('--od-flight','0');}const changed=enabled!==value;enabled=value;root.visible=value;if(!value){observation=null;observationBlend=0;bridgeProps?.update({visible:false});shipyard?.hide();}if(value&&!current)apply(index);if(changed&&!value){stop();flight=null;document.body.style.setProperty('--od-flight','0');camera.position.set(0,0,10);camera.lookAt(0,0,0);}invalidate();}
+ function setActive(value,state){if(!value&&film.active)film.stop('navigation');paused=state.paused;if(paused&&flight){apply(flight.index);flight=null;document.body.style.setProperty('--od-flight','0');}const changed=enabled!==value;enabled=value;root.visible=value;if(!value){if(shipMode)shipyard?.hide();shipMode=false;observation=null;observationBlend=0;bridgeProps?.update({visible:false});}if(value&&!current)apply(index);if(changed&&!value){stop();flight=null;document.body.style.setProperty('--od-flight','0');camera.up.set(0,1,0);camera.fov=40;camera.updateProjectionMatrix();camera.position.set(0,0,10);camera.lookAt(0,0,0);}invalidate();}
  function update(delta,elapsed,dragX,dragY,zoom,foregroundVisible,scrollPixels){
   const now=performance.now(),wallDelta=Math.min((now-lastTick)/1000,.25);lastTick=now;if(!enabled)return false;root.visible=foregroundVisible;
   foreground=foregroundVisible;
   if(film.active){
    bridgeProps?.update({visible:false});
-   shipyard?.hide();
    nearStars.visible=false;
    const earthStage=stages.get(0);
    if(earthStage?.userData.distantMoon)earthStage.userData.distantMoon.visible=false;
@@ -179,7 +179,7 @@ export function createOdysseyScene({scene,camera,makePlanet,invalidate,mainLight
    shipyard??=createShipScene({scene,camera,makePlanet,invalidate,renderer,mainLight});
    return shipyard.update({visible:foregroundVisible,moving,delta,scrollPixels,index,quality});
   }
-  shipyard?.hide();if(current)current.visible=true;
+  if(current)current.visible=true;
   let flyBy=0,warp=0,transit=0,arrivalShift=0;
   if(flight&&(moving||reduced.matches)){
    flight.time+=wallDelta;

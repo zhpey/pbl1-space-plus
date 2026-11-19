@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040912">
+  <meta name="description" content="从轨道看地球日出。拖动滑杆，观察晨昏线两侧的城市灯光与云层。">
+  <title>轨道上的日出 · 太空+</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="sunrise.css">
+  <script src="js/sunrise.js" defer></script>
+</head>
+<body>
+  <main class="sunrise">
+    <div class="view" aria-hidden="true"><canvas id="orbital-view"></canvas></div>
+    <header class="topline">
+      <a class="brand" href="./" aria-label="太空加首页"><i aria-hidden="true"></i>太空<sup>+</sup><span aria-hidden="true">SPACE PLUS</span></a>
+      <a class="archive-link" href="./#od-worlds">五个探索篇章 <span aria-hidden="true">↗</span></a>
+    </header>
+    <section class="intro" aria-labelledby="sunrise-title">
+      <p class="eyebrow">地球轨道观测</p>
+      <h1 id="sunrise-title">轨道上的<br><em>日出</em></h1>
+      <p class="lede">低头是尚未熄灭的城市灯火，高处的云已经迎来阳光。拖动滑杆，看昼夜分界怎样扫过地表。</p>
+      <div class="intro-actions">
+        <button id="replay" type="button" disabled><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">播放日出</span></button>
+        <a class="explore-link" href="./#od-destinations">进入八站探索 <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <div class="scene-space" aria-hidden="true"></div>
+    <section class="instrument" aria-labelledby="phase-label">
+      <div class="instrument-head">
+        <label id="phase-label" for="phase">拨动晨昏线</label>
+        <output id="phase-name" for="phase" aria-live="off">静态地球</output>
+      </div>
+      <input id="phase" type="range" min="0" max="100" step="1" value="33" aria-valuetext="日出前" disabled>
+      <div class="phase-presets" role="group" aria-label="对照三个阶段">
+        <button type="button" data-phase="12" aria-pressed="false" disabled>夜侧</button>
+        <button type="button" data-phase="64" aria-pressed="false" disabled>日出</button>
+        <button type="button" data-phase="94" aria-pressed="false" disabled>昼侧</button>
+      </div>
+      <p id="scene-note">晨昏线是地表上白昼和黑夜的分界。</p>
+      <div class="scene-source"><span>光照模拟 · 时间已加速</span><a href="https://www.nasa.gov/image-article/suns-first-rays-peek-above-earths-limb/" target="_blank" rel="noopener noreferrer">NASA 轨道日出实拍 <span aria-hidden="true">↗</span></a></div>
+      <noscript><p class="fallback-note">启用 JavaScript 后即可拖动晨昏线。</p></noscript>
+    </section>
+  </main>
+</body>
+</html>
